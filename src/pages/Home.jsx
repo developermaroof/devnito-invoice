@@ -11,7 +11,7 @@ const Home = () => {
     const unsubscribe = onAuthStateChanged(auth, (result) => {
       if (result) {
         const { displayName, email, photoURL } = result;
-        setUserData({ displayName, email, photoURL });  // Include photoURL
+        setUserData({ displayName, email, photoURL });
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
@@ -27,7 +27,7 @@ const Home = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const { displayName, email, photoURL } = result.user;
-        setUserData({ displayName, email, photoURL });  // Include photoURL
+        setUserData({ displayName, email, photoURL });
         setIsLoggedIn(true);
       })
       .catch((error) => {
@@ -49,7 +49,6 @@ const Home = () => {
 
   return (
     <>
-      {/* Pass userData and isLoggedIn as props to the Navbar */}
       <Navbar userData={userData} isLoggedIn={isLoggedIn} Logout={Logout} />
       
       <div className="flex justify-center items-center min-h-screen">
@@ -63,8 +62,10 @@ const Home = () => {
 
         {isLoggedIn && (
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Welcome, {userData.displayName}</h1>
-            <p className="mb-4">{userData.email}</p>
+            <div className='flex gap-10 border-2'>
+              <button>View Invoice</button>
+              <button>Add New Invoice</button>
+            </div>
             <button onClick={Logout} type="button" className="bg-red-500 text-white py-2 px-4 rounded">
               Log out
             </button>

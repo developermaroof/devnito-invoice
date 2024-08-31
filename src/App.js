@@ -7,6 +7,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
 import EmailList from "./pages/EmailList";
+import FormWithPreview from "./pages/FormWithPreview";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,6 +43,10 @@ const router = (user) =>
     {
       path: "/emaillist",
       element: user ? <EmailList /> : <Error />, // Protect EmailList route based on user auth state
+    },
+    {
+      path: "/addinvoice",
+      element: user ? <FormWithPreview /> : <Error />, // Protect EmailList route based on user auth state
     },
     {
       path: "*",
