@@ -50,10 +50,10 @@ const Home = () => {
   return (
     <>
       <Navbar userData={userData} isLoggedIn={isLoggedIn} Logout={Logout} />
-      
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center  w-full h-full">
         {!isLoggedIn && (
-          <div className="flex justify-center items-center">
+          <div className="flex flex-col justify-center items-center p-10 border-2 w-full h-full">
+            <h1 className=''>Sign In</h1>
             <button onClick={GoogleSignUp} type="button" className="login-with-google-btn">
               Sign in with Google
             </button>
@@ -61,11 +61,7 @@ const Home = () => {
         )}
 
         {isLoggedIn && (
-          <div className="text-center">
-            <div className='flex gap-10 border-2'>
-              <button>View Invoice</button>
-              <button>Add New Invoice</button>
-            </div>
+          <div>
             <button onClick={Logout} type="button" className="bg-red-500 text-white py-2 px-4 rounded">
               Log out
             </button>
