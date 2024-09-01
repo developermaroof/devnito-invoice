@@ -25,8 +25,8 @@ const Navbar = ({ userData, isLoggedIn }) => {
             </div>
           ) : (
             <div className="text-center">
-              <h2 className="font-semibold text-xs">Guest</h2>
-              <p className="text-red-600 text-[0.7rem]">Please sign in</p>
+              <h2 className="font-semibold text-xs md:text-[1rem] lg:text-xl">Guest</h2>
+              <p className="text-red-600 text-[0.7rem] md:text-[0.8rem] lg:text-[1rem]">Please sign in</p>
             </div>
           )}
         </div>
