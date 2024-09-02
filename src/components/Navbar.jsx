@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../assets/logo.png';
 
 const Navbar = ({ userData, isLoggedIn }) => {
+  console.log("Navbar userData: ", userData); // Check if the user data is being passed
   return (
     <>
     <div>
