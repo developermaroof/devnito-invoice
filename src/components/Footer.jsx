@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div>
         <hr className='border-black'/>
-        <footer className='flex justify-center items-center text-center py-2'>
+        <footer className='flex justify-center items-center text-center py-4'>
             <div className='flex justify-center items-center gap-2'>
                 <p>Designed with </p>
                 <FaHeart />
