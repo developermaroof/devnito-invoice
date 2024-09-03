@@ -45,7 +45,7 @@ const router = (user) =>
       element: user ? <EmailList /> : <Error />, // Protect EmailList route based on user auth state
     },
     {
-      path: "/addinvoice",
+      path: "/addinvoices",
       element: user ? <FormWithPreview /> : <Error />, // Protect EmailList route based on user auth state
     },
     {
