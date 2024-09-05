@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 
 const FormWithPreview = () => {
   const [formData, setFormData] = useState({
@@ -13,11 +15,12 @@ const FormWithPreview = () => {
     durationHard: '',
     startingDate: '',
     endingDescription: '',
-    companyEmail: '',
+    ceoName: '',
+    companyName: '',
+    ceoEmail:'',
     bannerAddress: '',
     bannerEmail: '',
     bannerWebsite: '',
-    companyLogoFile: '',
   });
 
   const [showPopup, setShowPopup] = useState(false);
@@ -41,14 +44,19 @@ const FormWithPreview = () => {
   });
 
   return (
+    <>
+      <Navbar/>
     <div className="p-6">
       {/* Form Section */}
+      <div>
+        <h1 className='font-semibold text-center'>Add Invoice</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1">Title:</label>
           <input
             type="text"
             name="title"
+            placeholder='Type title..'
             value={formData.title}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -70,6 +78,7 @@ const FormWithPreview = () => {
           <input
             type="text"
             name="contractHeading"
+            placeholder='Type contact heading..'
             value={formData.contractHeading}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -81,6 +90,7 @@ const FormWithPreview = () => {
           <input
             type="text"
             name="name"
+            placeholder='Type name..'
             value={formData.name}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -91,6 +101,7 @@ const FormWithPreview = () => {
           <label className="block mb-1">Description:</label>
           <textarea
             name="description"
+            placeholder='Type starting message..'
             value={formData.description}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -98,10 +109,11 @@ const FormWithPreview = () => {
           ></textarea>
         </div>
         <div>
-          <label className="block mb-1">Project Budget in PKR:</label>
+          <label className="block mb-1">Project Budget:</label>
           <input
-            type="number"
+            type="text"
             name="projectBudget"
+            placeholder='Put budget..'
             value={formData.projectBudget}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -111,8 +123,9 @@ const FormWithPreview = () => {
         <div>
           <label className="block mb-1">Duration (Soft Deadline):</label>
           <input
-            type="number"
+            type="text"
             name="durationSoft"
+            placeholder='Type soft duration..'
             value={formData.durationSoft}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -122,8 +135,9 @@ const FormWithPreview = () => {
         <div>
           <label className="block mb-1">Duration (Hard Deadline):</label>
           <input
-            type="number"
+            type="text"
             name="durationHard"
+            placeholder='Type hard duration..'
             value={formData.durationHard}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -133,8 +147,9 @@ const FormWithPreview = () => {
         <div>
           <label className="block mb-1">Starting Date:</label>
           <input
-            type="date"
+            type="text"
             name="startingDate"
+            placeholder='Type starting date..'
             value={formData.startingDate}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -145,6 +160,7 @@ const FormWithPreview = () => {
           <label className="block mb-1">Ending Description:</label>
           <textarea
             name="endingDescription"
+            placeholder='Type ending message..'
             value={formData.endingDescription}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -152,11 +168,36 @@ const FormWithPreview = () => {
           ></textarea>
         </div>
         <div>
-          <label className="block mb-1">Company Email:</label>
+          <label className="block mb-1">CEO Name:</label>
+          <input
+            type="text"
+            name="ceoName"
+            placeholder='Type name..'
+            value={formData.ceoName}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 rounded w-full"
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-1">Company Name:</label>
+          <input
+            type="text"
+            name="companyName"
+            placeholder='Type name..'
+            value={formData.companyName}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 rounded w-full"
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-1">CEO Email:</label>
           <input
             type="email"
-            name="companyEmail"
-            value={formData.companyEmail}
+            name="ceoEmail"
+            placeholder='Put email..'
+            value={formData.ceoEmail}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
             required
@@ -167,6 +208,7 @@ const FormWithPreview = () => {
           <input
             type="text"
             name="bannerAddress"
+            placeholder='Type address..'
             value={formData.bannerAddress}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -178,6 +220,7 @@ const FormWithPreview = () => {
           <input
             type="email"
             name="bannerEmail"
+            placeholder='Put email..'
             value={formData.bannerEmail}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
@@ -189,17 +232,18 @@ const FormWithPreview = () => {
           <input
             type="url"
             name="bannerWebsite"
+            placeholder='Paste website URL..'
             value={formData.bannerWebsite}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
             required
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-          Submit
+        <button type="submit" className="bg-primary text-white text-xs px-8 py-2 rounded-3xl">
+          Add
         </button>
       </form>
-
+      </div>
       {/* Preview Section */}
       <div className="mt-8">
         <h2 className="text-xl font-semibold mb-4">Live Preview:</h2>
@@ -219,7 +263,9 @@ const FormWithPreview = () => {
           <p><strong>Duration (Hard):</strong> {formData.durationHard} days</p>
           <p><strong>Starting Date:</strong> {formData.startingDate}</p>
           <p><strong>Ending Description:</strong> {formData.endingDescription}</p>
-          <p><strong>Company Email:</strong> {formData.companyEmail}</p>
+          <p><strong>CEO Name:</strong> {formData.ceoName}</p>
+          <p><strong>Company Name:</strong> {formData.companyName}</p>
+          <p><strong>CEO Email:</strong> {formData.ceoEmail}</p>
           <p><strong>Banner Address:</strong> {formData.bannerAddress}</p>
           <p><strong>Banner Email:</strong> {formData.bannerEmail}</p>
           <p><strong>Banner Website:</strong> {formData.bannerWebsite}</p>
@@ -247,7 +293,9 @@ const FormWithPreview = () => {
               <p><strong>Duration (Hard):</strong> {formData.durationHard} days</p>
               <p><strong>Starting Date:</strong> {formData.startingDate}</p>
               <p><strong>Ending Description:</strong> {formData.endingDescription}</p>
-              <p><strong>Company Email:</strong> {formData.companyEmail}</p>
+              <p><strong>CEO Name:</strong> {formData.ceoName}</p>
+              <p><strong>Company Name:</strong> {formData.companyName}</p>
+              <p><strong>CEO Email:</strong> {formData.ceoEmail}</p>
               <p><strong>Banner Address:</strong> {formData.bannerAddress}</p>
               <p><strong>Banner Email:</strong> {formData.bannerEmail}</p>
               <p><strong>Banner Website:</strong> {formData.bannerWebsite}</p>
@@ -274,6 +322,8 @@ const FormWithPreview = () => {
         </div>
       )}
     </div>
+    <Footer/>
+    </>
   );
 };
 
