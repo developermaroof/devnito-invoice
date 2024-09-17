@@ -1,7 +1,8 @@
+// src/pages/FormWithPreview.jsx
 import React, { useState, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const FormWithPreview = () => {
   const [formData, setFormData] = useState({
@@ -49,12 +50,12 @@ const FormWithPreview = () => {
 
   return (
     <>
-      <Navbar/>
-    <div className="p-6">
-      {/* Form Section */}
-      <div>
-        <h1 className='font-semibold text-center'>Add Invoice</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <Navbar />
+      <div className="p-6">
+        {/* Form Section */}
+        <div>
+          <h1 className='font-semibold text-center'>Add Invoice</h1>
+          <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1">Title:</label>
           <input
@@ -285,14 +286,14 @@ const FormWithPreview = () => {
           />
         </div>
         <button type="submit" className="bg-primary text-white text-xs px-8 py-2 rounded-3xl">
-          Add
-        </button>
-      </form>
+              Add
+            </button>
+          </form>
       </div>
       {/* Preview Section */}
       <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4">Live Preview:</h2>
-        <div className="border p-4 rounded" ref={previewRef}>
+          <h2 className="text-xl font-semibold mb-4">Live Preview:</h2>
+          <div className="border p-4 rounded" ref={previewRef}>
           <div className='bg-gray-100 p-2 flex flex-col gap-10'>
             <div className='flex justify-between items-center'>
               <div>
@@ -337,10 +338,10 @@ const FormWithPreview = () => {
 
       {/* Popup for PDF download */}
       {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded shadow-lg text-center">
-            <h3 className="text-lg font-semibold mb-4">Form Submission</h3>
-            <div className="border p-4 rounded" ref={previewRef}>
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-6 rounded shadow-lg text-center">
+              <h3 className="text-lg font-semibold mb-4">Form Submission</h3>
+              <div className="border p-4 rounded" ref={previewRef}>
           <div className='bg-gray-100 p-2 flex flex-col gap-10'>
             <div className='flex justify-between items-center'>
               <div>
@@ -380,24 +381,24 @@ const FormWithPreview = () => {
               <img src={formData.bannercompanyLogo} alt="Company Logo" className="mt-2" />
             </div>
           )}
-        </div>
-            <button
-              onClick={handlePrint}
-              className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
-            >
-              Download as PDF
-            </button>
-            <button
-              onClick={() => setShowPopup(false)}
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Close
-            </button>
+       </div>
+              <button
+                onClick={handlePrint}
+                className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
+              >
+                Download as PDF
+              </button>
+              <button
+                onClick={() => setShowPopup(false)}
+                className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+              >
+                Close
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
-    <Footer/>
+        )}
+      </div>
+      <Footer />
     </>
   );
 };

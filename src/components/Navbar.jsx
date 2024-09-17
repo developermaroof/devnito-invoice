@@ -1,21 +1,22 @@
+// src/components/Navbar.jsx
 import React from 'react';
 import logo from '../assets/logo.png';
+import { useAuthContext } from '../context/AuthContext';
 
-const Navbar = ({ userData, isLoggedIn }) => {
-  console.log("Navbar userData: ", userData); // Check if the user data is being passed
+const Navbar = () => {
+  const { isLoggedIn, userData } = useAuthContext();
+
   return (
-    <>
     <div>
       <nav className="flex justify-between items-center p-4 lg:px-8 2xl:max-w-screen-2xl 2xl:mx-auto">
         <div className="flex items-center gap-1">
           <img src={logo} alt="Logo" className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10" />
-          {/* Display full title on large screens and up, and short title on smaller screens */}
           <h1 className="text-2xl font-bold hidden lg:block">Invoice Management System</h1>
           <h1 className="text-md md:text-2xl font-bold lg:hidden">Invoices</h1>
         </div>
         <div className="flex items-center">
           {isLoggedIn ? (
-            <div className=" flex items-center justify-center bg-black rounded-md p-2 px-3 md:px-6 lg:py-4 lg:pl-10 space-x-2 md:gap-2">
+            <div className="flex items-center justify-center bg-black rounded-md p-2 px-3 md:px-6 lg:py-4 lg:pl-10 space-x-2 md:gap-2">
               <div className="flex flex-col justify-center">
                 <h2 className="font-semibold text-white text-[0.7rem] md:text-[0.8rem] lg:text-[1rem]">{userData.displayName}</h2>
                 <p className="text-gray-300 text-[0.5rem] md:text-[0.7rem] lg:text-[0.9rem]">{userData.email}</p>
@@ -33,8 +34,7 @@ const Navbar = ({ userData, isLoggedIn }) => {
         </div>
       </nav>
       <hr className='border-black'/>
-      </div>
-    </>
+    </div>
   );
 };
 
