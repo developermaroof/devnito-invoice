@@ -7,9 +7,12 @@ const FormWithPreview = () => {
   const [formData, setFormData] = useState({
     title: '',
     companyLogo: '',
+    companyLogoName: '',
     contractHeading: '',
     name: '',
-    description: '',
+    paragraph1: '',
+    paragraph2: '',
+    paragraph3: '',
     projectBudget: '',
     durationSoft: '',
     durationHard: '',
@@ -18,6 +21,7 @@ const FormWithPreview = () => {
     ceoName: '',
     companyName: '',
     ceoEmail:'',
+    bannercompanyLogo: '',
     bannerAddress: '',
     bannerEmail: '',
     bannerWebsite: '',
@@ -74,6 +78,18 @@ const FormWithPreview = () => {
           />
         </div>
         <div>
+          <label className="block mb-1">Company Name:</label>
+          <input
+            type="text"
+            name="companyLogoName"
+            value={formData.companyLogoName}
+            placeholder='Type company name..'
+            onChange={handleChange}
+            className="border border-gray-300 p-2 rounded w-full"
+            required
+          />
+        </div>
+        <div>
           <label className="block mb-1">Contract Heading:</label>
           <input
             type="text"
@@ -98,14 +114,34 @@ const FormWithPreview = () => {
           />
         </div>
         <div>
-          <label className="block mb-1">Description:</label>
+          <label className="block mb-1">1st Paragraph:</label>
           <textarea
-            name="description"
-            placeholder='Type starting message..'
-            value={formData.description}
+            name="paragraph1"
+            placeholder='Type something..'
+            value={formData.paragraph1}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
             required
+          ></textarea>
+        </div>
+        <div>
+          <label className="block mb-1">2nd Paragraph:</label>
+          <textarea
+            name="paragraph2"
+            placeholder='Type something..'
+            value={formData.paragraph2}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 rounded w-full"
+          ></textarea>
+        </div>
+        <div>
+          <label className="block mb-1">3rd Paragraph:</label>
+          <textarea
+            name="paragraph3"
+            placeholder='Type something..'
+            value={formData.paragraph3}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 rounded w-full"
           ></textarea>
         </div>
         <div>
@@ -164,7 +200,6 @@ const FormWithPreview = () => {
             value={formData.endingDescription}
             onChange={handleChange}
             className="border border-gray-300 p-2 rounded w-full"
-            required
           ></textarea>
         </div>
         <div>
@@ -204,7 +239,17 @@ const FormWithPreview = () => {
           />
         </div>
         <div>
-          <label className="block mb-1">Banner Address:</label>
+          <label className="block mb-1">Company Logo:</label>
+          <input
+            type="file"
+            name="companyLogo"
+            accept="image/*"
+            onChange={handleChange}
+            className="border border-gray-300 p-2 rounded w-full"
+          />
+        </div>
+        <div>
+          <label className="block mb-1">Company Address:</label>
           <input
             type="text"
             name="bannerAddress"
@@ -216,7 +261,7 @@ const FormWithPreview = () => {
           />
         </div>
         <div>
-          <label className="block mb-1">Banner Email:</label>
+          <label className="block mb-1">Company Email:</label>
           <input
             type="email"
             name="bannerEmail"
@@ -228,7 +273,7 @@ const FormWithPreview = () => {
           />
         </div>
         <div>
-          <label className="block mb-1">Banner Website:</label>
+          <label className="block mb-1">Company URL:</label>
           <input
             type="url"
             name="bannerWebsite"
@@ -247,32 +292,44 @@ const FormWithPreview = () => {
       {/* Preview Section */}
       <div className="mt-8">
         <h2 className="text-xl font-semibold mb-4">Live Preview:</h2>
-        <div className="border p-4 rounded bg-gray-100" ref={previewRef}>
-          <p><strong>Title:</strong> {formData.title}</p>
-          {formData.companyLogo && (
-            <div>
-              <strong>Company Logo:</strong>
-              <img src={formData.companyLogo} alt="Company Logo" className="mt-2" />
+        <div className="border p-4 rounded" ref={previewRef}>
+          <div className='bg-gray-100 p-2 flex flex-col gap-10'>
+            <div className='flex justify-between items-center'>
+              <div>
+                <p className='font-semibold text-[0.6rem] text-gray-700'>{formData.title}</p>
+              </div>
+              <div className='flex items-center justify-center gap-[0.1rem]'>
+                {formData.companyLogo && (
+                <div className='flex items-center'>
+                  <img src={formData.companyLogo} alt="Company Logo" className="w-4 h-4" />
+                </div>
+                )}
+                <p className='text-sm font-bold'>{formData.companyLogoName}</p>
+              </div>
             </div>
-          )}
-          <p><strong>Contract Heading:</strong> {formData.contractHeading}</p>
-          <p><strong>Name:</strong> {formData.name}</p>
-          <p><strong>Description:</strong> {formData.description}</p>
-          <p><strong>Project Budget in PKR:</strong> {formData.projectBudget}</p>
-          <p><strong>Duration (Soft):</strong> {formData.durationSoft} days</p>
-          <p><strong>Duration (Hard):</strong> {formData.durationHard} days</p>
-          <p><strong>Starting Date:</strong> {formData.startingDate}</p>
-          <p><strong>Ending Description:</strong> {formData.endingDescription}</p>
-          <p><strong>CEO Name:</strong> {formData.ceoName}</p>
-          <p><strong>Company Name:</strong> {formData.companyName}</p>
-          <p><strong>CEO Email:</strong> {formData.ceoEmail}</p>
-          <p><strong>Banner Address:</strong> {formData.bannerAddress}</p>
-          <p><strong>Banner Email:</strong> {formData.bannerEmail}</p>
-          <p><strong>Banner Website:</strong> {formData.bannerWebsite}</p>
-          {formData.companyLogo && (
             <div>
-              <strong>Company Logo:</strong>
-              <img src={formData.companyLogo} alt="Company Logo" className="mt-2" />
+              <p className='text-center font-semibold text-2xl'>{formData.contractHeading}</p>
+            </div>
+          </div>
+
+          <p>{formData.name}</p>
+          <p>{formData.paragraph1}</p>
+          <p>{formData.paragraph2}</p>
+          <p>{formData.paragraph3}</p>
+          <p>{formData.projectBudget}</p>
+          <p>{formData.durationSoft}</p>
+          <p>{formData.durationHard}</p>
+          <p>{formData.startingDate}</p>
+          <p>{formData.endingDescription}</p>
+          <p>{formData.ceoName}</p>
+          <p>{formData.companyName}</p>
+          <p>{formData.ceoEmail}</p>
+          <p>{formData.bannerAddress}</p>
+          <p>{formData.bannerEmail}</p>
+          <p>{formData.bannerWebsite}</p>
+          {formData.bannercompanyLogo && (
+            <div>
+              <img src={formData.bannercompanyLogo} alt="Company Logo" className="mt-2" />
             </div>
           )}
         </div>
@@ -283,29 +340,47 @@ const FormWithPreview = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded shadow-lg text-center">
             <h3 className="text-lg font-semibold mb-4">Form Submission</h3>
-            <div className="border p-4 rounded bg-gray-100" ref={previewRef}>
-              <p><strong>Title:</strong> {formData.title}</p>
-              <p><strong>Contract Heading:</strong> {formData.contractHeading}</p>
-              <p><strong>Name:</strong> {formData.name}</p>
-              <p><strong>Description:</strong> {formData.description}</p>
-              <p><strong>Project Budget in PKR:</strong> {formData.projectBudget}</p>
-              <p><strong>Duration (Soft):</strong> {formData.durationSoft} days</p>
-              <p><strong>Duration (Hard):</strong> {formData.durationHard} days</p>
-              <p><strong>Starting Date:</strong> {formData.startingDate}</p>
-              <p><strong>Ending Description:</strong> {formData.endingDescription}</p>
-              <p><strong>CEO Name:</strong> {formData.ceoName}</p>
-              <p><strong>Company Name:</strong> {formData.companyName}</p>
-              <p><strong>CEO Email:</strong> {formData.ceoEmail}</p>
-              <p><strong>Banner Address:</strong> {formData.bannerAddress}</p>
-              <p><strong>Banner Email:</strong> {formData.bannerEmail}</p>
-              <p><strong>Banner Website:</strong> {formData.bannerWebsite}</p>
-              {formData.companyLogo && (
-                <div>
-                  <strong>Company Logo:</strong>
-                  <img src={formData.companyLogo} alt="Company Logo" className="mt-2" />
+            <div className="border p-4 rounded" ref={previewRef}>
+          <div className='bg-gray-100 p-2 flex flex-col gap-10'>
+            <div className='flex justify-between items-center'>
+              <div>
+                <p className='font-semibold text-[0.6rem] text-gray-700'>{formData.title}</p>
+              </div>
+              <div className='flex items-center justify-center gap-[0.1rem]'>
+                {formData.companyLogo && (
+                <div className='flex items-center'>
+                  <img src={formData.companyLogo} alt="Company Logo" className="w-4 h-4" />
                 </div>
-              )}
+                )}
+                <p className='text-sm font-bold'>{formData.companyLogoName}</p>
+              </div>
             </div>
+            <div>
+              <p className='text-center font-semibold text-2xl'>{formData.contractHeading}</p>
+            </div>
+          </div>
+
+          <p>{formData.name}</p>
+          <p>{formData.paragraph1}</p>
+          <p>{formData.paragraph2}</p>
+          <p>{formData.paragraph3}</p>
+          <p>{formData.projectBudget}</p>
+          <p>{formData.durationSoft}</p>
+          <p>{formData.durationHard}</p>
+          <p>{formData.startingDate}</p>
+          <p>{formData.endingDescription}</p>
+          <p>{formData.ceoName}</p>
+          <p>{formData.companyName}</p>
+          <p>{formData.ceoEmail}</p>
+          <p>{formData.bannerAddress}</p>
+          <p>{formData.bannerEmail}</p>
+          <p>{formData.bannerWebsite}</p>
+          {formData.bannercompanyLogo && (
+            <div>
+              <img src={formData.bannercompanyLogo} alt="Company Logo" className="mt-2" />
+            </div>
+          )}
+        </div>
             <button
               onClick={handlePrint}
               className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
