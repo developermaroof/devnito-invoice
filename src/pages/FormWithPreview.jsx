@@ -22,7 +22,6 @@ const FormWithPreview = () => {
     ceoName: '',
     companyName: '',
     ceoEmail:'',
-    bannercompanyLogo: '',
     bannerAddress: '',
     bannerEmail: '',
     bannerWebsite: '',
@@ -240,16 +239,6 @@ const FormWithPreview = () => {
           />
         </div>
         <div>
-          <label className="block mb-1">Company Logo:</label>
-          <input
-            type="file"
-            name="companyLogo"
-            accept="image/*"
-            onChange={handleChange}
-            className="border border-gray-300 p-2 rounded w-full"
-          />
-        </div>
-        <div>
           <label className="block mb-1">Company Address:</label>
           <input
             type="text"
@@ -276,7 +265,7 @@ const FormWithPreview = () => {
         <div>
           <label className="block mb-1">Company URL:</label>
           <input
-            type="url"
+            type="text"
             name="bannerWebsite"
             placeholder='Paste website URL..'
             value={formData.bannerWebsite}
@@ -292,8 +281,8 @@ const FormWithPreview = () => {
       </div>
       {/* Preview Section */}
       <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">Live Preview:</h2>
-          <div className="border p-4 rounded" ref={previewRef}>
+        <h2 className="text-xl font-semibold mb-4">Live Preview:</h2>
+        <div className="border p-4 rounded" ref={previewRef}>
           <div className='bg-gray-100 p-2 flex flex-col gap-10'>
             <div className='flex justify-between items-center'>
               <div>
@@ -312,27 +301,52 @@ const FormWithPreview = () => {
               <p className='text-center font-semibold text-2xl'>{formData.contractHeading}</p>
             </div>
           </div>
-
-          <p>{formData.name}</p>
-          <p>{formData.paragraph1}</p>
-          <p>{formData.paragraph2}</p>
-          <p>{formData.paragraph3}</p>
-          <p>{formData.projectBudget}</p>
-          <p>{formData.durationSoft}</p>
-          <p>{formData.durationHard}</p>
-          <p>{formData.startingDate}</p>
-          <p>{formData.endingDescription}</p>
-          <p>{formData.ceoName}</p>
-          <p>{formData.companyName}</p>
-          <p>{formData.ceoEmail}</p>
-          <p>{formData.bannerAddress}</p>
-          <p>{formData.bannerEmail}</p>
-          <p>{formData.bannerWebsite}</p>
-          {formData.bannercompanyLogo && (
+          <div className='flex flex-col gap-2 mt-4 text-[0.6rem]'>
+            <p>Dear <span className='font-semibold'>{formData.name}</span>,</p>
+            <p>{formData.paragraph1}</p>
+            <p>{formData.paragraph2}</p>
+            <p>{formData.paragraph3}</p>
+          </div>
+          <div className='flex flex-col p-2 gap-2'>
             <div>
-              <img src={formData.bannercompanyLogo} alt="Company Logo" className="mt-2" />
+              <span className='text-xs font-bold'>Project Budget</span>
+              <p className='text-xs'>{formData.projectBudget}</p>
             </div>
-          )}
+            <div>
+              <span className='text-xs font-bold'>Duration</span>
+              <li className='text-xs'>{formData.durationSoft} soft-deadline</li>
+              <li className='text-xs'>{formData.durationHard} hard-deadline</li>
+            </div>
+            <div>
+              <span className='text-xs font-bold'>Starting from</span>
+              <li className='text-xs'>{formData.startingDate}</li>
+            </div>
+          </div>
+          <div className='mt-2'>
+            <p className='text-[0.6rem]'>{formData.endingDescription}</p>
+          </div>
+          <div className='mt-4 flex flex-col gap-2'>
+            <span className='text-xs'>Sincerely,</span>
+            <div>
+              <p className='text-[0.7rem]'>{formData.ceoName}</p>
+              <p className='text-[0.7rem] font-bold italic'>Founder & CEO @{formData.companyName}</p>
+              <p className='text-[0.7rem]'>{formData.ceoEmail}</p>
+            </div>
+          </div>
+          <div className='flex border-t border-b p-2 items-center justify-center mt-10 w-full h-full'>
+            <div className='border-r p-2'>
+              {formData.companyLogo && (
+              <div className='flex items-center'>
+                <img src={formData.companyLogo} alt="Company Logo" className="w-20 h-full" width={100} height={100} />
+              </div>
+              )}
+            </div>
+            <div className='flex flex-col gap-2 pl-2'>
+              <p className='text-[0.7rem]'><span className='font-bold'>Address:</span> {formData.bannerAddress}</p>
+              <p className='text-[0.7rem]'><span className='font-bold'>Email Address:</span> {formData.bannerEmail}</p>
+              <p className='text-[0.7rem]'><span className='font-bold'>Website:</span> {formData.bannerWebsite}</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -340,7 +354,7 @@ const FormWithPreview = () => {
       {showPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-6 rounded shadow-lg text-center">
-              <h3 className="text-lg font-semibold mb-4">Form Submission</h3>
+              <h3 className="text-lg font-semibold mb-4">Submission</h3>
               <div className="border p-4 rounded" ref={previewRef}>
           <div className='bg-gray-100 p-2 flex flex-col gap-10'>
             <div className='flex justify-between items-center'>
@@ -360,28 +374,53 @@ const FormWithPreview = () => {
               <p className='text-center font-semibold text-2xl'>{formData.contractHeading}</p>
             </div>
           </div>
-
-          <p>{formData.name}</p>
-          <p>{formData.paragraph1}</p>
-          <p>{formData.paragraph2}</p>
-          <p>{formData.paragraph3}</p>
-          <p>{formData.projectBudget}</p>
-          <p>{formData.durationSoft}</p>
-          <p>{formData.durationHard}</p>
-          <p>{formData.startingDate}</p>
-          <p>{formData.endingDescription}</p>
-          <p>{formData.ceoName}</p>
-          <p>{formData.companyName}</p>
-          <p>{formData.ceoEmail}</p>
-          <p>{formData.bannerAddress}</p>
-          <p>{formData.bannerEmail}</p>
-          <p>{formData.bannerWebsite}</p>
-          {formData.bannercompanyLogo && (
+          <div className='flex flex-col gap-2 mt-4 text-[0.6rem]'>
+            <p>Dear <span className='font-semibold'>{formData.name}</span>,</p>
+            <p>{formData.paragraph1}</p>
+            <p>{formData.paragraph2}</p>
+            <p>{formData.paragraph3}</p>
+          </div>
+          <div className='flex flex-col p-2 gap-2'>
             <div>
-              <img src={formData.bannercompanyLogo} alt="Company Logo" className="mt-2" />
+              <span className='text-xs font-bold'>Project Budget</span>
+              <p className='text-xs'>{formData.projectBudget}</p>
             </div>
-          )}
-       </div>
+            <div>
+              <span className='text-xs font-bold'>Duration</span>
+              <li className='text-xs'>{formData.durationSoft} soft-deadline</li>
+              <li className='text-xs'>{formData.durationHard} hard-deadline</li>
+            </div>
+            <div>
+              <span className='text-xs font-bold'>Starting from</span>
+              <li className='text-xs'>{formData.startingDate}</li>
+            </div>
+          </div>
+          <div className='mt-2'>
+            <p className='text-[0.6rem]'>{formData.endingDescription}</p>
+          </div>
+          <div className='mt-4 flex flex-col gap-2'>
+            <span className='text-xs'>Sincerely,</span>
+            <div>
+              <p className='text-[0.7rem]'>{formData.ceoName}</p>
+              <p className='text-[0.7rem] font-bold italic'>Founder & CEO @{formData.companyName}</p>
+              <p className='text-[0.7rem]'>{formData.ceoEmail}</p>
+            </div>
+          </div>
+          <div className='flex border-t border-b p-2 items-center justify-center mt-10'>
+            <div className='border-r p-2'>
+              {formData.companyLogo && (
+              <div className='flex items-center'>
+                <img src={formData.companyLogo} alt="Company Logo" className="" width={100} height={100} />
+              </div>
+              )}
+            </div>
+            <div className='flex flex-col gap-2 pl-2'>
+              <p className='text-[0.7rem]'><span className='font-bold'>Address:</span> {formData.bannerAddress}</p>
+              <p className='text-[0.7rem]'><span className='font-bold'>Email Address:</span> {formData.bannerEmail}</p>
+              <p className='text-[0.7rem]'><span className='font-bold'>Website:</span> {formData.bannerWebsite}</p>
+            </div>
+          </div>
+        </div>
               <button
                 onClick={handlePrint}
                 className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
