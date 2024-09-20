@@ -50,7 +50,7 @@ const FormWithPreview = () => {
   return (
     <>
       <Navbar />
-      <div className="p-6">
+      <div className="p-6 2xl:max-w-screen-2xl 2xl:mx-auto">
         {/* Form Section */}
         <div>
           <h1 className='font-semibold text-center'>Add Invoice</h1>
@@ -265,7 +265,7 @@ const FormWithPreview = () => {
         <div>
           <label className="block mb-1">Company URL:</label>
           <input
-            type="text"
+            type="url"
             name="bannerWebsite"
             placeholder='Paste website URL..'
             value={formData.bannerWebsite}
@@ -283,68 +283,68 @@ const FormWithPreview = () => {
       <div className="mt-8">
         <h2 className="text-xl font-semibold mb-4">Live Preview:</h2>
         <div className="border p-4 rounded" ref={previewRef}>
-          <div className='bg-gray-100 p-2 flex flex-col gap-10'>
+          <div className='bg-gray-100 p-2 md:p-4 flex flex-col gap-10'>
             <div className='flex justify-between items-center'>
               <div>
-                <p className='font-semibold text-[0.6rem] text-gray-700'>{formData.title}</p>
+                <p className='font-semibold text-[0.6rem] sm:text-sm md:text-lg text-gray-700'>{formData.title}</p>
               </div>
               <div className='flex items-center justify-center gap-[0.1rem]'>
                 {formData.companyLogo && (
                 <div className='flex items-center'>
-                  <img src={formData.companyLogo} alt="Company Logo" className="w-4 h-4" />
+                  <img src={formData.companyLogo} alt="Company Logo" className="w-4 h-4 sm:w-6 sm:h-6" />
                 </div>
                 )}
-                <p className='text-sm font-bold'>{formData.companyLogoName}</p>
+                <p className='text-sm sm:text-lg md:text-xl font-bold'>{formData.companyLogoName}</p>
               </div>
             </div>
             <div>
-              <p className='text-center font-semibold text-2xl'>{formData.contractHeading}</p>
+              <p className='text-center font-semibold text-2xl sm:text-3xl md:text-4xl'>{formData.contractHeading}</p>
             </div>
           </div>
-          <div className='flex flex-col gap-2 mt-4 text-[0.6rem]'>
+          <div className='flex flex-col gap-2 mt-4 md:mt-8 text-[0.6rem] sm:text-[0.8rem] md:text-sm'>
             <p>Dear <span className='font-semibold'>{formData.name}</span>,</p>
             <p>{formData.paragraph1}</p>
             <p>{formData.paragraph2}</p>
             <p>{formData.paragraph3}</p>
           </div>
-          <div className='flex flex-col p-2 gap-2'>
+          <div className='flex flex-col p-2 md:p-4 gap-2'>
             <div>
-              <span className='text-xs font-bold'>Project Budget</span>
-              <p className='text-xs'>{formData.projectBudget}</p>
+              <span className='text-xs sm:text-sm md:text-[1rem] font-bold'>Project Budget</span>
+              <p className='text-xs sm:text-sm md:text-[1rem]'>{formData.projectBudget}</p>
             </div>
             <div>
-              <span className='text-xs font-bold'>Duration</span>
-              <li className='text-xs'>{formData.durationSoft} soft-deadline</li>
-              <li className='text-xs'>{formData.durationHard} hard-deadline</li>
+              <span className='text-xs sm:text-sm md:text-[1rem] font-bold'>Duration</span>
+              <li className='text-xs sm:text-sm md:text-[1rem]'>{formData.durationSoft} soft-deadline</li>
+              <li className='text-xs sm:text-sm md:text-[1rem]'>{formData.durationHard} hard-deadline</li>
             </div>
             <div>
-              <span className='text-xs font-bold'>Starting from</span>
-              <li className='text-xs'>{formData.startingDate}</li>
+              <span className='text-xs sm:text-sm md:text-[1rem] font-bold'>Starting from</span>
+              <li className='text-xs sm:text-sm md:text-[1rem]'>{formData.startingDate}</li>
             </div>
           </div>
           <div className='mt-2'>
-            <p className='text-[0.6rem]'>{formData.endingDescription}</p>
+            <p className='text-[0.6rem] sm:text-[0.8rem] md:text-sm'>{formData.endingDescription}</p>
           </div>
-          <div className='mt-4 flex flex-col gap-2'>
-            <span className='text-xs'>Sincerely,</span>
+          <div className='mt-4 md:mt-8 flex flex-col gap-2'>
+            <span className='text-xs sm:text-sm md:text-[1rem]'>Sincerely,</span>
             <div>
-              <p className='text-[0.7rem]'>{formData.ceoName}</p>
-              <p className='text-[0.7rem] font-bold italic'>Founder & CEO @{formData.companyName}</p>
-              <p className='text-[0.7rem]'>{formData.ceoEmail}</p>
+              <p className='text-[0.7rem] sm:text-[0.8rem] md:text-sm'>{formData.ceoName}</p>
+              <p className='text-[0.7rem] sm:text-[0.8rem] md:text-sm font-bold italic'>Founder & CEO @{formData.companyName}</p>
+              <p className='text-[0.7rem] sm:text-[0.8rem] md:text-sm'>{formData.ceoEmail}</p>
             </div>
           </div>
-          <div className='flex border-t border-b p-2 items-center justify-center mt-10 w-full h-full'>
-            <div className='border-r p-2'>
+          <div className='flex border-y p-2 md:p-4 items-center justify-center mt-10 w-full h-full'>
+            <div className='p-2'>
               {formData.companyLogo && (
               <div className='flex items-center'>
                 <img src={formData.companyLogo} alt="Company Logo" className="w-20 h-full" width={100} height={100} />
               </div>
               )}
             </div>
-            <div className='flex flex-col gap-2 pl-2'>
-              <p className='text-[0.7rem]'><span className='font-bold'>Address:</span> {formData.bannerAddress}</p>
-              <p className='text-[0.7rem]'><span className='font-bold'>Email Address:</span> {formData.bannerEmail}</p>
-              <p className='text-[0.7rem]'><span className='font-bold'>Website:</span> {formData.bannerWebsite}</p>
+            <div className='flex flex-col border-l gap-2 pl-2 w-full overflow-scroll'>
+              <p className='text-[0.7rem] sm:text-[0.8rem] md:text-[1rem]'><span className='font-bold'>Address:</span> {formData.bannerAddress}</p>
+              <p className='text-[0.7rem] sm:text-[0.8rem] md:text-[1rem]'><span className='font-bold'>Email Address:</span> {formData.bannerEmail}</p>
+              <p className='text-[0.7rem] sm:text-[0.8rem] md:text-[1rem]'><span className='font-bold'>Website:</span> {formData.bannerWebsite}</p>
             </div>
           </div>
         </div>
