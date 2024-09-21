@@ -5,8 +5,8 @@ import "./App.css";
 
 import Home from "./pages/Home";
 import Error from "./pages/Error";
-import EmailList from "./pages/EmailList";
-import FormWithPreview from "./pages/FormWithPreview";
+import InvoiceList from "./pages/InvoiceList";
+import AddInvoice from "./pages/AddInvoice";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute"; // We'll create this next
 
@@ -17,10 +17,10 @@ function App() {
       element: <Home />,
     },
     {
-      path: "/emaillist",
+      path: "/invoicelist",
       element: (
         <ProtectedRoute>
-          <EmailList />
+          <InvoiceList />
         </ProtectedRoute>
       ),
     },
@@ -28,7 +28,7 @@ function App() {
       path: "/addinvoices",
       element: (
         <ProtectedRoute>
-          <FormWithPreview />
+          <AddInvoice />
         </ProtectedRoute>
       ),
     },

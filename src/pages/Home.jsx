@@ -43,7 +43,9 @@ const Home = () => {
                   </div>
                 </div>
                 <button className='mt-2 mb-10 lg:mb-12'>
+                <Link to="/invoicelist">
                   <h2 className='font-semibold lg:text-xl'>View Invoices</h2>
+                </Link>
                 </button>
               </div>
 
