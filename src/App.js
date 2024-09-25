@@ -8,6 +8,7 @@ import Error from "./pages/Error";
 import InvoiceList from "./pages/InvoiceList";
 import AddInvoice from "./pages/AddInvoice";
 import { AuthProvider } from "./context/AuthContext";
+import { InvoiceProvider } from "./context/InvoiceContext"; // Import InvoiceProvider
 import ProtectedRoute from "./components/ProtectedRoute"; // We'll create this next
 
 function App() {
@@ -40,7 +41,10 @@ function App() {
 
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+      <InvoiceProvider>
+        {/* Wrap with InvoiceProvider */}
+        <RouterProvider router={router} />
+      </InvoiceProvider>
     </AuthProvider>
   );
 }
