@@ -8,16 +8,12 @@ import PDFPopup from '../components/PDFPopup';
 import Navbar from "../components/Navbar";
 import PreviewSection from '../components/PreviewSection';
 
-// Context
-import { useInvoice } from '../context/InvoiceContext';
-
 // Firebase
 import { db, storage } from '../firebase/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const AddInvoice = () => {
-  const { addInvoice } = useInvoice();
   const initialFormState = { 
     title: '',
     companyLogo: null,
@@ -48,30 +44,7 @@ const AddInvoice = () => {
   const validateForm = () => {
     // List all required fields here
     const requiredFields = [
-      // 'title',
-      // "companyLogo",
-      // 'companyLogoName',
-      // 'contractHeading',
-      // 'name',
-      // 'paragraph1',
-      // 'paragraph2',
-      // 'paragraph3',
-      // 'projectBudget',
-      // 'durationSoft',
-      // 'durationHard',
-      // 'startingDate',
-      // 'endingDescription',
-      // 'ceoName',
-      // 'companyName',
-      'ceoEmail',
-      // 'bannerAddress',
-      'bannerEmail',
-      // 'bannerWebsite',
-      // 'contractStatus',
-      // 'paymentStatus',
-      // 'clientDetails',
-      'assigneeDetails',
-      // 'notes',
+      'title',
     ];
   
     for (let field of requiredFields) {
@@ -114,16 +87,6 @@ const AddInvoice = () => {
     return;
   }
 
-    // Email validation check
-    const isEmailValid = (email) => email.includes('@');
-    if (!isEmailValid(formData.ceoEmail) || !isEmailValid(formData.bannerEmail)) {
-        alert('Please enter a valid email address');
-        return; // Stop further execution if email is invalid
-        // Alternatively, show a modal for better UX
-        // setShowPopup(true);
-        // return;
-    }
-
     try {
       let logoUrl = '';
 
@@ -141,7 +104,6 @@ const AddInvoice = () => {
       };
 
       // Save the form data to Firestore
-      console.log("ADD DOC", db, invoiceData)
       const docRef = await addDoc(collection(db, 'invoices'), invoiceData);
       console.log("Document written with ID: ", docRef.id);
     
@@ -153,8 +115,11 @@ const AddInvoice = () => {
       // Reset form data if needed
       setFormData(initialFormState);
       
-      // Optionally navigate to another page if desired
-      // navigate('/invoicelist');
+    // Delay the navigation to /invoicelist after showing the popup
+      setTimeout(() => {
+        navigate('/invoicelist');    
+      },  6000); // Adjust the delay time (in milliseconds) to how long the modal should remain visible
+    
     } catch (error) {
       console.error("Error adding document: ", error.message);
       alert(`Error adding invoice: ${error.message}`);
@@ -176,7 +141,6 @@ const AddInvoice = () => {
                 value={formData.assigneeDetails}
                 placeholder='Type Something..'
                 onChange={handleChange}
-                required
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
@@ -201,7 +165,6 @@ const AddInvoice = () => {
                 value={formData.bannerEmail}
                 placeholder='Put email..'
                 onChange={handleChange}
-                required
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -226,7 +189,6 @@ const AddInvoice = () => {
                 value={formData.ceoEmail}
                 placeholder='Put email..'
                 onChange={handleChange}
-                required
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -463,6 +425,7 @@ const AddInvoice = () => {
                 value={formData.title}
                 placeholder='Type title..'
                 onChange={handleChange}
+                required
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
