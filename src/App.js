@@ -42,8 +42,9 @@ function App() {
   return (
     <AuthProvider>
       <InvoiceProvider>
+        {" "}
         {/* Wrap with InvoiceProvider */}
-        <RouterProvider router={router} />
+        <RouterProvider router={router} /> {/* Provide the routes */}
       </InvoiceProvider>
     </AuthProvider>
   );

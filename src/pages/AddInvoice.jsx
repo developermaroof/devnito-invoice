@@ -26,6 +26,7 @@ const AddInvoice = () => {
     projectBudget: '',
     durationSoft: '',
     durationHard: '',
+    deadline: '',
     startingDate: '',
     endingDescription: '',
     ceoName: '',
@@ -133,7 +134,7 @@ const AddInvoice = () => {
         <div>
           <h1 className='font-semibold text-center lg:text-2xl xl:text-3xl'>Add Invoice</h1>
           <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-44 lg:mb-32">
-            {/*  */}
+            {/* assignee details input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Assignee Details:</label>
               <textarea
@@ -144,7 +145,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
-            {/*  */}
+            {/* Banner Address input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Address:</label>
               <input
@@ -156,7 +157,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Banner Email input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Email:</label>
               <input
@@ -168,7 +169,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Banner Website input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Website:</label>
               <input
@@ -180,7 +181,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* CEO Email input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">CEO Email:</label>
               <input
@@ -192,7 +193,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* CEO Name input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">CEO Name:</label>
               <input
@@ -204,7 +205,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Client Details input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Client Details:</label>
               <textarea
@@ -215,7 +216,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
-            {/*  */}
+            {/* Company Logo input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Company Logo:</label>
               <input
@@ -226,7 +227,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Company Name input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Company Name:</label>
               <input
@@ -238,7 +239,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Contract Heading input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Contract Heading:</label>
               <input
@@ -250,7 +251,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Contract details Status */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Contract Status:</label>
               <div className="flex items-center">
@@ -276,7 +277,19 @@ const AddInvoice = () => {
                 <label className="ml-2 lg:text-lg xl:text-xl">In Progress</label>
               </div>
             </div>
-            {/*  */}
+            {/* Deadline input */}
+            <div>
+              <label className="block mb-1 lg:text-xl xl:text-2xl">Deadline:</label>
+              <input
+                type="date"
+                name="deadline"
+                value={formData.deadline}
+                placeholder='Put the deadline..'
+                onChange={handleChange}
+                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+              />
+            </div>
+            {/* Duration Hard input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Duration (Hard Deadline):</label>
               <input
@@ -288,7 +301,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Duration Soft input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Duration (Soft Deadline):</label>
               <input
@@ -300,7 +313,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Ending Description input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Ending Description:</label>
               <textarea
@@ -311,7 +324,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
-            {/*  */}
+            {/* Name input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Name:</label>
               <input
@@ -323,7 +336,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Notes input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Notes:</label>
               <textarea
@@ -334,7 +347,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
-            {/*  */}
+            {/* Paragraph 1 input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 1:</label>
               <textarea
@@ -345,7 +358,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
-            {/*  */}
+            {/* Paragraph 2 input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 2:</label>
               <textarea
@@ -356,7 +369,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
-            {/*  */}
+            {/* Paragraph 3 input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 3:</label>
               <textarea
@@ -367,7 +380,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
-            {/*  */}
+            {/* Payment Status input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Payment Status:</label>
               <div className="flex items-center">
@@ -393,7 +406,7 @@ const AddInvoice = () => {
                 <label className="ml-2 lg:text-lg xl:text-xl">Paid</label>
               </div>
             </div>
-            {/*  */}
+            {/* Project Budget input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Project Budget:</label>
               <input
@@ -405,7 +418,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Starting from input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Starting from:</label>
               <input
@@ -416,7 +429,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Title input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Title:</label>
               <input
@@ -429,7 +442,7 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/*  */}
+            {/* Button */}
             <button
             type="submit" 
             onClick={handleAddInvoice} 

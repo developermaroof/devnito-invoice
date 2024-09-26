@@ -18,21 +18,29 @@ const InvoiceList = () => {
           <table className="min-w-full border-collapse border border-gray-200">
             <thead>
               <tr>
-                <th className="border border-gray-300 p-2">ID</th>
-                <th className="border border-gray-300 p-2">Client</th>
-                <th className="border border-gray-300 p-2">Amount</th>
-                <th className="border border-gray-300 p-2">Date</th>
-                {/* Add more headers as necessary */}
+                <th className="border border-gray-300 p-2">Name</th>
+                <th className="border border-gray-300 p-2">Contract Status</th>
+                <th className="border border-gray-300 p-2">Starting Date</th>
+                <th className="border border-gray-300 p-2">Deadline</th>
+                <th className="border border-gray-300 p-2">Payment Status</th>
+                <th className="border border-gray-300 p-2">Title</th>
+                <th className="border border-gray-300 p-2">Client Details</th>
+                <th className="border border-gray-300 p-2">Assignee Details</th>
+                <th className="border border-gray-300 p-2">Notes</th>
               </tr>
             </thead>
             <tbody>
               {invoices.map((invoice) => (
                 <tr key={invoice.id}>
-                  <td className="border border-gray-300 p-2">{invoice.id}</td>
-                  <td className="border border-gray-300 p-2">{invoice.client}</td>
-                  <td className="border border-gray-300 p-2">{invoice.amount}</td>
-                  <td className="border border-gray-300 p-2">{invoice.date}</td>
-                  {/* Render more fields as necessary */}
+                  <td className="border border-gray-300 p-2">{invoice.name}</td>
+                  <td className="border border-gray-300 p-2">{invoice.contractStatus}</td>
+                  <td className="border border-gray-300 p-2">{invoice.startingDate}</td>
+                  <td className="border border-gray-300 p-2">{invoice.deadline}</td>
+                  <td className="border border-gray-300 p-2">{invoice.paymentStatus}</td>
+                  <td className="border border-gray-300 p-2">{invoice.title}</td>
+                  <td className="border border-gray-300 p-2">{invoice.clientDetails}</td>
+                  <td className="border border-gray-300 p-2">{invoice.assigneeDetails}</td>
+                  <td className="border border-gray-300 p-2">{invoice.notes}</td>
                 </tr>
               ))}
             </tbody>
