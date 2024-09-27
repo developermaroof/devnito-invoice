@@ -4,17 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import TruncateText from '../components/TruncateText';
+import PDFPopup from '../components/PDFPopup'; // Import PDFPopup
 
 const InvoiceList = () => {
   const { invoices, setInvoices, deleteInvoice } = useInvoice();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false); // State for showing the popup
+  const [selectedInvoice, setSelectedInvoice] = useState(null); // State for storing selected invoice data
 
-  // Fetch invoices when component mounts (if you have a fetch function)
   useEffect(() => {
-    // If you have a function to fetch invoices, call it here.
-    // Example: fetchInvoices();
-  }, []); // Empty dependency array means this runs only once on mount
+    // Fetch invoices if needed
+  }, []);
 
   const handleEdit = (invoice) => {
     navigate('/addinvoices', { state: { invoice } });
@@ -24,10 +25,7 @@ const InvoiceList = () => {
     setLoading(true);
     try {
       await deleteInvoice(id);
-      // Update the local state after deletion to reflect changes
       setInvoices((prevInvoices) => prevInvoices.filter((invoice) => invoice.id !== id));
-      // Optionally, reload the page if you want to fetch the updated data from the server
-      // window.location.reload(); // Uncomment if you want to reload after delete
     } catch (error) {
       console.error("Error deleting invoice: ", error);
       alert("Failed to delete the invoice. Please try again.");
@@ -36,14 +34,17 @@ const InvoiceList = () => {
     }
   };
 
+  const handleView = (invoice) => {
+    setSelectedInvoice(invoice); // Set the selected invoice data
+    setShowPopup(true); // Show the popup
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <div className="flex-grow p-4">
         <h1 className="text-2xl font-bold mb-4 text-center">Invoice List</h1>
-        {loading && (
-          <p className="text-center text-blue-500">Loading...</p>
-        )}
+        {loading && <p className="text-center text-blue-500">Loading...</p>}
         {invoices.length === 0 && !loading ? (
           <p className="text-center">No invoices available.</p>
         ) : (
@@ -60,6 +61,7 @@ const InvoiceList = () => {
                   <th className="border border-gray-300 p-2 min-w-[150px]">Client Details</th>
                   <th className="border border-gray-300 p-2 min-w-[150px]">Assignee Details</th>
                   <th className="border border-gray-300 p-2 min-w-[150px]">Notes</th>
+                  <th className="border border-gray-300 p-2 min-w-[100px]">View</th>
                   <th className="border border-gray-300 p-2 min-w-[100px]">Edit</th>
                   <th className="border border-gray-300 p-2 min-w-[100px]">Delete</th>
                 </tr>
@@ -84,6 +86,14 @@ const InvoiceList = () => {
                     </td>
                     <td className="border border-gray-300 p-2 min-w-[100px] text-center">
                       <button
+                        onClick={() => handleView(invoice)} // View button
+                        className="text-sm text-green-500 cursor-pointer hover:text-green-700"
+                      >
+                        View
+                      </button>
+                    </td>
+                    <td className="border border-gray-300 p-2 min-w-[100px] text-center">
+                      <button
                         onClick={() => handleEdit(invoice)} // Edit button
                         className="text-sm text-blue-500 cursor-pointer hover:text-blue-700"
                       >
@@ -105,6 +115,12 @@ const InvoiceList = () => {
           </div>
         )}
       </div>
+      {showPopup && (
+        <PDFPopup
+          formData={selectedInvoice} // Pass the selected invoice data
+          setShowPopup={setShowPopup} // Pass the function to close the popup
+        />
+      )}
       <Footer />
     </div>
   );
