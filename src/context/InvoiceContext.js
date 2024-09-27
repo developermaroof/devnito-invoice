@@ -1,54 +1,56 @@
-// src/context/InvoiceContext.js
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { db } from "../firebase/firebaseConfig";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 const InvoiceContext = createContext();
+
+export const useInvoice = () => {
+  return useContext(InvoiceContext);
+};
 
 export const InvoiceProvider = ({ children }) => {
   const [invoices, setInvoices] = useState([]);
 
   // Fetch invoices from Firestore
-  useEffect(() => {
-    const fetchInvoices = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "invoices"));
-        const invoicesData = querySnapshot.docs.map((doc) => ({
-          id: doc.id, // document ID
-          ...doc.data(), // document data
-        }));
-        setInvoices(invoicesData);
-      } catch (error) {
-        console.error("Error fetching invoices: ", error);
-      }
-    };
+  const fetchInvoices = async () => {
+    const invoicesCollection = collection(db, "invoices");
+    const invoicesSnapshot = await getDocs(invoicesCollection);
+    const invoicesList = invoicesSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setInvoices(invoicesList);
+  };
 
+  // Update invoice in Firestore
+  const updateInvoice = async (id, updatedData) => {
+    const invoiceDoc = doc(db, "invoices", id);
+    await updateDoc(invoiceDoc, updatedData);
+    fetchInvoices(); // Refresh the invoices after updating
+  };
+
+  // Delete invoice from Firestore
+  const deleteInvoice = async (id) => {
+    const invoiceDoc = doc(db, "invoices", id);
+    await deleteDoc(invoiceDoc);
+    // Instead of fetching invoices here, notify the component to remove the invoice
+  };
+
+  useEffect(() => {
     fetchInvoices();
   }, []);
 
-  // Add an invoice to Firestore
-  const addInvoice = async (invoice) => {
-    try {
-      const docRef = await addDoc(collection(db, "invoices"), invoice);
-      setInvoices((prevInvoices) => [
-        ...prevInvoices,
-        { id: docRef.id, ...invoice },
-      ]);
-    } catch (error) {
-      console.error("Error adding invoice: ", error);
-    }
-  };
-
-  // Remove an invoice (by index)
-  const removeInvoice = (index) => {
-    setInvoices((prevInvoices) => prevInvoices.filter((_, i) => i !== index));
-  };
-
   return (
-    <InvoiceContext.Provider value={{ invoices, addInvoice, removeInvoice }}>
+    <InvoiceContext.Provider
+      value={{ invoices, setInvoices, updateInvoice, deleteInvoice }}
+    >
       {children}
     </InvoiceContext.Provider>
   );
 };
-
-export const useInvoice = () => useContext(InvoiceContext);
