@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "#3E3E3E",
+        tbodycolor: "#f9ffff",
       },
     },
   },
