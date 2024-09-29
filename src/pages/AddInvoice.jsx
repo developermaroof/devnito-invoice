@@ -9,9 +9,8 @@ import Navbar from "../components/Navbar";
 import PreviewSection from '../components/PreviewSection';
 
 // Firebase
-import { db, storage } from '../firebase/firebaseConfig';
+import { auth, db, storage } from '../firebase/firebaseConfig'; // Ensure you have access to Firebase Auth
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
-
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const AddInvoice = () => {
@@ -44,34 +43,28 @@ const AddInvoice = () => {
   };
 
   const [formData, setFormData] = useState(initialFormState);
-  const [savedFormData, setSavedFormData] = useState(initialFormState); // New state for holding saved form data
+  const [savedFormData, setSavedFormData] = useState(initialFormState);
   const [showPopup, setShowPopup] = useState(false);
   const previewRef = useRef();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isEditing, setIsEditing] = useState(false);
 
-    // New state to track edit mode
-    const [isEditing, setIsEditing] = useState(false);
-
-  // Autofill form if we are editing an existing invoice
   useEffect(() => {
     if (location.state && location.state.invoice) {
       setFormData(location.state.invoice);
-      setIsEditing(true); // Set editing mode if an invoice is being edited
+      setIsEditing(true);
     }
   }, [location.state]);
 
   const validateForm = () => {
-    // List all required fields here
     const requiredFields = ['title'];
-  
     for (let field of requiredFields) {
       if (!formData[field]) {
         alert(`Please fill the required field: ${field}`);
         return false;
       }
     }
-  
     return true;
   };
 
@@ -81,7 +74,6 @@ const AddInvoice = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-  
     if (name === 'companyLogo') {
       setFormData({ ...formData, [name]: files[0] });
     } else {
@@ -90,54 +82,45 @@ const AddInvoice = () => {
   };
 
   const handleAddInvoice = async () => {
-    // Validate form data
     if (!validateForm()) {
-      // If the form is invalid, stop the function execution
       return;
     }
 
     try {
       let logoUrl = '';
 
-      // Upload the company logo to Firebase Storage
       if (formData.companyLogo) {
         const storageRef = ref(storage, `logos/${formData.companyLogo.name}`);
         await uploadBytes(storageRef, formData.companyLogo);
         logoUrl = await getDownloadURL(storageRef);
-      }else if (isEditing) {
-        // If editing and no new logo uploaded, keep the existing logo
-        logoUrl = formData.companyLogo; // Maintain the existing logo URL
+      } else if (isEditing) {
+        logoUrl = formData.companyLogo;
       }
 
-      // Prepare the invoice data
+      const user = auth.currentUser; // Get the current user
       const invoiceData = {
         ...formData,
-        companyLogo: logoUrl, // Use the URL from storage
+        companyLogo: logoUrl,
+        userId: user.uid, // Add the UID of the user to the invoice data
       };
 
       if (isEditing) {
-        // Update the existing invoice
-        const invoiceId = location.state.invoice.id; // Make sure to get the ID of the invoice being edited
-        await updateDoc(doc(db, 'invoices', invoiceId), invoiceData); // Import `updateDoc` from 'firebase/firestore'
+        const invoiceId = location.state.invoice.id;
+        await updateDoc(doc(db, 'invoices', invoiceId), invoiceData);
         console.log("Document updated with ID: ", invoiceId);
       } else {
-        // Save the new invoice
         const docRef = await addDoc(collection(db, 'invoices'), invoiceData);
         console.log("Document written with ID: ", docRef.id);
       }
-    
-      // Show the popup with saved data
-      setSavedFormData(invoiceData); // Set the saved data to be displayed in popup
+
+      setSavedFormData(invoiceData);
       setShowPopup(true);
-      
-      // Reset form data if needed
       setFormData(initialFormState);
-      
-      // Delay the navigation to /invoicelist after showing the popup
+
       setTimeout(() => {
         navigate('/invoicelist');    
-      },  6000); // Adjust the delay time (in milliseconds) to how long the modal should remain visible
-    
+      },  6000);
+
     } catch (error) {
       console.error("Error adding document: ", error.message);
       alert(`Error adding invoice: ${error.message}`);

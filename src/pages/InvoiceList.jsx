@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useInvoice } from '../context/InvoiceContext';
 import { useNavigate } from 'react-router-dom';
+import { auth, db } from '../firebase/firebaseConfig'; // Ensure you have access to Firebase Auth
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import TruncateText from '../components/TruncateText';
@@ -14,8 +15,29 @@ const InvoiceList = () => {
   const [selectedInvoice, setSelectedInvoice] = useState(null); // State for storing selected invoice data
 
   useEffect(() => {
-    // Fetch invoices if needed
-  }, []);
+    const fetchInvoices = async () => {
+      const user = auth.currentUser; // Get the current user
+      if (user) {
+        try {
+          const querySnapshot = await db.collection('invoices')
+            .where('userId', '==', user.uid) // Fetch only invoices for the logged-in user
+            .get();
+            
+          const userInvoices = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+
+          setInvoices(userInvoices); // Set the invoices in state
+        } catch (error) {
+          console.error("Error fetching invoices: ", error);
+          // Handle error
+        }
+      }
+    };
+
+    fetchInvoices();
+  }, [setInvoices]);
 
   const handleEdit = (invoice) => {
     navigate('/addinvoices', { state: { invoice } });
