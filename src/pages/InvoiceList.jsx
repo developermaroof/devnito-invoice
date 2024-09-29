@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useInvoice } from '../context/InvoiceContext';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase/firebaseConfig'; // Ensure you have access to Firebase Auth
+import { query, collection, where, getDocs } from 'firebase/firestore'; // Import Firestore functions
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import TruncateText from '../components/TruncateText';
@@ -16,22 +17,25 @@ const InvoiceList = () => {
 
   useEffect(() => {
     const fetchInvoices = async () => {
-      const user = auth.currentUser; // Get the current user
+      const user = auth.currentUser;
+      console.log('Current User UID:', user ? user.uid : 'No user logged in');
+
       if (user) {
         try {
-          const querySnapshot = await db.collection('invoices')
-            .where('userId', '==', user.uid) // Fetch only invoices for the logged-in user
-            .get();
-            
-          const userInvoices = querySnapshot.docs.map(doc => ({
+          // Create a query to get invoices for the logged-in user
+          const q = query(collection(db, 'invoices'), where('userId', '==', user.uid));
+          const querySnapshot = await getDocs(q);
+          
+          // Map through the documents and extract their data
+          const fetchedInvoices = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
           }));
 
-          setInvoices(userInvoices); // Set the invoices in state
+          setInvoices(fetchedInvoices); // Set the invoices in state
         } catch (error) {
-          console.error("Error fetching invoices: ", error);
-          // Handle error
+          console.error('Error fetching invoices:', error);
+          // Handle error (e.g., set an error state or display a message)
         }
       }
     };

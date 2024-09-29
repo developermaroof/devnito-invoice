@@ -83,49 +83,59 @@ const AddInvoice = () => {
 
   const handleAddInvoice = async () => {
     if (!validateForm()) {
-      return;
+        return; // Validate the form before proceeding
     }
-
+  
     try {
-      let logoUrl = '';
+        const user = auth.currentUser;
+        console.log('Current User UID:', user ? user.uid : 'No user logged in');
+        
+        let logoUrl = '';
 
-      if (formData.companyLogo) {
-        const storageRef = ref(storage, `logos/${formData.companyLogo.name}`);
-        await uploadBytes(storageRef, formData.companyLogo);
-        logoUrl = await getDownloadURL(storageRef);
-      } else if (isEditing) {
-        logoUrl = formData.companyLogo;
-      }
+        if (formData.companyLogo) {
+            // If a new logo is being uploaded
+            const storageRef = ref(storage, `logos/${formData.companyLogo.name}`);
+            await uploadBytes(storageRef, formData.companyLogo);
+            logoUrl = await getDownloadURL(storageRef); // Get the logo URL
+        } else if (isEditing) {
+            // If editing, keep the existing logo
+            logoUrl = formData.companyLogo;
+        }
 
-      const user = auth.currentUser; // Get the current user
-      const invoiceData = {
-        ...formData,
-        companyLogo: logoUrl,
-        userId: user.uid, // Add the UID of the user to the invoice data
-      };
+        // Prepare the invoice data
+        const invoiceData = {
+            ...formData,
+            companyLogo: logoUrl,
+            userId: user.uid, // Add the UID of the user to the invoice data
+        };
 
-      if (isEditing) {
-        const invoiceId = location.state.invoice.id;
-        await updateDoc(doc(db, 'invoices', invoiceId), invoiceData);
-        console.log("Document updated with ID: ", invoiceId);
-      } else {
-        const docRef = await addDoc(collection(db, 'invoices'), invoiceData);
-        console.log("Document written with ID: ", docRef.id);
-      }
+        if (isEditing) {
+            // Update logic
+            const invoiceId = location.state.invoice.id; // Get the ID of the invoice to update
+            await updateDoc(doc(db, 'invoices', invoiceId), invoiceData);
+            console.log("Document updated with ID: ", invoiceId);
+        } else {
+            // Add new invoice
+            await addDoc(collection(db, 'invoices'), invoiceData);
+            console.log("Document written with ID: ", invoiceData.id);
+        }
 
-      setSavedFormData(invoiceData);
-      setShowPopup(true);
-      setFormData(initialFormState);
+        setSavedFormData(invoiceData); // Save the form data
+        setShowPopup(true); // Show a popup to indicate success
+        setFormData(initialFormState); // Reset the form data
 
-      setTimeout(() => {
-        navigate('/invoicelist');    
-      },  6000);
+        // Navigate to the invoice list after a delay
+        setTimeout(() => {
+            navigate('/invoicelist');    
+        }, 6000);
 
     } catch (error) {
-      console.error("Error adding document: ", error.message);
-      alert(`Error adding invoice: ${error.message}`);
+        console.error("Error adding document: ", error.message);
+        alert(`Error adding invoice: ${error.message}`);
     }
-  };
+};
+
+  
 
   return (
     <>
