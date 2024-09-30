@@ -74,7 +74,7 @@ const InvoiceList = () => {
         {invoices.length === 0 && !loading ? (
           <p className="text-center">No invoices available.</p>
         ) : (
-          <div className="overflow-x-auto rounded-lg p-4 m-4" style={{ boxShadow: '0 3px 8px 0 rgba(0, 0, 0, 0.3)' }}>
+          <div className="overflow-x-auto rounded-lg py-4 ">
 
             <table className="min-w-full">
               <thead className='text-center'>
@@ -93,25 +93,25 @@ const InvoiceList = () => {
                   <th className="p-2 min-w-[100px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Delete</th>
                 </tr>
               </thead>
-              <tbody className='bg-tbodycolor text-center'>
+              <tbody className=' text-center'>
                 {invoices.map((invoice) => (
                   <tr key={invoice.id}>
-                    <td className="border border-4 border-l-0 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.name}</td>
-                    <td className="border-y border-y-4 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-600 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.contractStatus}</td>
-                    <td className="border-y border-y-4 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-600 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.startingDate}</td>
-                    <td className="border-y border-y-4 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-600 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.deadline}</td>
-                    <td className="border-y border-y-4 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-600 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.paymentStatus}</td>
-                    <td className="border-y border-y-4 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-600 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.title}</td>
-                    <td className="border-y border-y-4 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-600 text-sm md:text-[1rem] lg:text-lg xl:text-xl">
+                    <td className="border border-2 border-l-0 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.name}</td>
+                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.contractStatus}</td>
+                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.startingDate}</td>
+                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.deadline}</td>
+                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.paymentStatus}</td>
+                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.title}</td>
+                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">
                       <TruncateText text={invoice.clientDetails} maxLength={30} />
                     </td>
-                    <td className="border-y border-y-4 border-gray-100 text-gray-600 text-sm md:text-[1rem] lg:text-lg xl:text-xl p-2 min-w-[150px] lg:min-w-[200px]">
+                    <td className="border-y border-y-2 border-gray-100 text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl p-2 min-w-[150px] lg:min-w-[200px]">
                       <TruncateText text={invoice.assigneeDetails} maxLength={30} />
                     </td>
-                    <td className="border-y border-y-4 border-gray-100 text-gray-600 text-sm md:text-[1rem] lg:text-lg xl:text-xl p-2 min-w-[150px] lg:min-w-[200px]">
+                    <td className="border-y border-y-2 border-gray-100 text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl p-2 min-w-[150px] lg:min-w-[200px]">
                       <TruncateText text={invoice.notes} maxLength={30} />
                     </td>
-                    <td className="border-y border-y-4 border-gray-100 p-2 min-w-[100px] text-center">
+                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[100px] text-center">
                       <button
                         onClick={() => handleView(invoice)} // View button
                         className="text-sm md:text-[1rem] lg:text-lg xl:text-xl text-green-500 cursor-pointer hover:text-green-700"
@@ -119,7 +119,7 @@ const InvoiceList = () => {
                         View
                       </button>
                     </td>
-                    <td className="border-y border-y-4 border-gray-100 p-2 min-w-[100px] text-center">
+                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[100px] text-center">
                       <button
                         onClick={() => handleEdit(invoice)} // Edit button
                         className="text-sm md:text-[1rem] lg:text-lg xl:text-xl text-blue-500 cursor-pointer hover:text-blue-700"
@@ -127,7 +127,7 @@ const InvoiceList = () => {
                         Edit
                       </button>
                     </td>
-                    <td className="border-y border-y-4 border-gray-100 p-2 min-w-[100px] text-center">
+                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[100px] text-center">
                       <button
                         onClick={() => handleDelete(invoice.id)} // Delete button
                         className="text-sm md:text-[1rem] lg:text-lg xl:text-xl text-red-500 cursor-pointer hover:text-red-700"

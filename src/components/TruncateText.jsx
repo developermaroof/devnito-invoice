@@ -17,7 +17,7 @@ const TruncateText = ({ text, maxLength }) => {
         {text.length > maxLength && (
           <button
             onClick={handleToggle}
-            className="text-blue-500 hover:underline focus:outline-none"
+            className="text-blue-500 text-sm hover:underline focus:outline-none"
           >
             {isTruncated ? 'Read more' : 'Show less'}
           </button>
