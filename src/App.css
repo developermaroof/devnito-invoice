@@ -1,0 +1,6 @@
+/* Adding before pseudo element with Tailwind classes */
+.requiredStar::before {
+    content: '*';
+    color: red; /* Optional: Add color to the star */
+    margin-right: 0.25rem; /* Adds some spacing between the star and the label text */
+  }

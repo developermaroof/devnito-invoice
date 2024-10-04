@@ -2,6 +2,7 @@
 import React from 'react';
 import logo from '../assets/logo.png';
 import { useAuthContext } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { isLoggedIn, userData } = useAuthContext();
@@ -11,8 +12,8 @@ const Navbar = () => {
       <nav className="flex justify-between items-center p-4 lg:px-8 2xl:max-w-screen-2xl 2xl:mx-auto">
         <div className="flex items-center gap-1">
           <img src={logo} alt="Logo" className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10" />
-          <h1 className="text-2xl font-bold hidden lg:block">Invoice Management System</h1>
-          <h1 className="text-md md:text-2xl font-bold lg:hidden">Invoices</h1>
+         <Link to="/"> <h1 className="text-2xl font-bold hidden lg:block">Invoice Management System</h1></Link>
+         <Link to="/"><h1 className="text-md md:text-2xl font-bold lg:hidden">Invoices</h1></Link>
         </div>
         <div className="flex items-center">
           {isLoggedIn ? (

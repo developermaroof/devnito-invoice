@@ -4,11 +4,11 @@ import ReactToPrint from 'react-to-print';
 
 class ComponentToPrint extends React.Component {
   render() {
-    return <PreviewContent formData={this.props.formData} />;
+    return <PreviewContent formData={this.props.formData} logoURL={this.props.logoURL} />;
   }
 }
 
-const PDFPopup = ({ formData, setShowPopup }) => {
+const PDFPopup = ({ formData, logoURL, setShowPopup }) => {
   const componentRef = useRef();
 
   return (
@@ -17,7 +17,7 @@ const PDFPopup = ({ formData, setShowPopup }) => {
       <div className="bg-white p-6 rounded shadow-lg w-[100%] h-[100%] overflow-scroll">
         <h3 className="text-lg font-semibold mb-4">Submission</h3>
         <div className="border p-4 lg:py-6 rounded lg:mb-8">
-          <ComponentToPrint ref={componentRef} formData={formData} />
+          <ComponentToPrint ref={componentRef} formData={formData} logoURL={logoURL} />
         </div>
         <ReactToPrint
           trigger={() => <button className="mt-4 bg-green-500 text-white px-4 py-2 rounded">Download as PDF</button>}

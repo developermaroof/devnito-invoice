@@ -1,17 +1,19 @@
 import React from 'react';
 
-const PreviewContent = ({ formData }) => {
+const PreviewContent = ({ formData, logoURL }) => {
   return (
-    <div className="border p-4 lg:py-6 rounded lg:mb-8">
+    <div className="border border-red-300  h-[40rem] p-4 lg:py-6 rounded lg:overflow-scroll">
     <div className='bg-gray-100 p-2 md:p-4 lg:p-6 flex flex-col gap-10 lg:gap-14'>
       <div className='flex justify-between items-center'>
         <div>
           <p className='font-semibold text-[0.6rem] sm:text-sm md:text-lg lg:text-xl xl:text-2xl text-gray-700'>{formData.title}</p>
         </div>
         <div className='flex items-center justify-center gap-[0.1rem]'>
-          {formData.companyLogo && (
-            <img src={formData.companyLogo} alt={formData.companyLogoName} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-10 lg:h-10 xl:w-12 xl:h-12" />
-          )}
+            {/* Use logoURL instead of formData.companyLogo */}
+            {logoURL && (
+              <img src={logoURL} alt={formData.companyLogoName} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-10 lg:h-10 xl:w-12 xl:h-12" />
+            )}
+
           <p className='text-sm sm:text-lg md:text-xl lg:text-3xl xl:text-4xl font-bold'>{formData.companyLogoName}</p>
         </div>
       </div>
@@ -53,9 +55,11 @@ const PreviewContent = ({ formData }) => {
       </div>
       <div className='flex border-y p-2 md:p-4 items-center justify-center mt-10 w-full h-full'>
         <div className='p-2 lg:px-6'>
-          {formData.companyLogo && (
-            <img src={formData.companyLogo} alt={formData.companyLogoName} className="w-20 lg:w-32 xl:w-36 h-full" width={100} height={100} />
-          )}
+            {/* Use logoURL instead of formData.companyLogo */}
+            {logoURL && (
+              <img src={logoURL} alt={formData.companyLogoName} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-10 lg:h-10 xl:w-12 xl:h-12" />
+            )}
+
         </div>
         <div className='flex flex-col border-l gap-2 pl-2 lg:pl-6 w-full overflow-x-scroll lg:overflow-x-hidden'>
           <p className='text-[0.7rem] sm:text-[0.8rem] md:text-[1rem] lg:text-lg xl:text-xl'><span className='font-bold'>Address:</span> {formData.bannerAddress}</p>

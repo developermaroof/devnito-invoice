@@ -1,12 +1,12 @@
 import React from 'react';
 import PreviewContent from './PreviewContent';
 
-const PreviewSection = ({ formData, previewRef }) => {
+const PreviewSection = ({ formData, logoURL, previewRef }) => {
   return (
-    <div className="mt-8">
+    <div className="">
       <h2 className="text-xl lg:text-2xl xl:text-3xl font-semibold mb-4 lg:mb-12">Live Preview:</h2>
-      <div className="border p-4 lg:py-6 rounded lg:mb-8" ref={previewRef}>
-        <PreviewContent formData={formData} />
+      <div className="border border-yellow-500 p-4 lg:p-6 rounded" ref={previewRef}>
+        <PreviewContent formData={formData} logoURL={logoURL} />
       </div>
     </div>
   );

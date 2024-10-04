@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useInvoice } from '../context/InvoiceContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { auth, db } from '../firebase/firebaseConfig'; // Ensure you have access to Firebase Auth
 import { query, collection, where, getDocs } from 'firebase/firestore'; // Import Firestore functions
 import Navbar from '../components/Navbar';
@@ -142,6 +142,12 @@ const InvoiceList = () => {
           </div>
         )}
       </div>
+                  {/* <!-- Floating Button --> */}
+                  <Link to="/addinvoices">
+              <button class="fixed bottom-20 right-5 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300">
+                + AddInvoices
+              </button>
+            </Link> 
       {showPopup && (
         <PDFPopup
           formData={selectedInvoice} // Pass the selected invoice data

@@ -1,6 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
+
+// Css File
+import "../App.css"
 
 // Components
 import Footer from '../components/Footer';
@@ -49,13 +52,30 @@ const AddInvoice = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isEditing, setIsEditing] = useState(false);
+  const [isFixed, setIsFixed] = useState(false); // New state variable for fixed position
+  const [logoURL, setLogoURL] = useState(null); // New state for logo URL
+
+    // Scroll event handler
+    const handleScroll = () => {
+      if (window.scrollY > 200) { // Adjust the scroll pixel threshold as needed
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    };
 
   useEffect(() => {
     if (location.state && location.state.invoice) {
       setFormData(location.state.invoice);
       setIsEditing(true);
     }
-  }, [location.state]);
+      // Add scroll event listener
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        // Cleanup event listener on unmount
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, [location.state]);
 
   const validateForm = () => {
     const requiredFields = ['title'];
@@ -75,7 +95,12 @@ const AddInvoice = () => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'companyLogo') {
-      setFormData({ ...formData, [name]: files[0] });
+      const file = files[0];
+      setFormData({ ...formData, [name]: file });
+
+      // Create a URL for the uploaded logo
+      const fileURL = URL.createObjectURL(file);
+      setLogoURL(fileURL); // Set the logo URL
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -123,6 +148,7 @@ const AddInvoice = () => {
         setSavedFormData(invoiceData); // Save the form data
         setShowPopup(true); // Show a popup to indicate success
         setFormData(initialFormState); // Reset the form data
+        setLogoURL(logoUrl); // Reset logo URL after submission
 
         // Navigate to the invoice list after a delay
         setTimeout(() => {
@@ -141,9 +167,23 @@ const AddInvoice = () => {
     <>
       <Navbar />
       <div className="p-6 lg:py-20 2xl:max-w-screen-2xl 2xl:mx-auto">
-        <div>
-          <h1 className='font-semibold text-center lg:text-2xl xl:text-3xl'>Add Invoice</h1>
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-44 lg:mb-32">
+        <div className='lg:flex lg:w-[100%]'>
+          <div className='lg:w-[50%]'>
+            <h1 className='font-semibold text-center lg:text-2xl xl:text-3xl'>Add Invoice</h1>
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-10 lg:mb-32">
+              {/* Title input */}
+              <div>
+                <label className="requiredStar block mb-1 lg:text-xl xl:text-2xl">Title:</label>
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  placeholder='Type title..'
+                  onChange={handleChange}
+                  required
+                  className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+              />
+            </div>
             {/* assignee details input */}
             <div>
               <label className="block mb-1 lg:text-xl xl:text-2xl">Assignee Details:</label>
@@ -236,6 +276,9 @@ const AddInvoice = () => {
                 onChange={handleChange}
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
+                  {logoURL && ( // Display the logo if available
+                  <img src={logoURL} alt="Company Logo" className="mt-2 w-10 h-10 object-contain" />
+                )}
             </div>
             {/* Company Name input */}
             <div>
@@ -439,20 +482,13 @@ const AddInvoice = () => {
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
-            {/* Title input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Title:</label>
-              <input
-                type="text"
-                name="title"
-                value={formData.title}
-                placeholder='Type title..'
-                onChange={handleChange}
-                required
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
             {/* Button */}
+            {/* <!-- Floating Button --> */}
+            <Link to="/invoicelist">
+              <button class="fixed bottom-20 right-10 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300">
+                + InvoiceList
+              </button>
+            </Link> 
             <button
             type="submit" 
             onClick={handleAddInvoice}
@@ -460,18 +496,20 @@ const AddInvoice = () => {
             >
             {location.state && location.state.invoice ? 'Update Invoice' : 'Add Invoice'}
             </button>
-          </form>
+            </form>
+          </div>
+          <div className={`lg:w-[50%] ${isFixed ? 'lg:fixed lg:bottom-0 lg:top-10 lg:right-5' : 'lg:static'}`}>
+            {/* Preview Section */}
+            <PreviewSection formData={formData} logoURL={logoURL}  previewRef={previewRef}/>
+          </div>
         </div>
-
-        {/* Preview Section */}
-        <PreviewSection formData={formData} previewRef={previewRef} />
-
         {/* Popup for PDF download */}
         {showPopup && (
           <PDFPopup
           formData={savedFormData} // Pass the saved data to the popup
           handlePrint={handlePrint}
           setShowPopup={setShowPopup}
+          logoURL={logoURL}
           previewRef={previewRef}
           />
         )}
