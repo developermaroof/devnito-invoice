@@ -168,7 +168,7 @@ const AddInvoice = () => {
       <Navbar />
       <div className="p-6 lg:py-20 2xl:max-w-screen-2xl 2xl:mx-auto">
         <div className='lg:flex lg:w-[100%]'>
-          <div className='lg:w-[50%]'>
+          <div className='lg:w-[50%] mb-10 lg:mb-0'>
             <h1 className='font-semibold text-center lg:text-2xl xl:text-3xl'>Add Invoice</h1>
             <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-10 lg:mb-32">
               {/* Title input */}
