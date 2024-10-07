@@ -1,45 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useInvoice } from '../context/InvoiceContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { auth, db } from '../firebase/firebaseConfig'; // Ensure you have access to Firebase Auth
-import { query, collection, where, getDocs } from 'firebase/firestore'; // Import Firestore functions
+import { auth, db } from '../firebase/firebaseConfig'; 
+import { query, collection, where, getDocs } from 'firebase/firestore'; 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import TruncateText from '../components/TruncateText';
-import PDFPopup from '../components/PDFPopup'; // Import PDFPopup
+import PDFPopup from '../components/PDFPopup'; 
 
 const InvoiceList = () => {
   const { invoices, setInvoices, deleteInvoice } = useInvoice();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [showPopup, setShowPopup] = useState(false); // State for showing the popup
-  const [selectedInvoice, setSelectedInvoice] = useState(null); // State for storing selected invoice data
+  const [showPopup, setShowPopup] = useState(false); 
+  const [selectedInvoice, setSelectedInvoice] = useState(null); 
 
   useEffect(() => {
     const fetchInvoices = async () => {
       const user = auth.currentUser;
-      console.log('Current User UID:', user ? user.uid : 'No user logged in');
-
       if (user) {
         try {
-          // Create a query to get invoices for the logged-in user
           const q = query(collection(db, 'invoices'), where('userId', '==', user.uid));
           const querySnapshot = await getDocs(q);
-          
-          // Map through the documents and extract their data
           const fetchedInvoices = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
           }));
-
-          setInvoices(fetchedInvoices); // Set the invoices in state
+          setInvoices(fetchedInvoices);
         } catch (error) {
           console.error('Error fetching invoices:', error);
-          // Handle error (e.g., set an error state or display a message)
         }
       }
     };
-
     fetchInvoices();
   }, [setInvoices]);
 
@@ -61,15 +53,30 @@ const InvoiceList = () => {
   };
 
   const handleView = (invoice) => {
-    setSelectedInvoice(invoice); // Set the selected invoice data
-    setShowPopup(true); // Show the popup
+    setSelectedInvoice(invoice);
+    setShowPopup(true);
   };
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <div className="flex-grow p-4 pt-10 2xl:max-w-screen-2xl 2xl:mx-auto">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold my-10 lg:mb-20 text-center">Invoice List</h1>
+        {/* Favorites Section */}
+        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold my-10 lg:mb-20 text-center">Favorites</h1>
+        <div className="flex items-center justify-between bg-gray-100 p-4 rounded-lg mb-10">
+          {/* Left Side: Company Logo */}
+          <div className="w-1/4">
+            <img src="/path/to/company-logo.png" alt="Company Logo" className="w-full h-auto object-contain" />
+          </div>
+          {/* Right Side: Title and Date */}
+          <div className="w-3/4 pl-4">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold">Project Title</h2>
+            <p className="text-sm md:text-base lg:text-lg text-gray-500">Due Date: 2024-10-10</p>
+          </div>
+        </div>
+
+        {/* Invoices List Section */}
+        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold my-10 lg:mb-20 text-center">Invoices List</h1>
         {loading && <p className="text-center text-blue-500">Loading...</p>}
         {invoices.length === 0 && !loading ? (
           <p className="text-center">No invoices available.</p>
@@ -142,18 +149,18 @@ const InvoiceList = () => {
           </div>
         )}
       </div>
-                  {/* <!-- Floating Button --> */}
-                  <Link to="/addinvoices">
-              <button class="fixed bottom-20 right-5 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300">
-                + AddInvoices
-              </button>
-            </Link> 
+
+      {/* Floating Button */}
+      <Link to="/addinvoices">
+        <button className="fixed bottom-20 right-5 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300">
+          + AddInvoices
+        </button>
+      </Link>
+
       {showPopup && (
-        <PDFPopup
-          formData={selectedInvoice} // Pass the selected invoice data
-          setShowPopup={setShowPopup} // Pass the function to close the popup
-        />
+        <PDFPopup formData={selectedInvoice} setShowPopup={setShowPopup} />
       )}
+
       <Footer />
     </div>
   );

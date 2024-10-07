@@ -13,7 +13,7 @@ import AddInvoice from '../assets/AddInvoice.png';
 import ViewInvoice from '../assets/ViewInvoice.png';
 
 const Home = () => {
-  const { isLoggedIn, GoogleSignUp, /* Logout */ } = useAuthContext();
+  const { isLoggedIn, GoogleSignUp } = useAuthContext();
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -64,10 +64,6 @@ const Home = () => {
               </div>
 
             </div>
-            {/* Optional Logout Button */}
-            {/* <button onClick={Logout} type="button" className="border px-2 bg-blue-200">
-              Log out
-            </button> */}
           </div>
         )}
       </div>
