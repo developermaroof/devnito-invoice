@@ -13,10 +13,10 @@ const PDFPopup = ({ formData, logoURL, setShowPopup }) => {
 
   return (
     <div className='2xl:max-w-screen-2xl 2xl:mx-auto'>
-    <div className="fixed overflow-scroll w-full h-full inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded shadow-lg w-[100%] h-[100%] overflow-scroll">
-        <h3 className="text-lg font-semibold mb-4">Submission</h3>
-        <div className="border p-4 lg:py-6 rounded lg:mb-8">
+    <div className="fixed w-full h-full inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white p-6 rounded shadow-lg max-w-[52rem] h-[100%] overflow-scroll">
+        <h3 className="text-lg font-semibold mb-4 text-center">Submission</h3>
+        <div className="p-4 lg:py-6 rounded lg:mb-8">
           <ComponentToPrint ref={componentRef} formData={formData} logoURL={logoURL} />
         </div>
         <ReactToPrint

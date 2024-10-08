@@ -2,18 +2,16 @@ import React from 'react';
 
 const PreviewContent = ({ formData, logoURL }) => {
   return (
-    <div className="border border-red-300 lg:h-[40rem] p-4 lg:py-6 rounded lg:w-full lg:h-full">
+    <div className="shadow-lg p-4 lg:py-6 rounded w-full">
       <div className='bg-gray-100 p-2 md:p-4 lg:p-6 flex flex-col gap-10 lg:gap-14'>
         <div className='flex justify-between items-center'>
           <div>
             <p className='font-semibold text-[0.6rem] sm:text-sm md:text-lg lg:text-xl xl:text-2xl text-gray-700'>{formData.title}</p>
           </div>
           <div className='flex items-center justify-center gap-[0.1rem]'>
-              {/* Use logoURL instead of formData.companyLogo */}
               {logoURL && (
                 <img src={logoURL} alt={formData.companyLogoName} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-10 lg:h-10 xl:w-12 xl:h-12" />
               )}
-
             <p className='text-sm sm:text-lg md:text-xl lg:text-3xl xl:text-4xl font-bold'>{formData.companyLogoName}</p>
           </div>
         </div>
