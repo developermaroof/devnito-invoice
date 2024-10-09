@@ -41,14 +41,15 @@ const Navbar = () => {
                 </div>
 
                 {/* Logout Button (Show on click) */}
-                
                 {showLogout && (
-                    <button 
-                      onClick={Logout}
-                      className="absolute bottom-[-30px] md:bottom-[-36px] left-[87px] md:left-[151px] lg:left-[196px] text-white text-xs md:text-sm lg:text-[1rem] font-semibold bg-black px-4 md:px-6 lg:px-8 py-2 lg:py-3 rounded-b"
-                    >
-                      Logout
-                    </button>
+                  <Link to="/">
+                  <button 
+                    onClick={Logout}
+                    className="absolute bottom-[-30px] md:bottom-[-36px] left-[87px] md:left-[151px] lg:left-[196px] text-white text-xs md:text-sm lg:text-[1rem] font-semibold bg-black px-4 md:px-6 lg:px-8 py-2 lg:py-3 rounded-b"
+                  >
+                    Logout
+                  </button>
+                  </Link>
                 )}
                 
               </div>

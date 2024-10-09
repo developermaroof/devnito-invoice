@@ -20,8 +20,8 @@ export const AuthProvider = ({ children }) => {
 
     signInWithPopup(auth, provider)
       .then((result) => {
-        const { displayName, email, photoURL } = result.user;
-        setUserData({ displayName, email, photoURL });
+        const { displayName, email, photoURL, uid } = result.user;
+        setUserData({ displayName, email, photoURL, uid });
         setIsLoggedIn(true);
       })
       .catch((error) => {
@@ -44,8 +44,8 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       console.log("Auth State Changed: ", user);
       if (user) {
-        const { displayName, email, photoURL } = user;
-        setUserData({ displayName, email, photoURL });
+        const { displayName, email, photoURL, uid } = user;
+        setUserData({ displayName, email, photoURL, uid });
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);

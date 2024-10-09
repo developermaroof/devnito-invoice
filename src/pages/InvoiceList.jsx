@@ -14,26 +14,32 @@ const InvoiceList = () => {
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false); 
   const [selectedInvoice, setSelectedInvoice] = useState(null); 
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchInvoices = async () => {
-      const user = auth.currentUser;
-      if (user) {
-        try {
-          const q = query(collection(db, 'invoices'), where('userId', '==', user.uid));
-          const querySnapshot = await getDocs(q);
-          const fetchedInvoices = querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-          }));
-          setInvoices(fetchedInvoices);
-        } catch (error) {
-          console.error('Error fetching invoices:', error);
-        }
-      }
-    };
-    fetchInvoices();
-  }, [setInvoices]);
+      const fetchInvoices = async () => {
+          const user = auth.currentUser;
+          if (!user) {
+              navigate('/login'); // Redirect to login if not authenticated
+              return; // Exit the function early
+          }
+  
+          try {
+              const q = query(collection(db, 'invoices'), where('userId', '==', user.uid));
+              const querySnapshot = await getDocs(q);
+              const fetchedInvoices = querySnapshot.docs.map(doc => ({
+                  id: doc.id,
+                  ...doc.data()
+              }));
+              setInvoices(fetchedInvoices);
+          } catch (error) {
+              console.error('Error fetching invoices:', error);
+              setError('Failed to fetch invoices. Please try again later.'); // Set error state
+          }
+      };
+      fetchInvoices();
+  }, [setInvoices, navigate]);
+
 
   const handleEdit = (invoice) => {
     navigate('/addinvoices', { state: { invoice } });
@@ -59,6 +65,8 @@ const InvoiceList = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {error && <p className="text-red-500 text-center">{error}</p>}
+
       <Navbar />
       <div className="flex-grow p-4 pt-10 2xl:max-w-screen-2xl 2xl:mx-auto">
         {/* Favorites Section */}

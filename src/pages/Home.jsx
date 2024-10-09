@@ -13,7 +13,7 @@ import AddInvoice from '../assets/AddInvoice.png';
 import ViewInvoice from '../assets/ViewInvoice.png';
 
 const Home = () => {
-  const { isLoggedIn, GoogleSignUp } = useAuthContext();
+  const { isLoggedIn, GoogleSignUp } = useAuthContext(); // Access userData here
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -43,9 +43,9 @@ const Home = () => {
                   </div>
                 </div>
                 <button className='mt-2 mb-10 lg:mb-12'>
-                <Link to="/invoicelist">
-                  <h2 className='font-semibold lg:text-xl'>View Invoices</h2>
-                </Link>
+                  <Link to="/invoicelist">
+                    <h2 className='font-semibold lg:text-xl'>View Invoices</h2>
+                  </Link>
                 </button>
               </div>
 

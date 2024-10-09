@@ -110,11 +110,15 @@ const AddInvoice = () => {
     if (!validateForm()) {
         return; // Validate the form before proceeding
     }
-  
+
     try {
-        const user = auth.currentUser;
-        console.log('Current User UID:', user ? user.uid : 'No user logged in');
-        
+        const user = auth.currentUser; // Get the current user
+        if (!user) {
+            alert('You must be logged in to add an invoice.'); // Alert if user is not logged in
+            return;
+        }
+        console.log('Current User UID:', user.uid); // Log the UID
+
         let logoUrl = '';
 
         if (formData.companyLogo) {
@@ -127,7 +131,7 @@ const AddInvoice = () => {
             logoUrl = formData.companyLogo;
         }
 
-        // Prepare the invoice data
+        // Prepare the invoice data, including user ID
         const invoiceData = {
             ...formData,
             companyLogo: logoUrl,
@@ -160,6 +164,7 @@ const AddInvoice = () => {
         alert(`Error adding invoice: ${error.message}`);
     }
 };
+
 
   
 
