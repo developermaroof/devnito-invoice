@@ -490,7 +490,7 @@ const AddInvoice = () => {
             {/* Button */}
             {/* <!-- Floating Button --> */}
             <Link to="/invoicelist">
-              <button class="fixed bottom-20 right-10 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300">
+              <button className="fixed bottom-20 right-10 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300">
                 + InvoiceList
               </button>
             </Link> 

@@ -15,6 +15,7 @@ const InvoiceList = () => {
   const [showPopup, setShowPopup] = useState(false); 
   const [selectedInvoice, setSelectedInvoice] = useState(null); 
   const [error, setError] = useState(null);
+  const [favorites, setFavorites] = useState([]); // Track favorite invoices
 
   useEffect(() => {
       const fetchInvoices = async () => {
@@ -40,6 +41,15 @@ const InvoiceList = () => {
       fetchInvoices();
   }, [setInvoices, navigate]);
 
+  // Add or remove an invoice from favorites
+  const handleFavorite = (invoice) => {
+    const isAlreadyFavorite = favorites.some(fav => fav.id === invoice.id);
+    if (isAlreadyFavorite) {
+      setFavorites(favorites.filter(fav => fav.id !== invoice.id));
+    } else {
+      setFavorites([...favorites, invoice]);
+    }
+  };
 
   const handleEdit = (invoice) => {
     navigate('/addinvoices', { state: { invoice } });
@@ -69,83 +79,100 @@ const InvoiceList = () => {
 
       <Navbar />
       <div className="flex-grow p-4 pt-10 2xl:max-w-screen-2xl 2xl:mx-auto">
+
         {/* Favorites Section */}
-        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold my-10 lg:mb-20 text-center">Favorites</h1>
-        <div className="flex items-center justify-between bg-gray-100 p-4 rounded-lg mb-10">
-          {/* Left Side: Company Logo */}
-          <div className="w-1/4">
-            <img src="/path/to/company-logo.png" alt="Company Logo" className="w-full h-auto object-contain" />
+        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold my-10 lg:mb-20 text-left">Favorites</h1>
+        {favorites.length === 0 ? (
+          <p className="text-center">No favorites added yet.</p>
+        ) : (
+          <div className="flex flex-wrap gap-4 w-full">
+            {favorites.map((fav) => (
+              <div key={fav.id} className="bg-gray-100 flex items-center p-4 rounded-lg gap-2">
+                <div>
+                  <img src={fav.companyLogo} alt="Company Logo" width={100} height={100} className="w-8 h-auto object-contain" />
+                </div>
+                <div className="">
+                  <h2 className="text-sm font-semibold">{fav.title}</h2>
+                  <p className="text-xs text-gray-500">Due Date: {fav.deadline}</p>
+                </div>
+              </div>
+            ))}
           </div>
-          {/* Right Side: Title and Date */}
-          <div className="w-3/4 pl-4">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold">Project Title</h2>
-            <p className="text-sm md:text-base lg:text-lg text-gray-500">Due Date: 2024-10-10</p>
-          </div>
-        </div>
+        )}
 
         {/* Invoices List Section */}
-        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold my-10 lg:mb-20 text-center">Invoices List</h1>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold my-10 lg:mb-20 text-left">Invoices List</h1>
         {loading && <p className="text-center text-blue-500">Loading...</p>}
         {invoices.length === 0 && !loading ? (
           <p className="text-center">No invoices available.</p>
         ) : (
-          <div className="overflow-x-auto rounded-lg py-4 ">
-
+          <div className="overflow-x-auto rounded-lg py-4">
             <table className="min-w-full">
               <thead className='text-center'>
                 <tr>
-                  <th className="p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Name</th>
-                  <th className="p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Contract Status</th>
-                  <th className="p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Starting Date</th>
-                  <th className="p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Deadline</th>
-                  <th className="p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Payment Status</th>
-                  <th className="p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Title</th>
-                  <th className="p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Client Details</th>
-                  <th className="p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Assignee Details</th>
-                  <th className="p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Notes</th>
-                  <th className="p-2 min-w-[100px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">View</th>
-                  <th className="p-2 min-w-[100px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Edit</th>
-                  <th className="p-2 min-w-[100px] lg:min-w-[200px] xl:min-w-[250px] md:text-lg lg:text-xl xl:text-2xl">Delete</th>
+                  {/* Add Favorite Column */}
+                  <th className="p-2 min-w-[100px] md:text-lg lg:text-xl xl:text-2xl">Favorite</th>
+                  <th className="p-2 min-w-[150px] md:text-lg lg:text-xl xl:text-2xl">Name</th>
+                  <th className="p-2 min-w-[150px] md:text-lg lg:text-xl xl:text-2xl">Contract Status</th>
+                  <th className="p-2 min-w-[150px] md:text-lg lg:text-xl xl:text-2xl">Starting Date</th>
+                  <th className="p-2 min-w-[150px] md:text-lg lg:text-xl xl:text-2xl">Deadline</th>
+                  <th className="p-2 min-w-[150px] md:text-lg lg:text-xl xl:text-2xl">Payment Status</th>
+                  <th className="p-2 min-w-[150px] md:text-lg lg:text-xl xl:text-2xl">Title</th>
+                  <th className="p-2 min-w-[150px] md:text-lg lg:text-xl xl:text-2xl">Client Details</th>
+                  <th className="p-2 min-w-[150px] md:text-lg lg:text-xl xl:text-2xl">Assignee Details</th>
+                  <th className="p-2 min-w-[150px] md:text-lg lg:text-xl xl:text-2xl">Notes</th>
+                  <th className="p-2 min-w-[100px] md:text-lg lg:text-xl xl:text-2xl">View</th>
+                  <th className="p-2 min-w-[100px] md:text-lg lg:text-xl xl:text-2xl">Edit</th>
+                  <th className="p-2 min-w-[100px] md:text-lg lg:text-xl xl:text-2xl">Delete</th>
                 </tr>
               </thead>
-              <tbody className=' text-center'>
+              <tbody className='text-center'>
                 {invoices.map((invoice) => (
                   <tr key={invoice.id}>
-                    <td className="border border-2 border-l-0 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.name}</td>
-                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.contractStatus}</td>
-                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.startingDate}</td>
-                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.deadline}</td>
-                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.paymentStatus}</td>
-                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">{invoice.title}</td>
-                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[150px] lg:min-w-[200px] xl:min-w-[250px] text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl">
+                    {/* Favorite Button */}
+                    <td className="border p-2">
+                      <button
+                        onClick={() => handleFavorite(invoice)}
+                        className={`text-sm md:text-lg lg:text-xl cursor-pointer ${favorites.some(fav => fav.id === invoice.id) ? 'text-yellow-500' : 'text-gray-400'}`}
+                      >
+                        ★
+                      </button>
+                    </td>
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">{invoice.name}</td>
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">{invoice.contractStatus}</td>
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">{invoice.startingDate}</td>
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">{invoice.deadline}</td>
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">{invoice.paymentStatus}</td>
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">{invoice.title}</td>
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">
                       <TruncateText text={invoice.clientDetails} maxLength={30} />
                     </td>
-                    <td className="border-y border-y-2 border-gray-100 text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl p-2 min-w-[150px] lg:min-w-[200px]">
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">
                       <TruncateText text={invoice.assigneeDetails} maxLength={30} />
                     </td>
-                    <td className="border-y border-y-2 border-gray-100 text-gray-500 text-sm md:text-[1rem] lg:text-lg xl:text-xl p-2 min-w-[150px] lg:min-w-[200px]">
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">
                       <TruncateText text={invoice.notes} maxLength={30} />
                     </td>
-                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[100px] text-center">
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">
                       <button
-                        onClick={() => handleView(invoice)} // View button
-                        className="text-sm md:text-[1rem] lg:text-lg xl:text-xl text-green-500 cursor-pointer hover:text-green-700"
+                        onClick={() => handleView(invoice)}
+                        className="text-green-500 hover:text-green-700"
                       >
                         View
                       </button>
                     </td>
-                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[100px] text-center">
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">
                       <button
-                        onClick={() => handleEdit(invoice)} // Edit button
-                        className="text-sm md:text-[1rem] lg:text-lg xl:text-xl text-blue-500 cursor-pointer hover:text-blue-700"
+                        onClick={() => handleEdit(invoice)}
+                        className="text-blue-500 hover:text-blue-700"
                       >
                         Edit
                       </button>
                     </td>
-                    <td className="border-y border-y-2 border-gray-100 p-2 min-w-[100px] text-center">
+                    <td className="border p-2 text-sm md:text-lg lg:text-xl min-w-[150px] lg:min-w-[200px] xl:min-w-[250px]">
                       <button
-                        onClick={() => handleDelete(invoice.id)} // Delete button
-                        className="text-sm md:text-[1rem] lg:text-lg xl:text-xl text-red-500 cursor-pointer hover:text-red-700"
+                        onClick={() => handleDelete(invoice.id)}
+                        className="text-red-500 hover:text-red-700"
                       >
                         Delete
                       </button>
