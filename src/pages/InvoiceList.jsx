@@ -69,9 +69,11 @@ const InvoiceList = () => {
   };
 
   const handleView = (invoice) => {
-    setSelectedInvoice(invoice);
+    setSelectedInvoice(invoice); // Set selectedInvoice directly
     setShowPopup(true);
-  };
+};
+
+  
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -193,8 +195,13 @@ const InvoiceList = () => {
       </Link>
 
       {showPopup && (
-        <PDFPopup formData={selectedInvoice} setShowPopup={setShowPopup} />
-      )}
+    <PDFPopup 
+        formData={selectedInvoice} 
+        logoURL={selectedInvoice?.companyLogo} // Pass the logo URL here
+        setShowPopup={setShowPopup} 
+    />
+)}
+
 
       <Footer />
     </div>
