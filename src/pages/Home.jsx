@@ -31,7 +31,7 @@ const Home = () => {
         {isLoggedIn && (
           <div className='p-4 flex flex-col gap-4 lg:gap-10 justify-center items-center text-center'>
             <h1 className='text-sm sm:text-[1rem] md:text-lg lg:text-2xl p-6 px-8 sm:px-32 md:px-44'>
-              Make your email list now, with Sales Email List Software from Devnito LLC.
+              Make your invoice list now, with Sales invoices List Software from Devnito LLC.
             </h1>
             <div className='flex flex-col lg:flex-row gap-10 pb-6 lg:pb-0'>
 
