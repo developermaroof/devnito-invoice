@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
+import { FaEye } from "react-icons/fa";
 
 // Css File
-import "../App.css"
+import "../App.css";
 
 // Components
 import Footer from '../components/Footer';
@@ -12,7 +13,7 @@ import Navbar from "../components/Navbar";
 import PreviewSection from '../components/PreviewSection';
 
 // Firebase
-import { auth, db, storage } from '../firebase/firebaseConfig'; // Ensure you have access to Firebase Auth
+import { auth, db, storage } from '../firebase/firebaseConfig';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -54,7 +55,11 @@ const AddInvoice = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isFixed, setIsFixed] = useState(false); // New state variable for fixed position
   const [logoURL, setLogoURL] = useState(null); // New state for logo URL
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar visibility
 
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen); // Toggle the sidebar
+  };
     // Scroll event handler
     const handleScroll = () => {
       if (window.scrollY > 200) { // Adjust the scroll pixel threshold as needed
@@ -171,10 +176,20 @@ const AddInvoice = () => {
   return (
     <>
       <Navbar />
-      <div className="p-6 lg:py-20 2xl:max-w-screen-2xl 2xl:mx-auto">
+      <div className="p-6 lg:py-20 2xl:max-w-screen-2xl 2xl:mx-auto relative">
         <div className='lg:flex lg:w-[100%]'>
           <div className='lg:w-[50%] mb-10 lg:mb-0'>
-            <h1 className='font-semibold text-center lg:text-2xl xl:text-3xl'>Add Invoice</h1>
+            <h1 className="hidden lg:block font-semibold text-center lg:text-2xl xl:text-3xl">
+              Add Invoice
+            </h1>
+            <div className='flex justify-between mb-10 lg:hidden'>
+              <h1 className='font-semibold text-center lg:text-2xl xl:text-3xl'>Add Invoice</h1>
+              <div className='flex items-center'>
+                <FaEye className='mr-1'/>
+                <button onClick={handleToggleSidebar} className='font-semibold text-center lg:text-2xl xl:text-3xl'>Preview</button>
+              </div>
+            </div>
+            
             <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-10 lg:mb-32">
               {/* Title input */}
               <div>
@@ -488,12 +503,7 @@ const AddInvoice = () => {
               />
             </div>
             {/* Button */}
-            {/* <!-- Floating Button --> */}
-            <Link to="/invoicelist">
-              <button className="fixed text-xs md:text-sm lg:text-lg xl:text-xl bottom-20 right-5 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300">
-                + InvoiceList
-              </button>
-            </Link> 
+           
             <button
             type="submit" 
             onClick={handleAddInvoice}
@@ -503,10 +513,23 @@ const AddInvoice = () => {
             </button>
             </form>
           </div>
-          <div className={`lg:w-[50%] ${isFixed ? 'lg:fixed lg:bottom-0 lg:top-10 lg:right-5' : 'lg:static'}`}>
-            {/* Preview Section */}
-            <PreviewSection formData={formData} logoURL={logoURL}  previewRef={previewRef}/>
+          {/* Sidebar for Preview Section */}
+          {isSidebarOpen && (
+            <>
+              <div className="fixed inset-0 bg-black opacity-50 z-40" onClick={handleToggleSidebar}></div>
+              <div
+                className='fixed overflow-auto pt-10 top-24 right-0 max-w-[80vw] max-h-[80vh] min-h-auto bg-white shadow-lg z-50 lg:hidden'
+              >
+                <button className="absolute top-5 right-5 " onClick={handleToggleSidebar}>Close</button>
+                <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
+              </div>
+            </>
+          )}
+          <div className={`hidden lg:block lg:w-[50%] ${isFixed ? 'lg:fixed lg:bottom-0 lg:top-10 lg:right-5' : 'lg:static'}`}>
+            {/* Preview Section for large screens */}
+            <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
           </div>
+
         </div>
         {/* Popup for PDF download */}
         {showPopup && (
@@ -518,7 +541,21 @@ const AddInvoice = () => {
           previewRef={previewRef}
           />
         )}
+
+            {/* <!-- Floating Button --> */}
+            <div className='fixed bottom-20 right-0 w-full'>
+              <div className='w-full 2xl:max-w-screen-2xl 2xl:mx-auto relative'>
+              <Link to="/invoicelist">
+              <button className="absolute text-xs md:text-sm lg:text-lg xl:text-xl bottom-0 right-0 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300 mr-2">
+                + InvoiceList
+              </button>
+            </Link>
+              </div>
+       
+            </div>
+    
       </div>
+   
       <Footer />
     </>
   );

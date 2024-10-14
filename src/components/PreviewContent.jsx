@@ -2,7 +2,7 @@ import React from 'react';
 
 const PreviewContent = ({ formData, logoURL }) => {
   return (
-    <div className="shadow-lg p-4 lg:py-6 rounded w-full">
+    <div className="p-4 lg:py-6 rounded w-full lg:max-h-[80vh] lg:min-h-auto">
       <div className='bg-gray-100 p-2 md:p-4 lg:p-6 flex flex-col gap-10 lg:gap-14'>
         <div className='flex justify-between items-center'>
           <div>

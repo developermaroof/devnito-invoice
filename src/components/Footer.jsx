@@ -3,7 +3,7 @@ import { FaHeart } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div>
+    <div className='bg-white'>
         <hr className='border-black'/>
         <footer className='flex justify-center items-center text-center py-4'>
             <div className='flex justify-center items-center gap-2'>
