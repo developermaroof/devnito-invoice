@@ -182,13 +182,41 @@ const AddInvoice = () => {
             <h1 className="hidden lg:block font-semibold text-center lg:text-2xl xl:text-3xl">
               Add Invoice
             </h1>
+
+            {/* Mobile/Tebs */}
             <div className='flex justify-between mb-10 lg:hidden'>
-              <h1 className='font-semibold text-center lg:text-2xl xl:text-3xl'>Add Invoice</h1>
-              <div className='flex items-center'>
-                <FaEye className='mr-1'/>
-                <button onClick={handleToggleSidebar} className='font-semibold text-center lg:text-2xl xl:text-3xl'>Preview</button>
+              <div>
+                <h1 className='font-semibold text-center'>Add Invoice</h1>
+              </div>
+
+              {/* Hamburger Menu Button */}
+              <div>
+              <div
+                onClick={handleToggleSidebar}
+                className="flex items-center"
+              >
+                <FaEye className="text-black text-xl" />
+                <button className="font-semibold text-center px-1">
+                  Preview
+                </button>
+              </div>
+
+                {/* Sidebar for Preview Section */}
+                <div
+                  style={{ right: isSidebarOpen ? '0' : '-80vw' }}
+                  className="w-[80vw] border-2 border-yellow-300 h-[80vh] fixed bg-white z-[50] overflow-y-auto transition-all duration-500 shadow-md"
+                >
+                  <button
+                    className=" bg-transparent border-none text-2xl cursor-pointer"
+                    onClick={handleToggleSidebar}
+                  >
+                    Close
+                  </button>
+                  <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
+                </div>
               </div>
             </div>
+            {/* Mobile/Tebs */}
             
             <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-10 lg:mb-32">
               {/* Title input */}
@@ -513,18 +541,6 @@ const AddInvoice = () => {
             </button>
             </form>
           </div>
-          {/* Sidebar for Preview Section */}
-          {isSidebarOpen && (
-            <>
-              <div className="fixed inset-0 bg-black opacity-50 z-40" onClick={handleToggleSidebar}></div>
-              <div
-                className='fixed overflow-auto pt-10 top-24 right-0 max-w-[80vw] max-h-[80vh] min-h-auto bg-white shadow-lg z-50 lg:hidden'
-              >
-                <button className="absolute top-5 right-5 " onClick={handleToggleSidebar}>Close</button>
-                <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
-              </div>
-            </>
-          )}
           <div className={`hidden lg:block lg:w-[50%] ${isFixed ? 'lg:fixed lg:bottom-0 lg:top-10 lg:right-5' : 'lg:static'}`}>
             {/* Preview Section for large screens */}
             <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
