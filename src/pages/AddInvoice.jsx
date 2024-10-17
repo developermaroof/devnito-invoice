@@ -183,7 +183,7 @@ const AddInvoice = () => {
         <div className='lg:flex lg:w-[100%]'>
           <div className='lg:w-[50%] mb-10 lg:mb-0'>
             <h1 className="hidden lg:block font-semibold text-center lg:text-2xl xl:text-3xl">
-              Add Invoice
+              Add Contract
             </h1>
 
             {/* Mobile/Tebs */}
@@ -568,7 +568,7 @@ const AddInvoice = () => {
             onClick={handleAddInvoice}
             className="bg-primary text-white text-xs lg:text-lg xl:text-xl px-8 lg:px-10 py-2 rounded-3xl"
             >
-            {location.state && location.state.invoice ? 'Update Invoice' : 'Add Invoice'}
+            {location.state && location.state.invoice ? 'Update Contract' : 'Add Contract'}
             </button>
             </form>
             {/* form */}
@@ -595,7 +595,7 @@ const AddInvoice = () => {
               <div className='w-full 2xl:max-w-screen-2xl 2xl:mx-auto relative'>
               <Link to="/invoicelist">
               <button className="absolute text-xs md:text-sm lg:text-lg xl:text-xl bottom-0 right-0 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300 mr-2">
-                + InvoiceList
+                + ContractsList
               </button>
             </Link>
               </div>

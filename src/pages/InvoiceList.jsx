@@ -103,10 +103,10 @@ const InvoiceList = () => {
         )}
 
         {/* Invoices List Section */}
-        <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mt-10 lg:mt-14 mb-5 lg:mb-10 text-left">Invoices List :</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mt-10 lg:mt-14 mb-5 lg:mb-10 text-left">Contracts List :</h1>
         {loading && <p className="text-center text-blue-500">Loading...</p>}
         {invoices.length === 0 && !loading ? (
-          <p className="text-left text-xs md:text-sm lg:text-lg xl:text-xl">No invoices available.</p>
+          <p className="text-left text-xs md:text-sm lg:text-lg xl:text-xl">No contracts available.</p>
         ) : (
           <div className="overflow-x-auto rounded-lg py-4">
             <table className="min-w-full">
@@ -190,7 +190,7 @@ const InvoiceList = () => {
       {/* Floating Button */}
       <Link to="/addinvoices">
         <button className="fixed text-xs md:text-sm lg:text-lg xl:text-xl bottom-20 right-5 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300">
-          + AddInvoices
+          + AddContracts
         </button>
       </Link>
 

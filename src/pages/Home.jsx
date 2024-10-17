@@ -31,7 +31,7 @@ const Home = () => {
         {isLoggedIn && (
           <div className='p-4 flex flex-col gap-4 lg:gap-10 justify-center items-center text-center'>
             <h1 className='text-sm sm:text-[1rem] md:text-lg lg:text-2xl p-6 px-8 sm:px-32 md:px-44'>
-              Make your invoice list now, with Sales invoices List Software from Devnito LLC.
+              Make your contract list now, with Sales contracts List Software from Devnito LLC.
             </h1>
             <div className='flex flex-col lg:flex-row gap-10 pb-6 lg:pb-0'>
 
@@ -44,7 +44,7 @@ const Home = () => {
                 </div>
                 <button className='mt-2 mb-10 lg:mb-12'>
                   <Link to="/invoicelist">
-                    <h2 className='font-semibold lg:text-xl'>View Invoices</h2>
+                    <h2 className='font-semibold lg:text-xl'>View Contracts</h2>
                   </Link>
                 </button>
               </div>
@@ -58,7 +58,7 @@ const Home = () => {
                 </div>
                 <button className='mt-2 mb-10 lg:mb-12'>
                   <Link to="/addinvoices">
-                    <h2 className='font-semibold lg:text-xl'>Add Invoices</h2>
+                    <h2 className='font-semibold lg:text-xl'>Add Contracts</h2>
                   </Link>
                 </button>
               </div>

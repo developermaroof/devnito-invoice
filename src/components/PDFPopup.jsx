@@ -19,6 +19,7 @@ const PDFPopup = ({ formData, logoURL, setShowPopup }) => {
         <div className="p-4 lg:py-6 rounded lg:mb-8">
           <ComponentToPrint ref={componentRef} formData={formData} logoURL={logoURL} />
         </div>
+        <div className='lg:fixed flex justify-center items-center '>
         <ReactToPrint
           trigger={() => <button className="mt-4 bg-green-500 text-white px-4 py-2 rounded">Download as PDF</button>}
           content={() => componentRef.current}
@@ -30,6 +31,7 @@ const PDFPopup = ({ formData, logoURL, setShowPopup }) => {
         >
           Close
         </button>
+        </div>
       </div>
     </div>
   </div>

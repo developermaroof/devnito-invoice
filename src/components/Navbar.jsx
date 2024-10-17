@@ -17,10 +17,10 @@ const Navbar = () => {
         <div className="flex items-center gap-[0.1rem]">
           <img src={logo} alt="Logo" className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10" />
           <Link to="/"> 
-            <h1 className="text-2xl font-bold hidden lg:block">Invoice Management System</h1>
+            <h1 className="text-2xl font-bold hidden lg:block">Contract Management System</h1>
           </Link>
           <Link to="/">
-            <h1 className="text-md md:text-2xl font-bold lg:hidden">Invoices</h1>
+            <h1 className="text-md md:text-2xl font-bold lg:hidden">Contracts</h1>
           </Link>
         </div>
 
