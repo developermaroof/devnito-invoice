@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 import { FaEye } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 
 // Css File
 import "../App.css";
@@ -191,27 +192,29 @@ const AddInvoice = () => {
 
               {/* Hamburger Menu Button */}
               <div>
-              <div
-                onClick={handleToggleSidebar}
-                className="flex items-center"
-              >
-                <FaEye className="text-black text-xl" />
-                <button className="font-semibold text-center px-1">
-                  Preview
-                </button>
-              </div>
+                <div
+                  onClick={handleToggleSidebar}
+                  className="flex items-center"
+                >
+                  <FaEye className="text-black text-xl" />
+                  <button className="font-semibold text-center px-1">
+                    Preview
+                  </button>
+                </div>
 
                 {/* Sidebar for Preview Section */}
                 <div
                   style={{ right: isSidebarOpen ? '0' : '-80vw' }}
-                  className="w-[80vw] border-2 border-yellow-300 h-[80vh] fixed bg-white z-[50] overflow-y-auto transition-all duration-500 shadow-md"
+                  className="max-w-[80vw] min-w-auto p-4 max-h-[80vh] min-h-auto fixed top-24 bg-white z-[50] overflow-y-auto transition-all duration-500 shadow-lg border-2"
                 >
+                  <div className='flex justify-end sticky top-0 mr-2 z-50'>
                   <button
-                    className=" bg-transparent border-none text-2xl cursor-pointer"
+                    className="bg-transparent border-none text-2xl cursor-pointer"
                     onClick={handleToggleSidebar}
                   >
-                    Close
+                    <IoMdClose />
                   </button>
+                  </div>
                   <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
                 </div>
               </div>
