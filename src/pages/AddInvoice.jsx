@@ -57,9 +57,11 @@ const AddInvoice = () => {
   const [isFixed, setIsFixed] = useState(false); // New state variable for fixed position
   const [logoURL, setLogoURL] = useState(null); // New state for logo URL
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar visibility
+  const [isFormDisabled, setIsFormDisabled] = useState(false); // State for disabling form
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen); // Toggle the sidebar
+    setIsFormDisabled(!isSidebarOpen); // Toggle form disabled state
   };
     // Scroll event handler
     const handleScroll = () => {
@@ -204,23 +206,23 @@ const AddInvoice = () => {
 
                 {/* Sidebar for Preview Section */}
                 <div
-                  style={{ right: isSidebarOpen ? '0' : '-80vw' }}
-                  className="max-w-[80vw] min-w-auto p-4 max-h-[80vh] min-h-auto fixed top-24 bg-white z-[50] overflow-y-auto transition-all duration-500 shadow-lg border-2"
+                  style={{ right: isSidebarOpen ? '0' : '-93vw' }}
+                  className="max-w-[93vw] min-w-[93vw] p-4 h-full fixed top-0 bg-white z-[50] overflow-y-auto transition-all duration-500 shadow-lg border-2"
                 >
-                  <div className='flex justify-end sticky top-0 mr-2 z-50'>
-                  <button
-                    className="bg-transparent border-none text-2xl cursor-pointer"
-                    onClick={handleToggleSidebar}
-                  >
-                    <IoMdClose />
-                  </button>
+                  <div className='flex justify-end sticky top-2 mr-2 z-50'>
+                    <button
+                      className="bg-transparent border-none text-2xl cursor-pointer"
+                      onClick={handleToggleSidebar}
+                    >
+                      <IoMdClose />
+                    </button>
                   </div>
-                  <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
+                    <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef}/>
                 </div>
               </div>
             </div>
             {/* Mobile/Tebs */}
-            
+            {/* form */}
             <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-10 lg:mb-32">
               {/* Title input */}
               <div>
@@ -231,6 +233,7 @@ const AddInvoice = () => {
                   value={formData.title}
                   placeholder='Type title..'
                   onChange={handleChange}
+                  disabled={isFormDisabled} // Disable based on sidebar
                   required
                   className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
@@ -243,6 +246,7 @@ const AddInvoice = () => {
                 value={formData.assigneeDetails}
                 placeholder='Type Something..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
@@ -255,6 +259,7 @@ const AddInvoice = () => {
                 value={formData.bannerAddress}
                 placeholder='Type address..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -267,6 +272,7 @@ const AddInvoice = () => {
                 value={formData.bannerEmail}
                 placeholder='Put email..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -279,6 +285,7 @@ const AddInvoice = () => {
                 value={formData.bannerWebsite}
                 placeholder='Paste website URL..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -291,6 +298,7 @@ const AddInvoice = () => {
                 value={formData.ceoEmail}
                 placeholder='Put email..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -303,6 +311,7 @@ const AddInvoice = () => {
                 value={formData.ceoName}
                 placeholder='Type name..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -314,6 +323,7 @@ const AddInvoice = () => {
                 value={formData.clientDetails}
                 placeholder='Type Something..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
@@ -325,6 +335,7 @@ const AddInvoice = () => {
                 name="companyLogo"
                 accept="image/*"
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
                   {logoURL && ( // Display the logo if available
@@ -340,6 +351,7 @@ const AddInvoice = () => {
                 value={formData.companyName}
                 placeholder='Type company name..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -352,6 +364,7 @@ const AddInvoice = () => {
                 value={formData.contractHeading}
                 placeholder='Type contract heading..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -365,6 +378,7 @@ const AddInvoice = () => {
                   value="Completed"
                   checked={formData.contractStatus === "Completed"}
                   onChange={handleChange}
+                  disabled={isFormDisabled} // Disable based on sidebar
                   className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
                 />
                 <label className="ml-2 lg:text-lg xl:text-xl">Completed</label>
@@ -376,6 +390,7 @@ const AddInvoice = () => {
                   value="inProgress"
                   checked={formData.contractStatus === "inProgress"}
                   onChange={handleChange}
+                  disabled={isFormDisabled} // Disable based on sidebar
                   className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
                 />
                 <label className="ml-2 lg:text-lg xl:text-xl">In Progress</label>
@@ -390,6 +405,7 @@ const AddInvoice = () => {
                 value={formData.deadline}
                 placeholder='Put the deadline..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -402,6 +418,7 @@ const AddInvoice = () => {
                 value={formData.durationHard}
                 placeholder='Type hard deadline..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -414,6 +431,7 @@ const AddInvoice = () => {
                 value={formData.durationSoft}
                 placeholder='Type soft deadline..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -425,6 +443,7 @@ const AddInvoice = () => {
                 value={formData.endingDescription}
                 placeholder='Type ending message..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
@@ -437,6 +456,7 @@ const AddInvoice = () => {
                 value={formData.name}
                 placeholder='Type name..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -448,6 +468,7 @@ const AddInvoice = () => {
                 value={formData.notes}
                 placeholder='Type any notes..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
@@ -459,6 +480,7 @@ const AddInvoice = () => {
                 value={formData.paragraph1}
                 placeholder='Type paragraph 1..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
@@ -470,6 +492,7 @@ const AddInvoice = () => {
                 value={formData.paragraph2}
                 placeholder='Type paragraph 2..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
@@ -481,6 +504,7 @@ const AddInvoice = () => {
                 value={formData.paragraph3}
                 placeholder='Type paragraph 3..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               ></textarea>
             </div>
@@ -494,6 +518,7 @@ const AddInvoice = () => {
                   value="Pending"
                   checked={formData.paymentStatus === "Pending"}
                   onChange={handleChange}
+                  disabled={isFormDisabled} // Disable based on sidebar
                   className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
                 />
                 <label className="ml-2 lg:text-lg xl:text-xl">Pending</label>
@@ -505,6 +530,7 @@ const AddInvoice = () => {
                   value="Paid"
                   checked={formData.paymentStatus === "Paid"}
                   onChange={handleChange}
+                  disabled={isFormDisabled} // Disable based on sidebar
                   className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
                 />
                 <label className="ml-2 lg:text-lg xl:text-xl">Paid</label>
@@ -519,6 +545,7 @@ const AddInvoice = () => {
                 value={formData.projectBudget}
                 placeholder='Put project budget..'
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -530,6 +557,7 @@ const AddInvoice = () => {
                 name="startingDate"
                 value={formData.startingDate}
                 onChange={handleChange}
+                disabled={isFormDisabled} // Disable based on sidebar
                 className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
               />
             </div>
@@ -543,6 +571,7 @@ const AddInvoice = () => {
             {location.state && location.state.invoice ? 'Update Invoice' : 'Add Invoice'}
             </button>
             </form>
+            {/* form */}
           </div>
           <div className={`hidden lg:block lg:w-[50%] ${isFixed ? 'lg:fixed lg:bottom-0 lg:top-10 lg:right-5' : 'lg:static'}`}>
             {/* Preview Section for large screens */}
