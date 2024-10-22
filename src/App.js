@@ -1,4 +1,3 @@
-// src/App.js
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
@@ -7,9 +6,11 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import InvoiceList from "./pages/InvoiceList";
 import AddInvoice from "./pages/AddInvoice";
+import AddClient from "./pages/AddClient";
 import { AuthProvider } from "./context/AuthContext";
-import { InvoiceProvider } from "./context/InvoiceContext"; // Import InvoiceProvider
-import ProtectedRoute from "./components/ProtectedRoute"; // We'll create this next
+import { InvoiceProvider } from "./context/InvoiceContext";
+import { ClientProvider } from "./context/ClientProvider"; // Import ClientProvider
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const router = createBrowserRouter([
@@ -34,6 +35,14 @@ function App() {
       ),
     },
     {
+      path: "/addclient",
+      element: (
+        <ProtectedRoute>
+          <AddClient />
+        </ProtectedRoute>
+      ),
+    },
+    {
       path: "*",
       element: <Error />,
     },
@@ -42,9 +51,9 @@ function App() {
   return (
     <AuthProvider>
       <InvoiceProvider>
-        {" "}
-        {/* Wrap with InvoiceProvider */}
-        <RouterProvider router={router} /> {/* Provide the routes */}
+        <ClientProvider>
+          <RouterProvider router={router} />
+        </ClientProvider>
       </InvoiceProvider>
     </AuthProvider>
   );

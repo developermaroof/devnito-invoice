@@ -13,19 +13,17 @@ const Navbar = () => {
 
   return (
     <div>
+      {isLoggedIn ? (
       <nav className="flex justify-between items-center p-4 lg:px-8 2xl:max-w-screen-2xl 2xl:mx-auto">
         <div className="flex items-center gap-[0.1rem]">
           <img src={logo} alt="Logo" className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10" />
-          <Link to="/"> 
-            <h1 className="text-2xl font-bold hidden lg:block">Contract Management System</h1>
-          </Link>
           <Link to="/">
-            <h1 className="text-md md:text-2xl font-bold lg:hidden">Contracts</h1>
+            <h1 className="text-md md:text-2xl lg:text-2xl font-bold">CRM</h1>
           </Link>
         </div>
 
         <div className="flex items-center">
-          {isLoggedIn ? (
+          
             <div className="flex items-center space-x-4">
               {/* User Info */}
               <div 
@@ -54,14 +52,13 @@ const Navbar = () => {
                 
               </div>
             </div>
-          ) : (
-            <div className="text-center">
-              <h2 className="font-semibold text-xs md:text-[1rem] lg:text-xl">Guest</h2>
-              <p className="text-red-600 text-[0.7rem] md:text-[0.8rem] lg:text-[1rem]">Please sign in</p>
-            </div>
-          )}
+          
         </div>
       </nav>
+      ) : (
+        <>
+        </>
+      )}
       <hr className='border-black'/>
     </div>
   );
