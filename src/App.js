@@ -1,58 +1,16 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-
-import Dashboard from "./pages/Dashboard";
-import Error from "./pages/Error";
-import InvoiceList from "./pages/InvoiceList";
-import AddInvoice from "./pages/AddInvoice";
-import AddClient from "./pages/AddClient";
 import { AuthProvider } from "./context/AuthContext";
 import { InvoiceProvider } from "./context/InvoiceContext";
-import { ClientProvider } from "./context/ClientProvider"; // Import ClientProvider
-import ProtectedRoute from "./components/ProtectedRoute";
+import { ClientProvider } from "./context/ClientProvider";
+import AuthenticatedApp from "./components/AuthenticatedApp";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Dashboard />,
-    },
-    {
-      path: "/invoicelist",
-      element: (
-        <ProtectedRoute>
-          <InvoiceList />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "/addinvoices",
-      element: (
-        <ProtectedRoute>
-          <AddInvoice />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "/addclient",
-      element: (
-        <ProtectedRoute>
-          <AddClient />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "*",
-      element: <Error />,
-    },
-  ]);
-
   return (
     <AuthProvider>
       <InvoiceProvider>
         <ClientProvider>
-          <RouterProvider router={router} />
+          <AuthenticatedApp />
         </ClientProvider>
       </InvoiceProvider>
     </AuthProvider>

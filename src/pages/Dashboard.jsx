@@ -1,19 +1,3 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-'use client'
-
 import { useState } from 'react'
 import {
   Dialog,
@@ -93,16 +77,8 @@ export default function Example() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
-      <div className="min-h-full">
-        <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-40 lg:hidden">
+      <div className="min-h-full border-2 border-yellow-500">
+        <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-40 lg:hidden border-2 border-red-500">
           <DialogBackdrop
             transition
             className="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
@@ -173,9 +149,9 @@ export default function Example() {
         </Dialog>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
+        <div className="hidden  border-2 border-blue-500 lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-grow flex-col overflow-y-auto bg-cyan-700 pb-4 pt-5">
+          <div className="flex  border-2 border-blue-500 flex-grow flex-col overflow-y-auto bg-cyan-700 pb-4 pt-5">
             <div className="flex flex-shrink-0 items-center px-4">
               <img
                 alt="Easywire logo"
@@ -183,7 +159,7 @@ export default function Example() {
                 className="h-8 w-auto"
               />
             </div>
-            <nav aria-label="Sidebar" className="mt-5 flex flex-1 flex-col divide-y divide-cyan-800 overflow-y-auto">
+            <nav aria-label="Sidebar" className=" border-2 border-blue-500 mt-5 flex flex-1 flex-col divide-y divide-cyan-800 overflow-y-auto">
               <div className="space-y-1 px-2">
                 {navigation.map((item) => (
                   <a
@@ -219,7 +195,7 @@ export default function Example() {
         </div>
 
         <div className="flex flex-1 flex-col lg:pl-64">
-          <div className="flex h-16 flex-shrink-0 border-b border-gray-200 bg-white lg:border-none">
+          <div className="flex   border-2 border-blue-500 h-16 flex-shrink-0 border-b border-gray-200 bg-white lg:border-none">
             <button
               type="button"
               onClick={() => setSidebarOpen(true)}
@@ -302,9 +278,9 @@ export default function Example() {
               </div>
             </div>
           </div>
-          <main className="flex-1 pb-8">
+          <main className="flex-1 pb-8   border-2 border-green-500">
             {/* Page header */}
-            <div className="bg-white shadow">
+            <div className="bg-white shadow   border-2 border-blue-500">
               <div className="px-4 sm:px-6 lg:mx-auto lg:max-w-6xl lg:px-8">
                 <div className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
                   <div className="min-w-0 flex-1">
@@ -365,192 +341,7 @@ export default function Example() {
               </div>
             </div>
 
-            <div className="mt-8">
-              <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                <h2 className="text-lg font-medium leading-6 text-gray-900">Overview</h2>
-                <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {/* Card */}
-                  {cards.map((card) => (
-                    <div key={card.name} className="overflow-hidden rounded-lg bg-white shadow">
-                      <div className="p-5">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0">
-                            <card.icon aria-hidden="true" className="h-6 w-6 text-gray-400" />
-                          </div>
-                          <div className="ml-5 w-0 flex-1">
-                            <dl>
-                              <dt className="truncate text-sm font-medium text-gray-500">{card.name}</dt>
-                              <dd>
-                                <div className="text-lg font-medium text-gray-900">{card.amount}</div>
-                              </dd>
-                            </dl>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="bg-gray-50 px-5 py-3">
-                        <div className="text-sm">
-                          <a href={card.href} className="font-medium text-cyan-700 hover:text-cyan-900">
-                            View all
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <h2 className="mx-auto mt-8 max-w-6xl px-4 text-lg font-medium leading-6 text-gray-900 sm:px-6 lg:px-8">
-                Recent activity
-              </h2>
-
-              {/* Activity list (smallest breakpoint only) */}
-              <div className="shadow sm:hidden">
-                <ul role="list" className="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden">
-                  {transactions.map((transaction) => (
-                    <li key={transaction.id}>
-                      <a href={transaction.href} className="block bg-white px-4 py-4 hover:bg-gray-50">
-                        <span className="flex items-center space-x-4">
-                          <span className="flex flex-1 space-x-2 truncate">
-                            <BanknotesIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-gray-400" />
-                            <span className="flex flex-col truncate text-sm text-gray-500">
-                              <span className="truncate">{transaction.name}</span>
-                              <span>
-                                <span className="font-medium text-gray-900">{transaction.amount}</span>{' '}
-                                {transaction.currency}
-                              </span>
-                              <time dateTime={transaction.datetime}>{transaction.date}</time>
-                            </span>
-                          </span>
-                          <ChevronRightIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-gray-400" />
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-
-                <nav
-                  aria-label="Pagination"
-                  className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3"
-                >
-                  <div className="flex flex-1 justify-between">
-                    <a
-                      href="#"
-                      className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      Previous
-                    </a>
-                    <a
-                      href="#"
-                      className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      Next
-                    </a>
-                  </div>
-                </nav>
-              </div>
-
-              {/* Activity table (small breakpoint and up) */}
-              <div className="hidden sm:block">
-                <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                  <div className="mt-2 flex flex-col">
-                    <div className="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
-                      <table className="min-w-full divide-y divide-gray-200">
-                        <thead>
-                          <tr>
-                            <th
-                              scope="col"
-                              className="bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900"
-                            >
-                              Transaction
-                            </th>
-                            <th
-                              scope="col"
-                              className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                            >
-                              Amount
-                            </th>
-                            <th
-                              scope="col"
-                              className="hidden bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900 md:block"
-                            >
-                              Status
-                            </th>
-                            <th
-                              scope="col"
-                              className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                            >
-                              Date
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200 bg-white">
-                          {transactions.map((transaction) => (
-                            <tr key={transaction.id} className="bg-white">
-                              <td className="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900">
-                                <div className="flex">
-                                  <a href={transaction.href} className="group inline-flex space-x-2 truncate text-sm">
-                                    <BanknotesIcon
-                                      aria-hidden="true"
-                                      className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                                    />
-                                    <p className="truncate text-gray-500 group-hover:text-gray-900">
-                                      {transaction.name}
-                                    </p>
-                                  </a>
-                                </div>
-                              </td>
-                              <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                                <span className="font-medium text-gray-900">{transaction.amount}</span>
-                                {transaction.currency}
-                              </td>
-                              <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
-                                <span
-                                  className={classNames(
-                                    statusStyles[transaction.status],
-                                    'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
-                                  )}
-                                >
-                                  {transaction.status}
-                                </span>
-                              </td>
-                              <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                                <time dateTime={transaction.datetime}>{transaction.date}</time>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                      {/* Pagination */}
-                      <nav
-                        aria-label="Pagination"
-                        className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
-                      >
-                        <div className="hidden sm:block">
-                          <p className="text-sm text-gray-700">
-                            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
-                            <span className="font-medium">20</span> results
-                          </p>
-                        </div>
-                        <div className="flex flex-1 justify-between gap-x-3 sm:justify-end">
-                          <a
-                            href="#"
-                            className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
-                          >
-                            Previous
-                          </a>
-                          <a
-                            href="#"
-                            className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
-                          >
-                            Next
-                          </a>
-                        </div>
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </main>
         </div>
       </div>
