@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 
-import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 import Error from "./pages/Error";
 import InvoiceList from "./pages/InvoiceList";
 import AddInvoice from "./pages/AddInvoice";
@@ -16,7 +16,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
+      element: <Dashboard />,
     },
     {
       path: "/invoicelist",
