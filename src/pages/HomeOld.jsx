@@ -15,7 +15,7 @@ import ViewInvoice from '../assets/ViewInvoice.png';
 // Images
 import Logo from '../assets/logo.png';
 
-const Home = () => {
+const HomeOld = () => {
   const { isLoggedIn, GoogleSignUp } = useAuthContext(); // Access userData here
 
   return (
@@ -154,4 +154,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeOld;

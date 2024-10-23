@@ -3,10 +3,10 @@ import { useInvoice } from '../context/InvoiceContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { auth, db } from '../firebase/firebaseConfig'; 
 import { query, collection, where, getDocs } from 'firebase/firestore'; 
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import TruncateText from '../components/TruncateText';
-import PDFPopup from '../components/PDFPopup'; 
+import Navbar from './Navbar';
+import Footer from './Footer';
+import TruncateText from './TruncateText';
+import PDFPopup from './PDFPopup'; 
 
 const InvoiceList = () => {
   const { invoices, setInvoices, deleteInvoice } = useInvoice();

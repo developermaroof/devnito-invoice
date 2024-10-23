@@ -1,58 +1,54 @@
 import React from "react";
 import { useAuthContext } from "../context/AuthContext";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, createBrowserRouter, Route, RouterProvider, Routes } from "react-router-dom";
 
 import Dashboard from "../pages/Dashboard";
 import Error from "../pages/Error";
-import InvoiceList from "../pages/InvoiceList";
+import InvoiceList from "./InvoiceList";
 import AddInvoice from "../pages/AddInvoice";
 import AddClient from "../pages/AddClient";
+import Home from "../components/Home";
 import ProtectedRoute from "./ProtectedRoute";
 import GoogleSignIn from "../pages/GoogleSignIn";
+
 
 function AuthenticatedApp() {
   const { isLoggedIn } = useAuthContext();
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: (
-        <ProtectedRoute>
-          <Dashboard />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "/invoicelist",
-      element: (
-        <ProtectedRoute>
-          <InvoiceList />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "/addinvoices",
-      element: (
-        <ProtectedRoute>
-          <AddInvoice />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "/addclient",
-      element: (
-        <ProtectedRoute>
-          <AddClient />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "*",
-      element: <Error />,
-    },
-  ]);
 
-  return isLoggedIn ? <RouterProvider router={router} /> : <GoogleSignIn />;
+  // <RouterProvider router={router} />
+  return isLoggedIn ? (
+    <div className="min-h-screen bg-gray-100">
+      <BrowserRouter>
+        <Dashboard />
+        <Routes>
+          <Route path="/" element={ 
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } />
+          <Route path="/invoicelist" element={ 
+            <ProtectedRoute>
+              <InvoiceList />
+            </ProtectedRoute>
+          } />
+          <Route path="/addinvoices" element={ 
+            <ProtectedRoute>
+              <AddInvoice />
+            </ProtectedRoute>
+          } />
+          <Route path="/addclient" element={ 
+            <ProtectedRoute>
+              <AddClient />
+            </ProtectedRoute>
+          } />
+          <Route path="*" element={ <Error />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  ) : (
+    <GoogleSignIn />
+  );
 }
 
 export default AuthenticatedApp;

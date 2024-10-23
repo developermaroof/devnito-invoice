@@ -10,7 +10,9 @@ function App() {
     <AuthProvider>
       <InvoiceProvider>
         <ClientProvider>
-          <AuthenticatedApp />
+          <div className="min-h-screen bg-gray-50">
+            <AuthenticatedApp />
+          </div>
         </ClientProvider>
       </InvoiceProvider>
     </AuthProvider>
