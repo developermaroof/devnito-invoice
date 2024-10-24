@@ -6,7 +6,7 @@ const GoogleSignIn = () => {
   const { GoogleSignUp } = useAuthContext();
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen justify-center mx-auto 2xl:max-w-screen-2xl">
       <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div className="mb-4 text-center">
@@ -31,7 +31,7 @@ const GoogleSignIn = () => {
                   fill="#4285F4"
                 />
                 <path
-                  d="M5.26498 14.2949C5.02498 13.5699 4.88501 12.7999 4.88501 11.9999C4.88501 11.1999 5.01998 10.4299 5.26498 9.7049L1.275 6.60986C0.46 8.22986 0 10.0599 0 11.9999C0 13.9399 0.46 15.7699 1.28 17.3899L5.26498 14.2949Z"
+                  // d="M5.26498 14.2949C5.02498 13.5699 4.88501 12.7999 4.88501 11.9999C4.88501 11.1999 5.01998 10.4299 5.26498 9.7049L1.275 6.60986C0.46 8.22986 0 10.0599 0 11.9999C0 13.9399 0.46 15.7699 1.28 17.3899L5.26498 14.2949Z"
                   fill="#FBBC05"
                 />
                 <path
