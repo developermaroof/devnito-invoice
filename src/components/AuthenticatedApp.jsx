@@ -4,12 +4,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Dashboard from "../pages/Dashboard";
 import Error from "../pages/Error";
-import InvoiceList from "./InvoiceList";
+// import InvoiceList from "./InvoiceList";
 import AddInvoice from "../pages/AddInvoice";
 import AddClient from "../pages/AddClient";
 import Home from "../components/Home";
 import ProtectedRoute from "./ProtectedRoute";
 import GoogleSignIn from "../pages/GoogleSignIn";
+import ContractsList from "./ContractsList";
 
 
 function AuthenticatedApp() {
@@ -29,7 +30,7 @@ function AuthenticatedApp() {
           } />
           <Route path="/invoicelist" element={ 
             <ProtectedRoute>
-              <InvoiceList />
+              <ContractsList />
             </ProtectedRoute>
           } />
           <Route path="/addinvoices" element={ 
