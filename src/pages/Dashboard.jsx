@@ -38,9 +38,9 @@ const initialNavigation = [
   { name: 'Contracts', href: '/invoicelist', icon: DocumentChartBarIcon },
 ];
 const secondaryNavigation = [
-  { name: 'Settings', href: '#', icon: CogIcon },
-  { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
-  { name: 'Privacy', href: '#', icon: ShieldCheckIcon },
+  { name: 'Settings', href: '/', icon: CogIcon },
+  { name: 'Help', href: '/', icon: QuestionMarkCircleIcon },
+  { name: 'Privacy', href: '/', icon: ShieldCheckIcon },
 ]
 
 function classNames(...classes) {
@@ -130,7 +130,7 @@ export default function Example() {
         </Dialog>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
+        <div className="hidden z-40 lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-grow flex-col overflow-y-auto bg-cyan-700 pb-4 pt-5">
             <div className="flex flex-shrink-0 items-center px-4">
@@ -175,7 +175,8 @@ export default function Example() {
             </nav>
           </div>
         </div>
-        <div className="flex h-16 flex-shrink-0 border-b border-gray-200 bg-white lg:border-none">
+        {/* Navbar */}
+        <div className="lg:pl-64 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white lg:border-l lg:border-yellow-600">
             <button
               type="button"
               onClick={() => setSidebarOpen(true)}
@@ -187,7 +188,7 @@ export default function Example() {
             {/* Search bar */}
             <div className="flex flex-1 justify-between px-4 sm:px-6 lg:mx-auto lg:max-w-6xl lg:px-8">
               <div className="flex flex-1">
-                <form action="#" method="GET" className="flex w-full md:ml-0">
+                <form action="/" method="GET" className="flex w-full md:ml-0">
                   <label htmlFor="search-field" className="sr-only">
                     Search
                   </label>
@@ -239,27 +240,27 @@ export default function Example() {
                     className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                   >
                     <MenuItem>
-                      <Link to="#" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                      <Link to="/" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                         Your Profile
                       </Link>
                     </MenuItem>
                     <MenuItem>
-                      <Link to="#" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                      <Link to="/" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                         Settings
                       </Link>
                     </MenuItem>
                     <MenuItem>
-                     
-                        <button onClick={Logout} className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                     <Link  className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                        <button onClick={Logout}>
                           Logout
                         </button>
-                     
+                        </Link>
                     </MenuItem>
                   </MenuItems>
                 </Menu>
               </div>
             </div>
-          </div>
+        </div>
       </div>
     </>
   )
