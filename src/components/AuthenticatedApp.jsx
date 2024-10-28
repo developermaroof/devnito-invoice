@@ -28,6 +28,11 @@ function AuthenticatedApp() {
               <Home />
             </ProtectedRoute>
           } />
+          <Route path="/addcontract" element={
+            <ProtectedRoute>
+              <AddInvoice />
+            </ProtectedRoute>
+            } />
           <Route path="/invoicelist" element={ 
             <ProtectedRoute>
               <ContractsList />

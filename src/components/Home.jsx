@@ -9,6 +9,7 @@ import {
   ChevronRightIcon,
   InboxIcon,
 } from '@heroicons/react/20/solid'
+import { Link } from 'react-router-dom';
 const cards = [
   { name: 'Account balance', href: '/', icon: ScaleIcon, amount: '$30,659.45' },
   // More items...
@@ -89,16 +90,18 @@ const Home = () => {
                   </dl>
                 </div>
               </div>
-           
-
+            
             </div>
             <div className="mt-6 flex space-x-3 md:ml-4 md:mt-0">
+              <Link to="/addcontract">
+
               <button
                 type="button"
                 className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
-                Add money
+                Add Contract
               </button>
+              </Link>
               <button
                 type="button"
                 className="inline-flex items-center rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"

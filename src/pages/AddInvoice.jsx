@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+// import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 import { FaEye } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
@@ -8,9 +9,7 @@ import { IoMdClose } from "react-icons/io";
 import "../App.css";
 
 // Components
-import Footer from '../components/Footer';
 import PDFPopup from '../components/PDFPopup';
-import Navbar from "../components/Navbar";
 import PreviewSection from '../components/PreviewSection';
 
 // Firebase
@@ -178,7 +177,9 @@ const AddInvoice = () => {
 
   return (
     <>
-      <Navbar />
+        <div className="flex flex-1 flex-col lg:pl-64 ">
+          
+          <main className="flex-1 pb-8">
       <div className="p-6 lg:py-20 2xl:max-w-screen-2xl 2xl:mx-auto relative">
         <div className='lg:flex lg:w-[100%]'>
           <div className='lg:w-[50%] mb-10 lg:mb-0'>
@@ -206,7 +207,7 @@ const AddInvoice = () => {
 
                 {/* Sidebar for Preview Section */}
                 <div
-                  style={{ right: isSidebarOpen ? '0' : '-93vw' }}
+                  style={{ right: isSidebarOpen ? '0' : '-90vw' }}
                   className="max-w-[93vw] min-w-[93vw] p-4 h-full fixed top-0 bg-white z-[50] overflow-y-auto transition-all duration-500 shadow-lg border-2"
                 >
                   <div className='flex justify-end sticky top-2 mr-2 z-50'>
@@ -573,7 +574,7 @@ const AddInvoice = () => {
             </form>
             {/* form */}
           </div>
-          <div className={`hidden lg:block lg:w-[50%] ${isFixed ? 'lg:fixed lg:bottom-0 lg:top-10 lg:right-5' : 'lg:static'}`}>
+          <div className={`hidden lg:block lg:w-[50%] ${isFixed ? 'lg:fixed lg:bottom-0 lg:top-10 lg:right-[-7%] ' : 'lg:static'}`}>
             {/* Preview Section for large screens */}
             <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
           </div>
@@ -591,7 +592,7 @@ const AddInvoice = () => {
         )}
 
             {/* <!-- Floating Button --> */}
-            <div className='fixed bottom-20 right-0 w-full'>
+            {/* <div className='fixed bottom-20 right-0 w-full'>
               <div className='w-full 2xl:max-w-screen-2xl 2xl:mx-auto relative'>
               <Link to="/invoicelist">
               <button className="absolute text-xs md:text-sm lg:text-lg xl:text-xl bottom-0 right-0 bg-blue-500 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-300 mr-2">
@@ -599,12 +600,10 @@ const AddInvoice = () => {
               </button>
             </Link>
               </div>
-       
-            </div>
-    
+            </div> */}
       </div>
-   
-      <Footer />
+      </main>
+      </div>
     </>
   );
 };
