@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useInvoice } from '../context/InvoiceContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// import { useNavigate, Link } from 'react-router-dom';
 import { auth, db } from '../firebase/firebaseConfig'; 
 import { query, collection, where, getDocs } from 'firebase/firestore'; 
-import TruncateText from './TruncateText';
-import PDFPopup from './PDFPopup';
+// import TruncateText from './TruncateText';
+// import PDFPopup from './PDFPopup';
 import {
-  BanknotesIcon,
+  // BanknotesIcon,
   ChevronRightIcon,
   EllipsisVerticalIcon,
 } from '@heroicons/react/20/solid'
@@ -19,35 +20,14 @@ import {
 } from '@headlessui/react'
 
 
-const transactions = [
-  {
-    id: 1,
-    name: 'Payment to Molly Sanders',
-    href: '/',
-    amount: '$20,000',
-    currency: 'USD',
-    status: 'success',
-    date: 'July 11, 2020',
-    datetime: '2020-07-11',
-  },
-  // More transactions...
-]
-const statusStyles = {
-  success: 'bg-green-100 text-green-800',
-  processing: 'bg-yellow-100 text-yellow-800',
-  failed: 'bg-gray-100 text-gray-800',
-}
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
-
 const ContractsList = () => {
-  const { invoices, setInvoices, deleteInvoice } = useInvoice();
+  const { invoices, setInvoices } = useInvoice();
+  // const { invoices, setInvoices, deleteInvoice } = useInvoice();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [showPopup, setShowPopup] = useState(false); 
-  const [selectedInvoice, setSelectedInvoice] = useState(null); 
+  const [loading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [showPopup, setShowPopup] = useState(false); 
+  // const [selectedInvoice, setSelectedInvoice] = useState(null); 
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]); // Track favorite invoices
 console.log("Invoices data:", invoices)
@@ -75,27 +55,27 @@ console.log("Invoices data:", invoices)
     fetchInvoices();
 }, [setInvoices, navigate]);
 
-const handleEdit = (invoice) => {
-  navigate('/addinvoices', { state: { invoice } });
-};
+// const handleEdit = (invoice) => {
+//   navigate('/addinvoices', { state: { invoice } });
+// };
 
-const handleDelete = async (id) => {
-  setLoading(true);
-  try {
-    await deleteInvoice(id);
-    setInvoices((prevInvoices) => prevInvoices.filter((invoice) => invoice.id !== id));
-  } catch (error) {
-    console.error("Error deleting invoice: ", error);
-    alert("Failed to delete the invoice. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+// const handleDelete = async (id) => {
+//   setLoading(true);
+//   try {
+//     await deleteInvoice(id);
+//     setInvoices((prevInvoices) => prevInvoices.filter((invoice) => invoice.id !== id));
+//   } catch (error) {
+//     console.error("Error deleting invoice: ", error);
+//     alert("Failed to delete the invoice. Please try again.");
+//   } finally {
+//     setLoading(false);
+//   }
+// };
 
-const handleView = (invoice) => {
-  setSelectedInvoice(invoice); // Set selectedInvoice directly
-  setShowPopup(true);
-};
+// const handleView = (invoice) => {
+//   setSelectedInvoice(invoice); // Set selectedInvoice directly
+//   setShowPopup(true);
+// };
 
 
 // Add or remove an invoice from favorites
@@ -120,7 +100,7 @@ const handleFavorite = (invoice) => {
               {favorites.length === 0 ? (
                 <p className="text-left text-xs md:text-sm lg:text-lg xl:text-xl">No pinned projects added yet.</p>
               ) : (
-              <ul role="list" className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
+              <ul className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
               {favorites.map((fav) => (
                   <li key={fav.id} className="relative col-span-1 flex rounded-md shadow-sm">
                     <div>
@@ -203,24 +183,26 @@ const handleFavorite = (invoice) => {
           {/* Activity list (smallest breakpoint only) */}
           <div className="shadow sm:hidden">
             <ul className="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden">
-              {transactions.map((transaction) => (
-                <li key={transaction.id}>
-                  <a href={transaction.href} className="block bg-white px-4 py-4 hover:bg-gray-50">
+            {invoices.map((invoice) => (
+                <li key={invoice.id}>
+                  <div className="block bg-white px-4 py-4 hover:bg-gray-50">
                     <span className="flex items-center space-x-4">
                       <span className="flex flex-1 space-x-2 truncate">
-                        <BanknotesIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-gray-400" />
+                      <button
+                              onClick={() => handleFavorite(invoice)}
+                              className={`text-md lg:text-lg xl:text-2xl cursor-pointer ${favorites.some(fav => fav.id === invoice.id) ? 'text-yellow-500' : 'text-gray-400'}`}
+                            >
+                              ★
+                            </button>
                         <span className="flex flex-col truncate text-sm text-gray-500">
-                          <span className="truncate">{transaction.name}</span>
-                          <span>
-                            <span className="font-medium text-gray-900">{transaction.amount}</span>{' '}
-                            {transaction.currency}
-                          </span>
-                          <time dateTime={transaction.datetime}>{transaction.date}</time>
+                          <span className="truncate">Contract with {invoice.name}</span>
+                            <span className="font-medium text-gray-900">{invoice.projectBudget}</span>{' '}
+                          <time dateTime={invoice.datetime}>{invoice.deadline}</time>
                         </span>
                       </span>
                       <ChevronRightIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0 text-gray-400" />
                     </span>
-                  </a>
+                  </div>
                 </li>
               ))}
             </ul>
