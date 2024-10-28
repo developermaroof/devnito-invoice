@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuthContext } from '../context/AuthContext' // Add the AuthContext import for handling logout
 import { Link } from 'react-router-dom'
+import Logo from "../assets/logo.png"
 import {
   Dialog,
   DialogBackdrop,
@@ -50,11 +51,20 @@ function classNames(...classes) {
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const {userData, Logout } = useAuthContext() 
-  const [currentNav, setCurrentNav] = useState(initialNavigation[0].name); // Initialize to the first item
-  
-    const handleNavClick = (name) => {
+  // Initialize currentNav from localStorage or default to the first item
+  const [currentNav, setCurrentNav] = useState(
+    localStorage.getItem('currentNav') || initialNavigation[0].name
+  );
+
+  useEffect(() => {
+    // Store the current navigation item in localStorage on update
+    localStorage.setItem('currentNav', currentNav);
+  }, [currentNav]);
+
+  const handleNavClick = (name) => {
     setCurrentNav(name); // Update the current navigation item
   };
+
   return (
     <>
       <div className="min-h-full">
@@ -85,28 +95,28 @@ export default function Example() {
               <div className="flex flex-shrink-0 items-center px-4">
                 <img
                   alt="Easywire logo"
-                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=cyan&shade=300"
+                  src={Logo}
                   className="h-8 w-auto"
                 />
               </div>
               <nav aria-label="Sidebar" className="mt-5 h-full flex-shrink-0 divide-y divide-cyan-800 overflow-y-auto">
-                <div className="space-y-1 px-2">
-                {initialNavigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      onClick={() => handleNavClick(item.name)} // Set current item on click
-                      aria-current={currentNav === item.name ? 'page' : undefined}
-                      className={classNames(
-                        currentNav === item.name ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:bg-cyan-600 hover:text-white',
-                        'group flex items-center rounded-md px-2 py-2 text-base font-medium',
-                      )}
-                    >
-                      <item.icon aria-hidden="true" className="mr-4 h-6 w-6 flex-shrink-0 text-cyan-200" />
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
+              <div className="space-y-1 px-2">
+        {initialNavigation.map((item) => (
+          <Link
+            key={item.name}
+            to={item.href}
+            onClick={() => handleNavClick(item.name)} // Set current item on click
+            aria-current={currentNav === item.name ? 'page' : undefined}
+            className={classNames(
+              currentNav === item.name ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:bg-cyan-600 hover:text-white',
+              'group flex items-center rounded-md px-2 py-2 text-base font-medium',
+            )}
+          >
+            <item.icon aria-hidden="true" className="mr-4 h-6 w-6 flex-shrink-0 text-cyan-200" />
+            {item.name}
+          </Link>
+        ))}
+      </div>
                 <div className="mt-6 pt-6">
                   <div className="space-y-1 px-2">
                     {secondaryNavigation.map((item) => (
@@ -136,7 +146,7 @@ export default function Example() {
             <div className="flex flex-shrink-0 items-center px-4">
               <img
                 alt="Easywire logo"
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=cyan&shade=300"
+                src={Logo}
                 className="h-8 w-auto"
               />
             </div>
@@ -176,7 +186,7 @@ export default function Example() {
           </div>
         </div>
         {/* Navbar */}
-        <div className="lg:pl-64 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white lg:border-l lg:border-yellow-600">
+        <div className="lg:pl-64 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white">
             <button
               type="button"
               onClick={() => setSidebarOpen(true)}

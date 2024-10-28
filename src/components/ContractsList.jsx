@@ -50,7 +50,7 @@ const ContractsList = () => {
   const [selectedInvoice, setSelectedInvoice] = useState(null); 
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]); // Track favorite invoices
-
+console.log("Invoices data:", invoices)
   useEffect(() => {
     const fetchInvoices = async () => {
         const user = auth.currentUser;
@@ -98,7 +98,6 @@ const handleView = (invoice) => {
 };
 
 
-
 // Add or remove an invoice from favorites
 const handleFavorite = (invoice) => {
   const isAlreadyFavorite = favorites.some(fav => fav.id === invoice.id);
@@ -111,43 +110,94 @@ const handleFavorite = (invoice) => {
 
   return (
     <div className="flex flex-1 flex-col lg:pl-64 ">
-       {error && <p className="text-red-500 text-center">{error}</p>}
-      {/* Favorites */}
+      {error && <p className="text-red-500 text-center">{error}</p>}
+      {/* Pinned projects */}
       <div className="min-h-full">
         <div className="flex flex-col lg:pl-64">
           <main className="flex-1">
             <div className="mt-6 px-4 sm:px-6 lg:px-8">
-              <h2 className="text-sm font-medium text-gray-900">Favorites</h2>
+              <h2 className="text-sm font-medium text-gray-900">Pinned Projects</h2>
               {favorites.length === 0 ? (
-                <p className="text-left text-xs md:text-sm lg:text-lg xl:text-xl">No favorites added yet.</p>
+                <p className="text-left text-xs md:text-sm lg:text-lg xl:text-xl">No pinned projects added yet.</p>
               ) : (
-                <div className="flex flex-wrap gap-4 w-full">
-                {favorites.map((fav) => (
-                  <div key={fav.id} className="bg-gray-100 flex items-center p-4 rounded-lg gap-2">
+              <ul role="list" className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
+              {favorites.map((fav) => (
+                  <li key={fav.id} className="relative col-span-1 flex rounded-md shadow-sm">
                     <div>
                       <img src={fav.companyLogo} alt="Company Logo" width={100} height={100} className="w-7 lg:w-10 xl:w-12 h-auto object-contain" />
                     </div>
-                    <div className="">
-                      <h2 className="text-xs lg:text-lg xl:text-xl font-semibold">{fav.title}</h2>
-                      <p className="text-[0.7rem] lg:text-sm xl:text-lg text-gray-500">Due Date: {fav.deadline}</p>
+                    <div className="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
+                      <div className="flex-1 truncate px-4 py-2 text-sm">
+                        <a href="/" className="font-medium text-gray-900 hover:text-gray-600">
+                          {fav.title}
+                        </a>
+                        <p className="text-gray-500">Due Date: {fav.deadline}</p>
+                      </div>
+                      <Menu as="div" className="flex-shrink-0 pr-2">
+                        <MenuButton className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                          <span className="sr-only">Open options</span>
+                          <EllipsisVerticalIcon aria-hidden="true" className="h-5 w-5" />
+                        </MenuButton>
+                        <MenuItems
+                          transition
+                          className="absolute right-10 top-3 z-10 mx-3 mt-1 w-48 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                        >
+                          <div className="py-1">
+                            <MenuItem>
+                              <a
+                                href="/"
+                                className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+                              >
+                                View
+                              </a>
+                            </MenuItem>
+                          </div>
+                          <div className="py-1">
+                            <MenuItem>
+                              <a
+                                href="/"
+                                className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+                              >
+                                Removed from pinned
+                              </a>
+                            </MenuItem>
+                            <MenuItem>
+                              <a
+                                href="/"
+                                className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+                              >
+                                Share
+                              </a>
+                            </MenuItem>
+                          </div>
+                        </MenuItems>
+                      </Menu>
                     </div>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
               )}
             </div>
           </main>
         </div>
       </div>
-      {/* Favorites */}
       {/* List */}
       {loading && <p className="text-center text-blue-500">Loading...</p>}
+      <div className="min-h-full">
+  
+          <main className="flex-1">
+            <div className="mt-6 px-4 sm:px-6 lg:px-8">
         {invoices.length === 0 && !loading ? (
-          <p className="text-left text-xs md:text-sm lg:text-lg xl:text-xl">No contracts available.</p>
-        ) : (
+          <div>
+            <h2 className="mx-auto mt-8 max-w-6xl px-4 text-lg font-medium leading-6 text-gray-900 sm:px-6 lg:px-8">
+              Recent activity
+            </h2>
+            <p className="text-left text-xs md:text-sm lg:text-lg xl:text-xl">No contracts available.</p>
+          </div>
+          ) : (
       <main className="flex-1 pb-8">
         <div className="mt-8">
-          <h2 className="mx-auto mt-8 max-w-6xl px-4 text-lg font-medium leading-6 text-gray-900 sm:px-6 lg:px-8">
+        <h2 className="mx-auto mt-8 max-w-6xl px-4 text-lg font-medium leading-6 text-gray-900 sm:px-6 lg:px-8">
             Recent activity
           </h2>
           {/* Activity list (smallest breakpoint only) */}
@@ -229,37 +279,34 @@ const handleFavorite = (invoice) => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {transactions.map((transaction) => (
-                        <tr key={transaction.id} className="bg-white">
+                    {invoices.map((invoice) => (
+                        <tr key={invoice.id} className="bg-white">
                           <td className="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900">
-                            <div className="flex">
-                              <a href={transaction.href} className="group inline-flex space-x-2 truncate text-sm">
-                                <BanknotesIcon
-                                  aria-hidden="true"
-                                  className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                                />
+                            <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => handleFavorite(invoice)}
+                              className={`text-md lg:text-lg xl:text-2xl cursor-pointer ${favorites.some(fav => fav.id === invoice.id) ? 'text-yellow-500' : 'text-gray-400'}`}
+                            >
+                              ★
+                            </button>
                                 <p className="truncate text-gray-500 group-hover:text-gray-900">
-                                  {transaction.name}
+                                 Contract with {invoice.name}
                                 </p>
-                              </a>
+                              
                             </div>
                           </td>
-                          <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                            <span className="font-medium text-gray-900">{transaction.amount}</span>
-                            {transaction.currency}
+                          <td className="whitespace-nowrap border-2 border-red-600 px-6 text-right text-sm text-gray-500">
+                            <span className="font-medium text-gray-900">{invoice.projectBudget}</span>
                           </td>
-                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
+                          <td className="hidden border-2 border-red-600 whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
                             <span
-                              className={classNames(
-                                statusStyles[transaction.status],
-                                'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
-                              )}
+                              className="border-2 font-medium capitalize"
                             >
-                              {transaction.status}
+                              {invoice.contractStatus}
                             </span>
                           </td>
                           <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                            <time dateTime={transaction.datetime}>{transaction.date}</time>
+                            <time dateTime={invoice.datetime}>{invoice.deadline}</time>
                           </td>
                         </tr>
                       ))}
@@ -296,10 +343,13 @@ const handleFavorite = (invoice) => {
             </div>
           </div>
         </div>  
-      </main>
-       )}
-    {/* List */}
-  </div>
+      </main>)}
+      </div>
+          </main>
+   
+      </div>
+      {/* List */}
+    </div>
   )
 }
 
