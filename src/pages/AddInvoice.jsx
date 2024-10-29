@@ -172,425 +172,415 @@ const AddInvoice = () => {
     }
 };
 
-
-  
-
   return (
     <>
-        <div className="flex flex-1 flex-col lg:pl-64 ">
-          
-          <main className="flex-1 pb-8">
-      <div className="p-6 lg:py-20 2xl:max-w-screen-2xl 2xl:mx-auto relative">
-        <div className='lg:flex lg:w-[100%]'>
-          <div className='lg:w-[50%] mb-10 lg:mb-0'>
-            <h1 className="hidden lg:block font-semibold text-center lg:text-2xl xl:text-3xl">
-              Add Contract
-            </h1>
-
-            {/* Mobile/Tebs */}
-            <div className='flex justify-between mb-10 lg:hidden'>
-              <div>
-                <h1 className='font-semibold text-center'>Add Contract</h1>
-              </div>
-
-              {/* Hamburger Menu Button */}
-              <div>
-                <div
-                  onClick={handleToggleSidebar}
-                  className="flex items-center"
-                >
-                  <FaEye className="text-black text-xl" />
-                  <button className="font-semibold text-center px-1">
-                    Preview
-                  </button>
-                </div>
-
-                {/* Sidebar for Preview Section */}
-                <div
-                  style={{ right: isSidebarOpen ? '0' : '-93vw' }}
-                  className="max-w-[93vw] min-w-[93vw] p-4 h-full fixed top-0 bg-white z-[50] overflow-y-auto transition-all duration-500 shadow-lg border-2"
-                >
-                  <div className='flex justify-end sticky top-2 mr-2 z-50'>
-                    <button
-                      className="bg-transparent border-none text-2xl cursor-pointer"
-                      onClick={handleToggleSidebar}
-                    >
-                      <IoMdClose />
-                    </button>
+      <div className="flex flex-1 flex-col lg:pl-64 ">
+        <main className="flex-1 pb-8">
+          <div className="p-6 lg:py-20 2xl:max-w-screen-2xl 2xl:mx-auto relative">
+            <div className='lg:flex lg:w-[100%]'>
+              <div className='lg:w-[50%] mb-10 lg:mb-0'>
+                <h1 className="hidden lg:block font-semibold text-center lg:text-2xl xl:text-3xl">
+                  Add Contract
+                </h1>
+                {/* Mobile/Tebs */}
+                <div className='flex justify-between mb-10 lg:hidden'>
+                  <div>
+                    <h1 className='font-semibold text-center'>Add Contract</h1>
                   </div>
-                    <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef}/>
+                  {/* Hamburger Menu Button */}
+                  <div>
+                    <div
+                      onClick={handleToggleSidebar}
+                      className="flex items-center"
+                    >
+                      <FaEye className="text-black text-xl" />
+                      <button className="font-semibold text-center px-1">
+                        Preview
+                      </button>
+                    </div>
+                    {/* Sidebar for Preview Section */}
+                    <div
+                      style={{ right: isSidebarOpen ? '0' : '-93vw' }}
+                      className="max-w-[93vw] min-w-[93vw] p-4 h-full fixed top-0 bg-white z-[50] overflow-y-auto transition-all duration-500 shadow-lg border-2"
+                    >
+                      <div className='flex justify-end sticky top-2 mr-2 z-50'>
+                        <button
+                          className="bg-transparent border-none text-2xl cursor-pointer"
+                          onClick={handleToggleSidebar}
+                        >
+                          <IoMdClose />
+                        </button>
+                      </div>
+                        <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef}/>
+                    </div>
+                  </div>
                 </div>
+                {/* Mobile/Tebs */}
+                {/* form */}
+                <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-10 lg:mb-32">
+                  {/* Title input */}
+                  <div>
+                    <label className="requiredStar block mb-1 lg:text-xl xl:text-2xl">Title:</label>
+                    <input
+                      type="text"
+                      name="title"
+                      value={formData.title}
+                      placeholder='Type title..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      required
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                  />
+                  </div>
+                  {/* assignee details input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Assignee Details:</label>
+                    <textarea
+                      name="assigneeDetails"
+                      value={formData.assigneeDetails}
+                      placeholder='Type Something..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    ></textarea>
+                  </div>
+                  {/* Banner Address input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Address:</label>
+                    <input
+                      type="text"
+                      name="bannerAddress"
+                      value={formData.bannerAddress}
+                      placeholder='Type address..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Banner Email input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Email:</label>
+                    <input
+                      type="email"
+                      name="bannerEmail"
+                      value={formData.bannerEmail}
+                      placeholder='Put email..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Banner Website input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Website:</label>
+                    <input
+                      type="url"
+                      name="bannerWebsite"
+                      value={formData.bannerWebsite}
+                      placeholder='Paste website URL..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* CEO Email input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">CEO Email:</label>
+                    <input
+                      type="email"
+                      name="ceoEmail"
+                      value={formData.ceoEmail}
+                      placeholder='Put email..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* CEO Name input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">CEO Name:</label>
+                    <input
+                      type="text"
+                      name="ceoName"
+                      value={formData.ceoName}
+                      placeholder='Type name..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Client Details input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Client Details:</label>
+                    <textarea
+                      name="clientDetails"
+                      value={formData.clientDetails}
+                      placeholder='Type Something..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    ></textarea>
+                  </div>
+                  {/* Company Logo input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Company Logo:</label>
+                    <input
+                      type="file"
+                      name="companyLogo"
+                      accept="image/*"
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                        {logoURL && ( // Display the logo if available
+                        <img src={logoURL} alt="Company Logo" className="mt-2 w-10 h-10 object-contain" />
+                      )}
+                  </div>
+                  {/* Company Name input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Company Name:</label>
+                    <input
+                      type="text"
+                      name="companyName"
+                      value={formData.companyName}
+                      placeholder='Type company name..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Contract Heading input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Contract Heading:</label>
+                    <input
+                      type="text"
+                      name="contractHeading"
+                      value={formData.contractHeading}
+                      placeholder='Type contract heading..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Contract details Status */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Contract Status:</label>
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        name="contractStatus"
+                        value="Completed"
+                        checked={formData.contractStatus === "Completed"}
+                        onChange={handleChange}
+                        disabled={isFormDisabled} // Disable based on sidebar
+                        className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
+                      />
+                      <label className="ml-2 lg:text-lg xl:text-xl">Completed</label>
+                    </div>
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        name="contractStatus"
+                        value="inProgress"
+                        checked={formData.contractStatus === "inProgress"}
+                        onChange={handleChange}
+                        disabled={isFormDisabled} // Disable based on sidebar
+                        className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
+                      />
+                      <label className="ml-2 lg:text-lg xl:text-xl">In Progress</label>
+                    </div>
+                  </div>
+                  {/* Deadline input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Deadline:</label>
+                    <input
+                      type="date"
+                      name="deadline"
+                      value={formData.deadline}
+                      placeholder='Put the deadline..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Duration Hard input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Duration (Hard Deadline):</label>
+                    <input
+                      type="text"
+                      name="durationHard"
+                      value={formData.durationHard}
+                      placeholder='Type hard deadline..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Duration Soft input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Duration (Soft Deadline):</label>
+                    <input
+                      type="text"
+                      name="durationSoft"
+                      value={formData.durationSoft}
+                      placeholder='Type soft deadline..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Ending Description input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Ending Description:</label>
+                    <textarea
+                      name="endingDescription"
+                      value={formData.endingDescription}
+                      placeholder='Type ending message..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    ></textarea>
+                  </div>
+                  {/* Name input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Name:</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      placeholder='Type name..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Notes input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Notes:</label>
+                    <textarea
+                      name="notes"
+                      value={formData.notes}
+                      placeholder='Type any notes..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    ></textarea>
+                  </div>
+                  {/* Paragraph 1 input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 1:</label>
+                    <textarea
+                      name="paragraph1"
+                      value={formData.paragraph1}
+                      placeholder='Type paragraph 1..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    ></textarea>
+                  </div>
+                  {/* Paragraph 2 input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 2:</label>
+                    <textarea
+                      name="paragraph2"
+                      value={formData.paragraph2}
+                      placeholder='Type paragraph 2..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    ></textarea>
+                  </div>
+                  {/* Paragraph 3 input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 3:</label>
+                    <textarea
+                      name="paragraph3"
+                      value={formData.paragraph3}
+                      placeholder='Type paragraph 3..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    ></textarea>
+                  </div>
+                  {/* Payment Status input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Payment Status:</label>
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        name="paymentStatus"
+                        value="Pending"
+                        checked={formData.paymentStatus === "Pending"}
+                        onChange={handleChange}
+                        disabled={isFormDisabled} // Disable based on sidebar
+                        className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
+                      />
+                      <label className="ml-2 lg:text-lg xl:text-xl">Pending</label>
+                    </div>
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        name="paymentStatus"
+                        value="Paid"
+                        checked={formData.paymentStatus === "Paid"}
+                        onChange={handleChange}
+                        disabled={isFormDisabled} // Disable based on sidebar
+                        className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
+                      />
+                      <label className="ml-2 lg:text-lg xl:text-xl">Paid</label>
+                    </div>
+                  </div>
+                  {/* Project Budget input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Project Budget:</label>
+                    <input
+                      type="text"
+                      name="projectBudget"
+                      value={formData.projectBudget}
+                      placeholder='Put project budget..'
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                  {/* Starting from input */}
+                  <div>
+                    <label className="block mb-1 lg:text-xl xl:text-2xl">Starting from:</label>
+                    <input
+                      type="date"
+                      name="startingDate"
+                      value={formData.startingDate}
+                      onChange={handleChange}
+                      disabled={isFormDisabled} // Disable based on sidebar
+                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+                    />
+                  </div>
+                   {/* Button */}
+                  <button
+                    type="submit" 
+                    onClick={handleAddInvoice}
+                    className="bg-primary text-white text-xs lg:text-lg xl:text-xl px-8 lg:px-10 py-2 rounded-3xl"
+                  >
+                    {location.state && location.state.invoice ? 'Update Contract' : 'Add Contract'}
+                  </button>
+                </form>
+               {/* form */}
+              </div>
+              <div className={`hidden lg:block lg:max-w-[40vw] lg:max-h-[80vh] ${isFixed ? ' lg:fixed lg:bottom-0 lg:top-10 lg:right-[2%] ' : 'lg:static'}`}>
+                {/* Preview Section for large screens */}
+                <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
               </div>
             </div>
-            {/* Mobile/Tebs */}
-            {/* form */}
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-10 lg:mb-32">
-              {/* Title input */}
-              <div>
-                <label className="requiredStar block mb-1 lg:text-xl xl:text-2xl">Title:</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  placeholder='Type title..'
-                  onChange={handleChange}
-                  disabled={isFormDisabled} // Disable based on sidebar
-                  required
-                  className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
+            {/* Popup for PDF download */}
+            {showPopup && (
+              <PDFPopup
+              formData={savedFormData} // Pass the saved data to the popup
+              handlePrint={handlePrint}
+              setShowPopup={setShowPopup}
+              logoURL={logoURL}
+              previewRef={previewRef}
               />
-            </div>
-            {/* assignee details input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Assignee Details:</label>
-              <textarea
-                name="assigneeDetails"
-                value={formData.assigneeDetails}
-                placeholder='Type Something..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              ></textarea>
-            </div>
-            {/* Banner Address input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Address:</label>
-              <input
-                type="text"
-                name="bannerAddress"
-                value={formData.bannerAddress}
-                placeholder='Type address..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Banner Email input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Email:</label>
-              <input
-                type="email"
-                name="bannerEmail"
-                value={formData.bannerEmail}
-                placeholder='Put email..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Banner Website input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Website:</label>
-              <input
-                type="url"
-                name="bannerWebsite"
-                value={formData.bannerWebsite}
-                placeholder='Paste website URL..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* CEO Email input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">CEO Email:</label>
-              <input
-                type="email"
-                name="ceoEmail"
-                value={formData.ceoEmail}
-                placeholder='Put email..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* CEO Name input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">CEO Name:</label>
-              <input
-                type="text"
-                name="ceoName"
-                value={formData.ceoName}
-                placeholder='Type name..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Client Details input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Client Details:</label>
-              <textarea
-                name="clientDetails"
-                value={formData.clientDetails}
-                placeholder='Type Something..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              ></textarea>
-            </div>
-            {/* Company Logo input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Company Logo:</label>
-              <input
-                type="file"
-                name="companyLogo"
-                accept="image/*"
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-                  {logoURL && ( // Display the logo if available
-                  <img src={logoURL} alt="Company Logo" className="mt-2 w-10 h-10 object-contain" />
-                )}
-            </div>
-            {/* Company Name input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Company Name:</label>
-              <input
-                type="text"
-                name="companyName"
-                value={formData.companyName}
-                placeholder='Type company name..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Contract Heading input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Contract Heading:</label>
-              <input
-                type="text"
-                name="contractHeading"
-                value={formData.contractHeading}
-                placeholder='Type contract heading..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Contract details Status */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Contract Status:</label>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="contractStatus"
-                  value="Completed"
-                  checked={formData.contractStatus === "Completed"}
-                  onChange={handleChange}
-                  disabled={isFormDisabled} // Disable based on sidebar
-                  className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
-                />
-                <label className="ml-2 lg:text-lg xl:text-xl">Completed</label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="contractStatus"
-                  value="inProgress"
-                  checked={formData.contractStatus === "inProgress"}
-                  onChange={handleChange}
-                  disabled={isFormDisabled} // Disable based on sidebar
-                  className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
-                />
-                <label className="ml-2 lg:text-lg xl:text-xl">In Progress</label>
-              </div>
-            </div>
-            {/* Deadline input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Deadline:</label>
-              <input
-                type="date"
-                name="deadline"
-                value={formData.deadline}
-                placeholder='Put the deadline..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Duration Hard input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Duration (Hard Deadline):</label>
-              <input
-                type="text"
-                name="durationHard"
-                value={formData.durationHard}
-                placeholder='Type hard deadline..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Duration Soft input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Duration (Soft Deadline):</label>
-              <input
-                type="text"
-                name="durationSoft"
-                value={formData.durationSoft}
-                placeholder='Type soft deadline..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Ending Description input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Ending Description:</label>
-              <textarea
-                name="endingDescription"
-                value={formData.endingDescription}
-                placeholder='Type ending message..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              ></textarea>
-            </div>
-            {/* Name input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                placeholder='Type name..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Notes input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Notes:</label>
-              <textarea
-                name="notes"
-                value={formData.notes}
-                placeholder='Type any notes..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              ></textarea>
-            </div>
-            {/* Paragraph 1 input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 1:</label>
-              <textarea
-                name="paragraph1"
-                value={formData.paragraph1}
-                placeholder='Type paragraph 1..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              ></textarea>
-            </div>
-            {/* Paragraph 2 input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 2:</label>
-              <textarea
-                name="paragraph2"
-                value={formData.paragraph2}
-                placeholder='Type paragraph 2..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              ></textarea>
-            </div>
-            {/* Paragraph 3 input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 3:</label>
-              <textarea
-                name="paragraph3"
-                value={formData.paragraph3}
-                placeholder='Type paragraph 3..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              ></textarea>
-            </div>
-            {/* Payment Status input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Payment Status:</label>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="paymentStatus"
-                  value="Pending"
-                  checked={formData.paymentStatus === "Pending"}
-                  onChange={handleChange}
-                  disabled={isFormDisabled} // Disable based on sidebar
-                  className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
-                />
-                <label className="ml-2 lg:text-lg xl:text-xl">Pending</label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="paymentStatus"
-                  value="Paid"
-                  checked={formData.paymentStatus === "Paid"}
-                  onChange={handleChange}
-                  disabled={isFormDisabled} // Disable based on sidebar
-                  className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
-                />
-                <label className="ml-2 lg:text-lg xl:text-xl">Paid</label>
-              </div>
-            </div>
-            {/* Project Budget input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Project Budget:</label>
-              <input
-                type="text"
-                name="projectBudget"
-                value={formData.projectBudget}
-                placeholder='Put project budget..'
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Starting from input */}
-            <div>
-              <label className="block mb-1 lg:text-xl xl:text-2xl">Starting from:</label>
-              <input
-                type="date"
-                name="startingDate"
-                value={formData.startingDate}
-                onChange={handleChange}
-                disabled={isFormDisabled} // Disable based on sidebar
-                className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-              />
-            </div>
-            {/* Button */}
-           
-            <button
-            type="submit" 
-            onClick={handleAddInvoice}
-            className="bg-primary text-white text-xs lg:text-lg xl:text-xl px-8 lg:px-10 py-2 rounded-3xl"
-            >
-            {location.state && location.state.invoice ? 'Update Contract' : 'Add Contract'}
-            </button>
-            </form>
-            {/* form */}
-          </div>
-          <div className={`hidden lg:block lg:max-w-[40vw] lg:max-h-[80vh] ${isFixed ? ' lg:fixed lg:bottom-0 lg:top-10 lg:right-[2%] ' : 'lg:static'}`}>
-            {/* Preview Section for large screens */}
-            <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
-          </div>
-
-        </div>
-        {/* Popup for PDF download */}
-        {showPopup && (
-          <PDFPopup
-          formData={savedFormData} // Pass the saved data to the popup
-          handlePrint={handlePrint}
-          setShowPopup={setShowPopup}
-          logoURL={logoURL}
-          previewRef={previewRef}
-          />
-        )}
-
+            )}
             {/* <!-- Floating Button --> */}
             {/* <div className='fixed bottom-20 right-0 w-full'>
               <div className='w-full 2xl:max-w-screen-2xl 2xl:mx-auto relative'>
@@ -601,8 +591,8 @@ const AddInvoice = () => {
             </Link>
               </div>
             </div> */}
-      </div>
-      </main>
+          </div>
+        </main>
       </div>
     </>
   );

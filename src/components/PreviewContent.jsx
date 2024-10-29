@@ -12,11 +12,10 @@ const PreviewContent = ({ formData, logoURL }) => {
             {logoURL && (
               <img src={logoURL} alt={formData.companyLogoName} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-10 lg:h-10 xl:w-12 xl:h-12" />
             )}
-            <p className='text-sm sm:text-lg md:text-xl lg:text-3xl xl:text-4xl font-bold'>{formData.companyLogoName}</p>
           </div>
         </div>
         <div>
-          <p className='text-center font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl'>{formData.contractHeading}</p>
+          <p className='text-center font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl'>{formData.contractHeading}</p>
         </div>
       </div>
       <div className='flex flex-col gap-2 lg:gap-4 mt-4 md:mt-8 text-[0.6rem] sm:text-[0.8rem] md:text-sm lg:text-lg xl:text-xl'>
@@ -25,17 +24,17 @@ const PreviewContent = ({ formData, logoURL }) => {
         <p>{formData.paragraph2}</p>
         <p>{formData.paragraph3}</p>
       </div>
-      <div className='flex flex-col lg:flex-row justify-between p-2 md:p-4 lg:p-8 xl:py-14 gap-2 lg:gap-4'>
+      <div className='flex flex-col justify-between p-2 md:p-4 lg:py-8 xl:py-14 gap-2 lg:gap-4'>
         <div>
           <span className='text-xs sm:text-sm md:text-[1rem] xl:text-xl font-bold'>Project Budget</span>
           <p className='text-xs sm:text-sm md:text-[1rem] xl:text-xl pt-2'>{formData.projectBudget}</p>
         </div>
-        <div className='lg:border-l lg:border-l-[0.2rem] lg:pl-6'>
+        <div>
           <span className='text-xs sm:text-sm md:text-[1rem] xl:text-xl font-bold'>Duration</span>
           <li className='text-xs sm:text-sm md:text-[1rem] xl:text-xl lg:pl-2 lg:pt-2'>{formData.durationSoft} soft-deadline</li>
           <li className='text-xs sm:text-sm md:text-[1rem] xl:text-xl lg:pl-2'>{formData.durationHard} hard-deadline</li>
         </div>
-        <div className='lg:border-l lg:border-l-[0.2rem] lg:pl-6'>
+        <div>
           <span className='text-xs sm:text-sm md:text-[1rem] xl:text-xl font-bold'>Starting from</span>
           <li className='text-xs sm:text-sm md:text-[1rem] xl:text-xl lg:pl-2 lg:pt-2'>{formData.startingDate}</li>
         </div>
@@ -51,14 +50,14 @@ const PreviewContent = ({ formData, logoURL }) => {
           <p className='text-[0.7rem] sm:text-[0.8rem] md:text-sm lg:text-lg xl:text-xl'>{formData.ceoEmail}</p>
         </div>
       </div>
-      <div className='flex border-y p-2 md:p-4 items-center justify-center mt-10 w-full h-full'>
+      <div className='flex border-y items-center justify-center mt-10 w-full h-full'>
         <div className='p-2 lg:px-6'>
           {/* Display the logo if logoURL is provided */}
           {logoURL && (
-            <img src={logoURL} alt={formData.companyLogoName} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-10 lg:h-10 xl:w-12 xl:h-12" />
+            <img src={logoURL} alt={formData.companyLogoName} className="object-contain w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-12 xl:h-12" />
           )}
         </div>
-        <div className='flex flex-col border-l gap-2 pl-2 lg:pl-6 w-full overflow-x-scroll lg:overflow-x-hidden'>
+        <div className='flex flex-col border-l gap-2 p-2 lg:p-6 w-full overflow-x-scroll lg:overflow-x-hidden'>
           <p className='text-[0.7rem] sm:text-[0.8rem] md:text-[1rem] lg:text-lg xl:text-xl'><span className='font-bold'>Address:</span> {formData.bannerAddress}</p>
           <p className='text-[0.7rem] sm:text-[0.8rem] md:text-[1rem] lg:text-lg xl:text-xl'><span className='font-bold'>Email Address:</span> {formData.bannerEmail}</p>
           <p className='text-[0.7rem] sm:text-[0.8rem] md:text-[1rem] lg:text-lg xl:text-xl'><span className='font-bold'>Website:</span> {formData.bannerWebsite}</p>
