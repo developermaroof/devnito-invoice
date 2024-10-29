@@ -566,7 +566,7 @@ const AddInvoice = () => {
                 </form>
                {/* form */}
               </div>
-              <div className={`hidden lg:block lg:max-w-[40vw] lg:max-h-[80vh] ${isFixed ? ' lg:fixed lg:bottom-0 lg:top-10 lg:right-[2%] ' : 'lg:static'}`}>
+              <div className={`hidden lg:block lg:min-w-[40vw] lg:max-w-[40vw] lg:max-h-[80vh] ${isFixed ? ' lg:fixed lg:bottom-0 lg:top-10 lg:right-[2%] ' : 'lg:static'}`}>
                 {/* Preview Section for large screens */}
                 <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
               </div>

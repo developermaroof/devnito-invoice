@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuthContext } from '../context/AuthContext' // Add the AuthContext import for handling logout
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Logo from "../assets/logo.png"
 import {
   Dialog,
@@ -48,22 +48,23 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const {userData, Logout } = useAuthContext() 
-  // Initialize currentNav from localStorage or default to the first item
-  const [currentNav, setCurrentNav] = useState(
-    localStorage.getItem('currentNav') || initialNavigation[0].name
-  );
-
+  const location = useLocation(); // Get the current URL path
+  const [currentNav, setCurrentNav] = useState('Home');
   useEffect(() => {
-    // Store the current navigation item in localStorage on update
-    localStorage.setItem('currentNav', currentNav);
-  }, [currentNav]);
-
+    // Set the active link based on the current URL path
+    const path = location.pathname;
+    const activeItem = path === '/invoicelist' || path === '/addcontract' ? 'Contracts' : 'Home'; // Adjust as needed for other paths
+    setCurrentNav(activeItem);
+    localStorage.setItem('currentNav', activeItem); // Sync with localStorage if needed
+  }, [location]);
   const handleNavClick = (name) => {
-    setCurrentNav(name); // Update the current navigation item
+    setCurrentNav(name); // Update active state on click
+    localStorage.setItem('currentNav', name);
   };
+
 
   return (
     <>
@@ -73,7 +74,6 @@ export default function Example() {
             transition
             className="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
           />
-
           <div className="fixed inset-0 z-40 flex">
             <DialogPanel
               transition
@@ -138,7 +138,6 @@ export default function Example() {
             </div>
           </div>
         </Dialog>
-
         {/* Static sidebar for desktop */}
         <div className="hidden z-40 lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
@@ -153,20 +152,20 @@ export default function Example() {
             <nav aria-label="Sidebar" className="mt-5 flex flex-1 flex-col divide-y divide-cyan-800 overflow-y-auto">
               <div className="space-y-1 px-2 ">
               {initialNavigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    onClick={() => handleNavClick(item.name)} // Set current item on click
-                    aria-current={currentNav === item.name ? 'page' : undefined}
-                    className={classNames(
-                      currentNav === item.name ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:bg-cyan-600 hover:text-white',
-                      'group flex items-center rounded-md px-2 py-2 text-sm font-medium leading-6',
-                    )}
-                  >
-                    <item.icon aria-hidden="true" className="mr-4 h-6 w-6 flex-shrink-0 text-cyan-200" />
-                    {item.name}
-                  </Link>
-                ))}
+        <Link
+          key={item.name}
+          to={item.href}
+          onClick={() => handleNavClick(item.name)}
+          aria-current={currentNav === item.name ? 'page' : undefined}
+          className={classNames(
+            currentNav === item.name ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:bg-cyan-600 hover:text-white',
+            'group flex items-center rounded-md px-2 py-2 text-base font-medium'
+          )}
+        >
+          <item.icon aria-hidden="true" className="mr-4 h-6 w-6 flex-shrink-0 text-cyan-200" />
+          {item.name}
+        </Link>
+      ))}
               </div>
               <div className="mt-6 pt-6 ">
                 <div className="space-y-1 px-2">
@@ -225,7 +224,6 @@ export default function Example() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon aria-hidden="true" className="h-6 w-6" />
                 </button>
-
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
@@ -275,3 +273,5 @@ export default function Example() {
     </>
   )
 }
+
+export default Dashboard;
