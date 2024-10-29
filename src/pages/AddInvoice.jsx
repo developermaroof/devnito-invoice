@@ -190,7 +190,7 @@ const AddInvoice = () => {
             {/* Mobile/Tebs */}
             <div className='flex justify-between mb-10 lg:hidden'>
               <div>
-                <h1 className='font-semibold text-center'>Add Invoice</h1>
+                <h1 className='font-semibold text-center'>Add Contract</h1>
               </div>
 
               {/* Hamburger Menu Button */}
@@ -207,7 +207,7 @@ const AddInvoice = () => {
 
                 {/* Sidebar for Preview Section */}
                 <div
-                  style={{ right: isSidebarOpen ? '0' : '-90vw' }}
+                  style={{ right: isSidebarOpen ? '0' : '-93vw' }}
                   className="max-w-[93vw] min-w-[93vw] p-4 h-full fixed top-0 bg-white z-[50] overflow-y-auto transition-all duration-500 shadow-lg border-2"
                 >
                   <div className='flex justify-end sticky top-2 mr-2 z-50'>
@@ -574,7 +574,7 @@ const AddInvoice = () => {
             </form>
             {/* form */}
           </div>
-          <div className={`hidden lg:block lg:w-[50%] ${isFixed ? 'lg:fixed lg:bottom-0 lg:top-10 lg:right-[-7%] ' : 'lg:static'}`}>
+          <div className={`hidden lg:block lg:max-w-[40vw] lg:max-h-[80vh] ${isFixed ? ' lg:fixed lg:bottom-0 lg:top-10 lg:right-[2%] ' : 'lg:static'}`}>
             {/* Preview Section for large screens */}
             <PreviewSection formData={formData} logoURL={logoURL} previewRef={previewRef} />
           </div>
