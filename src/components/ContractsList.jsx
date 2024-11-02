@@ -94,25 +94,26 @@ const handleFavorite = (invoice) => {
       {error && <p className="text-red-500 text-center">{error}</p>}
       {/* Starts Pinned projects */}
       <div className="min-h-full">
-        <div className="flex flex-col lg:pl-64">
+        <div className="flex flex-col mx-auto">
           <main className="flex-1">
-            <div className="mt-6 px-4 sm:px-6 lg:px-8">
-              <h2 className="text-sm font-medium text-gray-900">Pinned Projects</h2>
+            <div className="mt-6 px-4 sm:px-12 lg:px-16">
+              <h2 className="text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] font-medium mb-2 text-gray-900">Pinned Projects</h2>
               {favorites.length === 0 ? (
-                <p className="text-left text-xs md:text-sm lg:text-lg xl:text-xl">No pinned projects added yet.</p>
+                <p className="text-left text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]">No pinned projects added yet.</p>
               ) : (
               <ul className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
                 {favorites.map((fav) => (
                   <li key={fav.id} className="relative col-span-1 flex rounded-md shadow-sm">
-                    <div>
-                      <img src={fav.companyLogo} alt="Company Logo" width={100} height={100} className="w-7 lg:w-10 xl:w-12 h-auto object-contain" />
-                    </div>
-                    <div className="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
-                      <div className="flex-1 truncate px-4 py-2 text-sm">
-                        <a href="/" className="font-medium text-gray-900 hover:text-gray-600">
+                    
+                    <div className="flex flex-1 items-center justify-between truncate rounded-md border-b border-r border-t border-gray-200 bg-white">
+                      <div className='flex ml-2 w-auto h-auto bg-white justify-center items-center text-center'>
+                        <img src={fav.companyLogo} alt="Company Logo" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px] object-cover rounded-lg" />
+                      </div>
+                      <div className="flex-1 truncate px-4 py-2">
+                        <a href="/" className="font-medium text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] text-gray-900 hover:text-gray-600">
                           {fav.title}
                         </a>
-                        <p className="text-gray-500">Due Date: {fav.deadline}</p>
+                        <p className="text-gray-500 text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]">Due Date: {fav.deadline}</p>
                       </div>
                       <Menu as="div" className="flex-shrink-0 pr-2">
                         <MenuButton className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
@@ -165,20 +166,20 @@ const handleFavorite = (invoice) => {
       {/* Ends Pinned projects */}
       {/* Starts List */}
       {loading && <p className="text-center text-blue-500">Loading...</p>}
-      <div className="min-h-full">
+      <div className="min-h-full ">
         <main className="flex-1">
           <div className="mt-6 px-4 sm:px-6 lg:px-8">
             {invoices.length === 0 && !loading ? (
             <div>
-              <h2 className="mx-auto mt-8 max-w-6xl px-4 text-lg font-medium leading-6 text-gray-900 sm:px-6 lg:px-8">
+              <h2 className="mx-auto pb-2 mt-8 text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] font-medium leading-6 text-gray-900 sm:px-6 lg:px-8">
                 Recent activity
               </h2>
-              <p className="text-left text-xs md:text-sm lg:text-lg xl:text-xl">No contracts available.</p>
+              <p className="text-left text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]">No contracts available.</p>
             </div>
             ) : (
             <main className="flex-1 pb-8">
               <div className="mt-8">
-                <h2 className="mx-auto mt-8 max-w-6xl px-4 text-lg font-medium leading-6 text-gray-900 sm:px-6 lg:px-8">
+                <h2 className="mx-auto pb-2 mt-8 text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] font-medium leading-6 text-gray-900 sm:px-6 lg:px-8">
                   Recent activity
                 </h2>
                 {/* Activity list (smallest breakpoint only) */}
@@ -334,3 +335,5 @@ const handleFavorite = (invoice) => {
 }
 
 export default ContractsList
+
+// border-2 border-red-300
