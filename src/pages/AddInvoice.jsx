@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 import { FaEye } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-
+import { UserCircleIcon } from '@heroicons/react/24/solid'
 // Css File
 import "../App.css";
 
@@ -216,355 +216,509 @@ const AddInvoice = () => {
                   </div>
                 </div>
                 {/* Mobile/Tebs */}
-                {/* form */}
-                <form onSubmit={(e) => e.preventDefault()} className="space-y-4 lg:space-y-8 lg:px-10 lg:mb-32">
-                  {/* Title input */}
-                  <div>
-                    <label className="requiredStar block mb-1 lg:text-xl xl:text-2xl">Title:</label>
-                    <input
-                      type="text"
-                      name="title"
-                      value={formData.title}
-                      placeholder='Type title..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      required
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                  />
-                  </div>
-                  {/* assignee details input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Assignee Details:</label>
-                    <textarea
-                      name="assigneeDetails"
-                      value={formData.assigneeDetails}
-                      placeholder='Type Something..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    ></textarea>
-                  </div>
-                  {/* Banner Address input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Address:</label>
-                    <input
-                      type="text"
-                      name="bannerAddress"
-                      value={formData.bannerAddress}
-                      placeholder='Type address..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* Banner Email input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Email:</label>
-                    <input
-                      type="email"
-                      name="bannerEmail"
-                      value={formData.bannerEmail}
-                      placeholder='Put email..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* Banner Website input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Banner Website:</label>
-                    <input
-                      type="url"
-                      name="bannerWebsite"
-                      value={formData.bannerWebsite}
-                      placeholder='Paste website URL..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* CEO Email input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">CEO Email:</label>
-                    <input
-                      type="email"
-                      name="ceoEmail"
-                      value={formData.ceoEmail}
-                      placeholder='Put email..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* CEO Name input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">CEO Name:</label>
-                    <input
-                      type="text"
-                      name="ceoName"
-                      value={formData.ceoName}
-                      placeholder='Type name..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* Client Details input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Client Details:</label>
-                    <textarea
-                      name="clientDetails"
-                      value={formData.clientDetails}
-                      placeholder='Type Something..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    ></textarea>
-                  </div>
-                  {/* Company Logo input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Company Logo:</label>
-                    <input
-                      type="file"
-                      name="companyLogo"
-                      accept="image/*"
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                        {logoURL && ( // Display the logo if available
-                        <img src={logoURL} alt="Company Logo" className="mt-2 w-10 h-10 object-contain" />
-                      )}
-                  </div>
-                  {/* Company Name input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Company Name:</label>
-                    <input
-                      type="text"
-                      name="companyName"
-                      value={formData.companyName}
-                      placeholder='Type company name..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* Contract Heading input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Contract Heading:</label>
-                    <input
-                      type="text"
-                      name="contractHeading"
-                      value={formData.contractHeading}
-                      placeholder='Type contract heading..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* Contract details Status */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Contract Status:</label>
-                    <div className="flex items-center">
-                      <input
-                        type="radio"
-                        name="contractStatus"
-                        value="Completed"
-                        checked={formData.contractStatus === "Completed"}
-                        onChange={handleChange}
-                        disabled={isFormDisabled} // Disable based on sidebar
-                        className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
-                      />
-                      <label className="ml-2 lg:text-lg xl:text-xl">Completed</label>
+                {/* form from */}
+                <form onSubmit={(e) => e.preventDefault()} className=" lg:px-4">
+                  <div className="space-y-12">
+                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                      {/* //    --------------------------Title-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="title" className="requiredStar block text-sm/6 font-medium text-gray-900">
+                          Title
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            required
+                            id="title"
+                            autoComplete="text"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Name-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
+                          Name
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="name"
+                            autoComplete="text"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Contract Heading-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="contractheading" className="block text-sm/6 font-medium text-gray-900">
+                          Contract Heading
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            name="contractHeading"
+                            value={formData.contractHeading}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="contractHeading"
+                            autoComplete="text"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Company Logo-------------------------- */}
+                      <div className="col-span-full">
+                        <label htmlFor="companylogo" className="block text-sm font-medium text-gray-900">
+                          Company Logo
+                        </label>
+                        <div className="mt-2 flex items-center gap-x-3">
+                          {!logoURL ? (
+                            <UserCircleIcon aria-hidden="true" className="h-12 w-12 text-gray-300" />
+                          ) : (
+                            <img src={logoURL} alt="Selected Logo" className="h-12 w-12 object-contain rounded-full" />
+                          )}
+                          <input
+                            type="file"
+                            name="companyLogo"
+                            accept="image/*"
+                            onChange={handleChange}
+                            disabled={isFormDisabled}
+                            className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Paragraph 1-------------------------- */}
+                      <div className="col-span-full">
+                        <label htmlFor="paragraph1" className="block text-sm/6 font-medium text-gray-900">
+                          Paragraph 1
+                        </label>
+                        <div className="mt-2">
+                          <textarea
+                            name="paragraph1"
+                            value={formData.paragraph1}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="paragraph1"
+                            rows={3}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                            defaultValue={''}
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Paragraph 2-------------------------- */}
+                      <div className="col-span-full">
+                        <label htmlFor="paragraph2" className="block text-sm/6 font-medium text-gray-900">
+                          Paragraph 2
+                        </label>
+                        <div className="mt-2">
+                          <textarea
+                            name="paragraph2"
+                            value={formData.paragraph2}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="paragraph2"
+                            rows={3}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                            defaultValue={''}
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Paragraph 3-------------------------- */}
+                      <div className="col-span-full">
+                        <label htmlFor="paragraph3" className="block text-sm/6 font-medium text-gray-900">
+                          Paragraph 3
+                        </label>
+                        <div className="mt-2">
+                          <textarea
+                            name="paragraph3"
+                            value={formData.paragraph3}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="paragraph3"
+                            rows={3}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                            defaultValue={''}
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Project Budget-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="projectBudget" className="block text-sm/6 font-medium text-gray-900">
+                          Project Budget
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            name="projectBudget"
+                            value={formData.projectBudget}                            
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            required
+                            id="projectBudget"
+                            autoComplete="projectBudget"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Duration (Soft Deadline)-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="durationSoft" className="block text-sm/6 font-medium text-gray-900">
+                          Duration (Soft Deadline)
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            name="durationSoft"
+                            value={formData.durationSoft}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            required
+                            id="durationSoft"
+                            autoComplete="durationSoft"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Duration (Hard Deadline)-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="durationHard" className="block text-sm/6 font-medium text-gray-900">
+                          Duration (Hard Deadline)
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            name="durationHard"
+                            value={formData.durationHard}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            required
+                            id="durationHard"
+                            autoComplete="durationHard"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Starting Date-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="startingDate" className="block text-sm/6 font-medium text-gray-900">
+                          Starting Date
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="date"
+                            name="startingDate"
+                            value={formData.startingDate}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            required
+                            id="startingDate"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Ending Paragraph-------------------------- */}
+                      <div className="col-span-full">
+                        <label htmlFor="endingDescription" className="block text-sm/6 font-medium text-gray-900">
+                          Ending Paragraph
+                        </label>
+                        <div className="mt-2">
+                          <textarea
+                            name="endingDescription"
+                            value={formData.endingDescription}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="endingDescription"
+                            rows={3}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                            defaultValue={''}
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Company Ceo Name-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="ceoName" className="block text-sm/6 font-medium text-gray-900">
+                          Company Ceo Name
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            name="ceoName"
+                            value={formData.ceoName}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            required
+                            id="ceoName"
+                            autoComplete="ceoName"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Company Name-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="companyName" className="block text-sm/6 font-medium text-gray-900">
+                          Company Name
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            name="companyName"
+                            value={formData.companyName}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            required
+                            id="companyName"
+                            autoComplete="companyName"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Email address-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="ceoEmail" className="block text-sm/6 font-medium text-gray-900">
+                          Ceo Email Address
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="email"
+                            name="ceoEmail"
+                            value={formData.ceoEmail}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="ceoEmail"
+                            autoComplete="ceoEmail"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Address on Banner-------------------------- */}
+                      <div className="col-span-full">
+                        <label htmlFor="bannerAddress" className="block text-sm/6 font-medium text-gray-900">
+                          Address on Banner
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            name="bannerAddress"
+                            value={formData.bannerAddress}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="bannerAddress"
+                            autoComplete="bannerAddress"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Email Address on Banner-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="bannerEmail" className="block text-sm/6 font-medium text-gray-900">
+                          Email Address on Banner
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="email"
+                            name="bannerEmail"
+                            value={formData.bannerEmail}
+                            onChange={handleChange}
+                            disabled={isFormDisabled}
+                            id="bannerEmail"
+                            autoComplete="bannerEmail"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Email Address on Banner-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="bannerWebsite" className="block text-sm/6 font-medium text-gray-900">
+                          Website on Banner
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="url"
+                            name="bannerWebsite"
+                            value={formData.bannerWebsite}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="bannerWebsite"
+                            autoComplete="bannerWebsite"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Deadline-------------------------- */}
+                      <div className="sm:col-span-4">
+                        <label htmlFor="deadline" className="block text-sm/6 font-medium text-gray-900">
+                          Deadline
+                        </label>
+                        <div className="mt-2">
+                          <input
+                            type="date"
+                            name="deadline"
+                            value={formData.deadline}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            required
+                            id="deadline"
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Notes-------------------------- */}
+                      <div className="col-span-full">
+                        <label htmlFor="notes" className="block text-sm/6 font-medium text-gray-900">
+                          Notes
+                        </label>
+                        <div className="mt-2">
+                          <textarea
+                            name="notes"
+                            value={formData.notes}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="notes"
+                            rows={3}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                            defaultValue={''}
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Assignee Details-------------------------- */}
+                      <div className="col-span-full">
+                        <label htmlFor="assigneeDetails" className="block text-sm/6 font-medium text-gray-900">
+                          Assignee Details
+                        </label>
+                        <div className="mt-2">
+                          <textarea
+                            name="assigneeDetails"
+                            value={formData.assigneeDetails}
+                            onChange={handleChange}
+                            disabled={isFormDisabled} 
+                            id="assigneeDetails"
+                            rows={3}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                            defaultValue={''}
+                          />
+                        </div>
+                      </div>
+                      {/* //    --------------------------Assignee Details-------------------------- */}
+                      <div className="col-span-full">
+                        <label htmlFor="clientDetails" className="block text-sm/6 font-medium text-gray-900">
+                          Assignee Details
+                        </label>
+                        <div className="mt-2">
+                          <textarea
+                            name="clientDetails"
+                            value={formData.clientDetails}
+                            onChange={handleChange}
+                            disabled={isFormDisabled}  
+                            id="clientDetails"
+                            rows={3}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                            defaultValue={''}
+                          />
+                        </div>
+                      </div>
+
                     </div>
-                    <div className="flex items-center">
-                      <input
-                        type="radio"
-                        name="contractStatus"
-                        value="inProgress"
-                        checked={formData.contractStatus === "inProgress"}
-                        onChange={handleChange}
-                        disabled={isFormDisabled} // Disable based on sidebar
-                        className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
-                      />
-                      <label className="ml-2 lg:text-lg xl:text-xl">In Progress</label>
+                    {/* radio buttons from */}
+                    <div className="border-b border-gray-900/10 pb-12">
+                    {/* //    --------------------------Contract Status-------------------------- */}
+                      <div className="mt-10 space-y-10">
+                        <fieldset>
+                          <legend className="text-sm/6 font-semibold text-gray-900">Contract Status</legend>
+                          <div className="mt-6 space-y-6">
+                            <div className="flex items-center gap-x-3">
+                              <input
+                                id="completed"
+                                type="radio"
+                                name="contractStatus"
+                                value="Completed"
+                                checked={formData.contractStatus === "Completed"}
+                                onChange={handleChange}
+                                disabled={isFormDisabled} 
+                                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                              />
+                              <label htmlFor="completed" className="block text-sm/6 font-medium text-gray-900">
+                                Completed
+                              </label>
+                            </div>
+                            <div className="flex items-center gap-x-3">
+                              <input
+                                id="inprogress"
+                                type="radio"
+                                name="contractStatus"
+                                value="inProgress"
+                                checked={formData.contractStatus === "inProgress"}
+                                onChange={handleChange}
+                                disabled={isFormDisabled} 
+                                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                              />
+                              <label htmlFor="inprogress" className="block text-sm/6 font-medium text-gray-900">
+                                In Progress
+                              </label>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    {/* //    --------------------------Payment Status-------------------------- */}
+                      <div className="mt-10 space-y-10">
+                        <fieldset>
+                          <legend className="text-sm/6 font-semibold text-gray-900">Payment Status</legend>
+                          <div className="mt-6 space-y-6">
+                            <div className="flex items-center gap-x-3">
+                              <input
+                                id="pending"
+                                type="radio"
+                                name="paymentStatus"
+                                value="Pending"
+                                checked={formData.paymentStatus === "Pending"}
+                                onChange={handleChange}
+                                disabled={isFormDisabled} 
+                                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                              />
+                              <label htmlFor="pending" className="block text-sm/6 font-medium text-gray-900">
+                                Pending
+                              </label>
+                            </div>
+                            <div className="flex items-center gap-x-3">
+                              <input
+                                id="paid"
+                                type="radio"
+                                name="paymentStatus"
+                                value="Paid"
+                                checked={formData.paymentStatus === "Paid"}
+                                onChange={handleChange}
+                                disabled={isFormDisabled} 
+                                className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                              />
+                              <label htmlFor="paid" className="block text-sm/6 font-medium text-gray-900">
+                                Paid
+                              </label>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
                     </div>
+                    {/* radio buttons to */}
                   </div>
-                  {/* Deadline input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Deadline:</label>
-                    <input
-                      type="date"
-                      name="deadline"
-                      value={formData.deadline}
-                      placeholder='Put the deadline..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
+                  <div className="mt-6 flex items-center gap-x-6">
+                    <button
+                      type="submit" 
+                      onClick={handleAddInvoice}
+                      className="bg-primary text-white text-xs lg:text-lg xl:text-xl px-8 lg:px-10 py-2 rounded-3xl"
+                    >
+                      {location.state && location.state.invoice ? 'Update Contract' : 'Add Contract'}
+                    </button>
                   </div>
-                  {/* Duration Hard input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Duration (Hard Deadline):</label>
-                    <input
-                      type="text"
-                      name="durationHard"
-                      value={formData.durationHard}
-                      placeholder='Type hard deadline..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* Duration Soft input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Duration (Soft Deadline):</label>
-                    <input
-                      type="text"
-                      name="durationSoft"
-                      value={formData.durationSoft}
-                      placeholder='Type soft deadline..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* Ending Description input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Ending Description:</label>
-                    <textarea
-                      name="endingDescription"
-                      value={formData.endingDescription}
-                      placeholder='Type ending message..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    ></textarea>
-                  </div>
-                  {/* Name input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Name:</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      placeholder='Type name..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* Notes input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Notes:</label>
-                    <textarea
-                      name="notes"
-                      value={formData.notes}
-                      placeholder='Type any notes..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    ></textarea>
-                  </div>
-                  {/* Paragraph 1 input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 1:</label>
-                    <textarea
-                      name="paragraph1"
-                      value={formData.paragraph1}
-                      placeholder='Type paragraph 1..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    ></textarea>
-                  </div>
-                  {/* Paragraph 2 input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 2:</label>
-                    <textarea
-                      name="paragraph2"
-                      value={formData.paragraph2}
-                      placeholder='Type paragraph 2..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    ></textarea>
-                  </div>
-                  {/* Paragraph 3 input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Paragraph 3:</label>
-                    <textarea
-                      name="paragraph3"
-                      value={formData.paragraph3}
-                      placeholder='Type paragraph 3..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    ></textarea>
-                  </div>
-                  {/* Payment Status input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Payment Status:</label>
-                    <div className="flex items-center">
-                      <input
-                        type="radio"
-                        name="paymentStatus"
-                        value="Pending"
-                        checked={formData.paymentStatus === "Pending"}
-                        onChange={handleChange}
-                        disabled={isFormDisabled} // Disable based on sidebar
-                        className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
-                      />
-                      <label className="ml-2 lg:text-lg xl:text-xl">Pending</label>
-                    </div>
-                    <div className="flex items-center">
-                      <input
-                        type="radio"
-                        name="paymentStatus"
-                        value="Paid"
-                        checked={formData.paymentStatus === "Paid"}
-                        onChange={handleChange}
-                        disabled={isFormDisabled} // Disable based on sidebar
-                        className="border border-gray-300 p-2 rounded lg:text-lg xl:text-xl"
-                      />
-                      <label className="ml-2 lg:text-lg xl:text-xl">Paid</label>
-                    </div>
-                  </div>
-                  {/* Project Budget input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Project Budget:</label>
-                    <input
-                      type="text"
-                      name="projectBudget"
-                      value={formData.projectBudget}
-                      placeholder='Put project budget..'
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                  {/* Starting from input */}
-                  <div>
-                    <label className="block mb-1 lg:text-xl xl:text-2xl">Starting from:</label>
-                    <input
-                      type="date"
-                      name="startingDate"
-                      value={formData.startingDate}
-                      onChange={handleChange}
-                      disabled={isFormDisabled} // Disable based on sidebar
-                      className="border border-gray-300 p-2 rounded w-full lg:text-lg xl:text-xl"
-                    />
-                  </div>
-                   {/* Button */}
-                  <button
-                    type="submit" 
-                    onClick={handleAddInvoice}
-                    className="bg-primary text-white text-xs lg:text-lg xl:text-xl px-8 lg:px-10 py-2 rounded-3xl"
-                  >
-                    {location.state && location.state.invoice ? 'Update Contract' : 'Add Contract'}
-                  </button>
                 </form>
-               {/* form */}
+                {/* form to */}
               </div>
               <div className={`hidden lg:block lg:min-w-[40vw] lg:max-w-[40vw] lg:max-h-[80vh] ${isFixed ? ' lg:fixed lg:bottom-0 lg:top-10 lg:right-[2%] ' : 'lg:static'}`}>
                 {/* Preview Section for large screens */}

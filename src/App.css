@@ -1,5 +1,6 @@
-.requiredStar::before {
+.requiredStar::after {
     content: '*';
     color: red;
     margin-right: 0.25rem;
+    padding-left: 2px;
   }

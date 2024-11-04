@@ -31,8 +31,8 @@ const PreviewContent = ({ formData, logoURL }) => {
         </div>
         <div>
           <span className='text-xs sm:text-sm md:text-[1rem] xl:text-xl font-bold'>Duration</span>
-          <li className='text-xs sm:text-sm md:text-[1rem] xl:text-xl lg:pl-2 lg:pt-2'>{formData.durationSoft} soft-deadline</li>
-          <li className='text-xs sm:text-sm md:text-[1rem] xl:text-xl lg:pl-2'>{formData.durationHard} hard-deadline</li>
+          <li className='text-xs sm:text-sm md:text-[1rem] xl:text-xl lg:pl-2 lg:pt-2'>{formData.durationSoft} - ( Soft Deadline )</li>
+          <li className='text-xs sm:text-sm md:text-[1rem] xl:text-xl lg:pl-2'>{formData.durationHard} - ( Hard Deadline )</li>
         </div>
         <div>
           <span className='text-xs sm:text-sm md:text-[1rem] xl:text-xl font-bold'>Starting from</span>
