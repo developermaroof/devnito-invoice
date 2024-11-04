@@ -195,7 +195,7 @@ const Dashboard = () => {
               <Bars3CenterLeftIcon aria-hidden="true" className="h-6 w-6" />
             </button>
             {/* Search bar */}
-            <div className="flex flex-1 justify-between px-4 sm:px-6 lg:mx-auto lg:max-w-6xl lg:px-8">
+            <div className="flex flex-1 justify-between px-4 sm:px-6 lg:max-w-6xl lg:px-8">
               <div className="flex flex-1">
                 <form action="/" method="GET" className="flex w-full md:ml-0">
                   <label htmlFor="search-field" className="sr-only">
