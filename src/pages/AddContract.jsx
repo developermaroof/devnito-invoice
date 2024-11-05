@@ -163,7 +163,7 @@ const AddInvoice = () => {
 
         // Navigate to the invoice list after a delay
         setTimeout(() => {
-            navigate('/invoicelist');    
+            navigate('/contractslist');    
         }, 6000);
 
     } catch (error) {

@@ -35,8 +35,8 @@ const initialNavigation = [
   { name: 'Transactions', href: '/', icon: ClockIcon },
   { name: 'Balances', href: '/', icon: ScaleIcon },
   { name: 'Developers', href: '/', icon: CreditCardIcon },
-  { name: 'Clients', href: '/', icon: UserGroupIcon },
-  { name: 'Contracts', href: '/invoicelist', icon: DocumentChartBarIcon },
+  { name: 'Clients', href: '/clientslist', icon: UserGroupIcon },
+  { name: 'Contracts', href: '/contractslist', icon: DocumentChartBarIcon },
 ];
 const secondaryNavigation = [
   { name: 'Settings', href: '/', icon: CogIcon },
@@ -54,12 +54,18 @@ const Dashboard = () => {
   const location = useLocation(); // Get the current URL path
   const [currentNav, setCurrentNav] = useState('Home');
   useEffect(() => {
-    // Set the active link based on the current URL path
-    const path = location.pathname;
-    const activeItem = path === '/invoicelist' || path === '/addcontract' ? 'Contracts' : 'Home'; // Adjust as needed for other paths
-    setCurrentNav(activeItem);
-    localStorage.setItem('currentNav', activeItem); // Sync with localStorage if needed
+    const savedNav = localStorage.getItem('currentNav');
+    if (savedNav) {
+      setCurrentNav(savedNav);
+    } else {
+      const path = location.pathname;
+      const activeItem = path === '/invoicelist' || path === '/addcontract' ? 'Contracts' : 'Home';
+      setCurrentNav(activeItem);
+      localStorage.setItem('currentNav', activeItem);
+    }
   }, [location]);
+  
+  
   const handleNavClick = (name) => {
     setCurrentNav(name); // Update active state on click
     localStorage.setItem('currentNav', name);
@@ -152,20 +158,20 @@ const Dashboard = () => {
             <nav aria-label="Sidebar" className="mt-5 flex flex-1 flex-col divide-y divide-cyan-800 overflow-y-auto">
               <div className="space-y-1 px-2 ">
               {initialNavigation.map((item) => (
-        <Link
-          key={item.name}
-          to={item.href}
-          onClick={() => handleNavClick(item.name)}
-          aria-current={currentNav === item.name ? 'page' : undefined}
-          className={classNames(
-            currentNav === item.name ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:bg-cyan-600 hover:text-white',
-            'group flex items-center rounded-md px-2 py-2 text-base font-medium'
-          )}
-        >
-          <item.icon aria-hidden="true" className="mr-4 h-6 w-6 flex-shrink-0 text-cyan-200" />
-          {item.name}
-        </Link>
-      ))}
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  onClick={() => handleNavClick(item.name)}
+                  aria-current={currentNav === item.name ? 'page' : undefined}
+                  className={classNames(
+                    currentNav === item.name ? 'bg-cyan-800 text-white' : 'text-cyan-100 hover:bg-cyan-600 hover:text-white',
+                    'group flex items-center rounded-md px-2 py-2 text-base font-medium'
+                  )}
+                >
+                  <item.icon aria-hidden="true" className="mr-4 h-6 w-6 flex-shrink-0 text-cyan-200" />
+                  {item.name}
+                </Link>
+              ))}
               </div>
               <div className="mt-6 pt-6 ">
                 <div className="space-y-1 px-2">
@@ -186,88 +192,88 @@ const Dashboard = () => {
         </div>
         {/* Navbar */}
         <div className="lg:pl-64 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white">
-            <button
-              type="button"
-              onClick={() => setSidebarOpen(true)}
-              className="border-r border-gray-200 px-4 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 lg:hidden"
-            >
-              <span className="sr-only ">Open sidebar</span>
-              <Bars3CenterLeftIcon aria-hidden="true" className="h-6 w-6" />
-            </button>
-            {/* Search bar */}
-            <div className="flex flex-1 justify-between px-4 sm:px-6 lg:max-w-6xl lg:px-8">
-              <div className="flex flex-1">
-                <form action="/" method="GET" className="flex w-full md:ml-0">
-                  <label htmlFor="search-field" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                      <MagnifyingGlassIcon aria-hidden="true" className="h-5 w-5" />
-                    </div>
-                    <input
-                      id="search-field"
-                      name="search-field"
-                      type="search"
-                      placeholder="Search transactions"
-                      className="block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-                    />
+          <button
+            type="button"
+            onClick={() => setSidebarOpen(true)}
+            className="border-r border-gray-200 px-4 text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 lg:hidden"
+          >
+            <span className="sr-only ">Open sidebar</span>
+            <Bars3CenterLeftIcon aria-hidden="true" className="h-6 w-6" />
+          </button>
+          {/* Search bar */}
+          <div className="flex flex-1 justify-between px-4 sm:px-6 lg:max-w-6xl lg:px-8">
+            <div className="flex flex-1">
+              <form action="/" method="GET" className="flex w-full md:ml-0">
+                <label htmlFor="search-field" className="sr-only">
+                  Search
+                </label>
+                <div className="relative w-full text-gray-400 focus-within:text-gray-600">
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
+                    <MagnifyingGlassIcon aria-hidden="true" className="h-5 w-5" />
                   </div>
-                </form>
-              </div>
-              <div className="ml-4 flex items-center md:ml-6">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon aria-hidden="true" className="h-6 w-6" />
-                </button>
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <MenuButton className="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 lg:rounded-md lg:p-2 lg:hover:bg-gray-50">
-                      <span className="absolute -inset-1.5 lg:hidden" />
-                      <img
-                        alt=""
-                        src={userData.photoURL || "https://via.placeholder.com/150"}
-                        className="h-8 w-8 rounded-full"
-                      />
-                      <span className="ml-3 hidden text-sm font-medium text-gray-700 lg:block">
-                        <span className="sr-only">Open user menu for </span>{userData.displayName}
-                      </span>
-                      <ChevronDownIcon
-                        aria-hidden="true"
-                        className="ml-1 hidden h-5 w-5 flex-shrink-0 text-gray-400 lg:block"
-                      />
-                    </MenuButton>
-                  </div>
-                  <MenuItems
-                    transition
-                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-                  >
-                    <MenuItem>
-                      <Link to="/" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                        Your Profile
-                      </Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                        Settings
-                      </Link>
-                    </MenuItem>
-                    <MenuItem>
-                     <Link  className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                        <button onClick={Logout}>
-                          Logout
-                        </button>
-                        </Link>
-                    </MenuItem>
-                  </MenuItems>
-                </Menu>
-              </div>
+                  <input
+                    id="search-field"
+                    name="search-field"
+                    type="search"
+                    placeholder="Search transactions"
+                    className="block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                  />
+                </div>
+              </form>
             </div>
+            <div className="ml-4 flex items-center md:ml-6">
+              <button
+                type="button"
+                className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+              >
+                <span className="absolute -inset-1.5" />
+                <span className="sr-only">View notifications</span>
+                <BellIcon aria-hidden="true" className="h-6 w-6" />
+              </button>
+              {/* Profile dropdown */}
+              <Menu as="div" className="relative ml-3">
+                <div>
+                  <MenuButton className="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 lg:rounded-md lg:p-2 lg:hover:bg-gray-50">
+                    <span className="absolute -inset-1.5 lg:hidden" />
+                    <img
+                      alt=""
+                      src={userData.photoURL || "https://via.placeholder.com/150"}
+                      className="h-8 w-8 rounded-full"
+                    />
+                    <span className="ml-3 hidden text-sm font-medium text-gray-700 lg:block">
+                      <span className="sr-only">Open user menu for </span>{userData.displayName}
+                    </span>
+                    <ChevronDownIcon
+                      aria-hidden="true"
+                      className="ml-1 hidden h-5 w-5 flex-shrink-0 text-gray-400 lg:block"
+                    />
+                  </MenuButton>
+                </div>
+                <MenuItems
+                  transition
+                  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                >
+                  <MenuItem>
+                    <Link to="/" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                      Your Profile
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link to="/" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                      Settings
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link  className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                      <button onClick={Logout}>
+                        Logout
+                      </button>
+                    </Link>
+                  </MenuItem>
+                </MenuItems>
+              </Menu>
+            </div>
+          </div>
         </div>
       </div>
     </>

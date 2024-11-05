@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 // import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebaseConfig';
-import Footer from '../components/Footer';
-import Navbar from "../components/Navbar";
 
 const AddClient = () => {
   const initialFormState = {
@@ -68,7 +66,6 @@ const AddClient = () => {
 
   return (
     <>
-    <Navbar />
     <div className='mb-10 w-[100%] border-2 border-red-300'>
       <h1 className='font-semibold text-center'>Add Client</h1>
       <form onSubmit={handleSubmit} className='border-yellow-500 border-2'>
@@ -134,7 +131,6 @@ const AddClient = () => {
         <button type="submit" className='bg-primary text-white text-xs lg:text-lg xl:text-xl px-8 lg:px-10 py-2 rounded-3xl'>Add Client</button>
       </form>
     </div>
-    <Footer/>
     </>
   );
 };

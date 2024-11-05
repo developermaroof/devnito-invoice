@@ -15,13 +15,16 @@ const Home = () => {
     const handleAddContractClick = () => {
       localStorage.setItem('currentNav', 'Contracts'); // Set 'Contracts' as active in localStorage
     };
+    const handleAddClientClick = () => {
+      localStorage.setItem('currentNav', 'Clients'); // Set 'Clients' as active in localStorage
+    };
 
     return (
     <div className="flex flex-1 flex-col lg:pl-64 ">
     <main className="flex-1 pb-8">
       {/* Page header */}
       <div className="bg-white shadow">
-        <div className="px-4 sm:px-6 lg:mx-auto lg:max-w-6xl lg:px-8">
+        <div className="px-4 sm:px-6 lg:max-w-6xl lg:px-8">
           <div className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
             <div className="min-w-0 flex-1">
               {/* Profile */}
@@ -73,12 +76,24 @@ const Home = () => {
                 Add Contract
               </button>
               </Link>
+              <Link to="/addclient">
               <button
                 type="button"
-                className="inline-flex items-center rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+                onClick={handleAddClientClick}
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
-                Send money
+                Add Client
               </button>
+              </Link>
+              <Link to="/addcontract">
+              <button
+                type="button"
+                onClick={handleAddContractClick}
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              >
+                Add Developer
+              </button>
+              </Link>
             </div>
           </div>
         </div>
