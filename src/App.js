@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { AuthProvider } from "./context/AuthContext";
 import { InvoiceProvider } from "./context/InvoiceContext";
-import { ClientProvider } from "./context/ClientProvider";
+import { ClientProvider } from "./context/ClientContext";
 import AuthenticatedApp from "./components/AuthenticatedApp";
 
 function App() {

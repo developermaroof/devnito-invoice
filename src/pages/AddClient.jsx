@@ -57,7 +57,7 @@ const AddClient = () => {
       alert('Client added successfully!');
       setFormData(initialFormState); // Reset form after submission
       setAdditionalFields([]); // Clear additional fields
-      navigate('/clientlist'); // Navigate to your client list page
+      navigate('/clientslist'); // Navigate to your client list page
     } catch (error) {
       console.error('Error adding client: ', error);
       alert(`Error adding client: ${error.message}`);
