@@ -11,6 +11,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import GoogleSignIn from "../pages/GoogleSignIn";
 import ContractsList from "../pages/ContractsList";
 import ClientsList from "../pages/ClientsList";
+import ClientDetails from "../components/ClinetDetails";
 
 
 function AuthenticatedApp() {
@@ -46,6 +47,11 @@ function AuthenticatedApp() {
           <Route path="/clientslist" element={ 
             <ProtectedRoute>
               <ClientsList />
+            </ProtectedRoute>
+          } />
+          <Route path="/clientdetails/:clientId" element={ 
+            <ProtectedRoute>
+              <ClientDetails />
             </ProtectedRoute>
           } />
           <Route path="*" element={ <Error />} />

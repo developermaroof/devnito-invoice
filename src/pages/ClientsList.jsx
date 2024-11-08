@@ -8,7 +8,7 @@ import {
 
 import React, { useEffect, useState } from 'react';
 import { useClient } from '../context/ClientContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth, db } from '../firebase/firebaseConfig';
 import { query, collection, where, getDocs } from 'firebase/firestore';
 
@@ -60,7 +60,7 @@ const ClientsList = () => {
             <ul className="mt-5 divide-y divide-gray-200 border-t border-gray-200 sm:mt-0 sm:border-t-0">
               {clients?.map((client) => (
                 <li key={client.id}>
-                  <a href="/" className="group block">
+                  <Link to={`/clientdetails/${client.id}`} className="group block">
                     <div className="flex items-center px-4 py-5 sm:px-0 sm:py-6">
                       <div className="flex min-w-0 flex-1 items-center">
                         <div className="flex-shrink-0">
@@ -106,7 +106,7 @@ const ClientsList = () => {
                         />
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

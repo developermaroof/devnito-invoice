@@ -535,7 +535,7 @@ const AddInvoice = () => {
                           />
                         </div>
                       </div>
-                      {/* //    --------------------------Email Address on Banner-------------------------- */}
+                      {/* //    --------------------------Website on Banner-------------------------- */}
                       <div className="sm:col-span-4">
                         <label htmlFor="bannerWebsite" className="block text-sm/6 font-medium text-gray-900">
                           Website on Banner
