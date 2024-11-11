@@ -34,7 +34,7 @@ const ClientDetails = () => {
 
     return (
       <>
-        <div className="min-h-full">
+        <div className="min-h-full lg:pl-64">
           <main className="py-10">
             {/* Page header */}
             <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
@@ -52,11 +52,8 @@ const ClientDetails = () => {
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">{client.name}</h1>
                   <p className="text-sm font-medium text-gray-500">
-                    Applied for 
-                    <span className="text-gray-900">
-                      ( { client.title } ) 
-                    </span>
-                     on <time dateTime="2020-08-25">{client.currentDate}</time>
+                    Applied
+                     on <time dateTime="2020-08-25">{client.currentDate ? `${client.currentDate}` : 'N/A'}</time>
                   </p>
                 </div>
               </div>
@@ -69,7 +66,7 @@ const ClientDetails = () => {
                   <div className="bg-white shadow sm:rounded-lg">
                     <div className="px-4 py-5 sm:px-6">
                       <h2 id="applicant-information-title" className="text-lg/6 font-medium text-gray-900">
-                        Applicant Information
+                        Client Information
                       </h2>
                       <p className="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
                     </div>
@@ -77,24 +74,24 @@ const ClientDetails = () => {
                       <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                         <div className="sm:col-span-1">
                           <dt className="text-sm font-medium text-gray-500">Application for</dt>
-                          <dd className="mt-1 text-sm text-gray-900">{client.title}</dd>
+                          <dd className="mt-1 text-sm text-gray-900">{client.title ? `${client.title}` : 'N/A'}</dd>
                         </div>
                         <div className="sm:col-span-1">
                           <dt className="text-sm font-medium text-gray-500">Email address</dt>
-                          <dd className="mt-1 text-sm text-gray-900">{client.email}</dd>
+                          <dd className="mt-1 text-sm text-gray-900">{client.email ? `${client.email}` : 'N/A'}</dd>
                         </div>
                         <div className="sm:col-span-1">
                           <dt className="text-sm font-medium text-gray-500">Salary expectation</dt>
-                          <dd className="mt-1 text-sm text-gray-900">{client.earnings ? `$${client.earnings}` : 'N/A'}</dd>
+                          <dd className="mt-1 text-sm text-gray-900">{client.earnings ? `${client.earnings}` : 'N/A'}</dd>
                         </div>
                         <div className="sm:col-span-1">
                           <dt className="text-sm font-medium text-gray-500">Phone</dt>
-                          <dd className="mt-1 text-sm text-gray-900">{client.number}</dd>
+                          <dd className="mt-1 text-sm text-gray-900">{client.number ? `${client.number}` : 'N/A'}</dd>
                         </div>
                         <div className="sm:col-span-2">
                           <dt className="text-sm font-medium text-gray-500">About</dt>
                           <dd className="mt-1 text-sm text-gray-900">
-                            {client.about}
+                            {client.about ? `${client.about}` : 'N/A'}
                           </dd>
                         </div>
                       </dl>

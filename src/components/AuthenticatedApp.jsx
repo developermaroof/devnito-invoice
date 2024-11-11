@@ -11,7 +11,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import GoogleSignIn from "../pages/GoogleSignIn";
 import ContractsList from "../pages/ContractsList";
 import ClientsList from "../pages/ClientsList";
-import ClientDetails from "../components/ClinetDetails";
+import ClientDetails from "./ClientDetails";
 
 
 function AuthenticatedApp() {

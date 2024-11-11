@@ -112,14 +112,14 @@ const AddClient = () => {
     <div className="flex flex-1 flex-col lg:pl-64 ">
       <main className="flex-1 pb-8">
         <div className="p-6 lg:py-20 2xl:max-w-screen-2xl 2xl:mx-auto relative">
-          <div className='lg:flex lg:w-[100%]'>
-            <div className='lg:w-[50%] mb-10 lg:mb-0'>
-              <h1 className="font-semibold text-center lg:text-2xl xl:text-3xl">
+          <div className='w-full'>
+            <div className='mb-10 lg:mb-0'>
+              <h1 className="font-semibold text-left text-[0.8rem] sm:text-sm md:text-lg lg:text-2xl xl:text-3xl">
                 Add Client
               </h1>
-              <form onSubmit={handleSubmit} className=" lg:px-4">
+              <form onSubmit={handleSubmit}>
                 <div className="space-y-12">
-                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="mt-10 grid grid-cols-1 gap-y-8 sm:grid-cols-6">
                     
                     {/* //    --------------------------Name-------------------------- */}
                     

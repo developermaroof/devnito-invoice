@@ -48,7 +48,7 @@ const ClientsList = () => {
   }, [setClients, navigate]);
 
   return (
-    <div className="min-h-full">
+    <div className="min-h-full lg:pl-64">
       {error && <p className="text-red-500 text-center">{error}</p>}
       <main className="pb-16 pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
